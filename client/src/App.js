@@ -4,11 +4,12 @@ import './App.css';
 import Nav from './components/Nav'
 import Producto from './components/Producto';
 import {productos} from './data.js';
+import { useState } from 'react';
 
 
 function App() {
 
-  
+  const [prod, setProd] = useState([]);
 
   function onSearch(){
 
@@ -30,7 +31,7 @@ function App() {
   }   
 
   function onSearch(prod){
-    
+    setProd(oldProd => [...oldProd, prod]);
   }
 
 
