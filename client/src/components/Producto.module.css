@@ -1,0 +1,27 @@
+.productCard{
+    border: 1px solid #f0f0f0;
+    display: block;
+    padding: 1em;
+    border-radius: 3px; 
+}
+
+.productCard:hover{
+    box-shadow: 0 0 16px;
+}
+
+.productCard h5{
+    font-size: 1.5em;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    letter-spacing: .25em;
+}
+
+.productCard .precio{
+    color: #82ae46;
+}
+
+.productCard .btn1{
+    background-color: #82ae46;
+    color: #f0f0f0;
+    padding: .5em 1em;
+}
