@@ -3,6 +3,13 @@ import logo from './logo.svg';
 import './App.css';
 import { product } from '../../api/src/models/Product';
 
+// Era con fetch?
+function componentDidMount() {
+  fetch({ producto })
+      .then(response => response.json())
+      .then(data => console.log(data));
+}   
+
 function App() {
   return (
     <div className="App">

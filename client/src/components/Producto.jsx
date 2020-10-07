@@ -3,7 +3,15 @@ import React from 'react';
 import { producto } from '../../../api/src/models/Product';
 import style from './Producto.module.css';
 
+// Era con fetch?
+function componentDidMount() {
+    fetch({ producto })
+        .then(response => response.json())
+        .then(data => console.log(data));
+}   
+
 export default function Producto ({ name, precio, stock, descripcion }) {
+
     return (
       <div className={style.productCard}>
           <h5 className={style.titulo}> { name } </h5>
