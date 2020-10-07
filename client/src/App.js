@@ -1,35 +1,30 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { product } from '../../api/src/models/Product';
-import Producto from './components/Producto';
+//import { product } from '../../api/src/models/Product';
 
-// Era con fetch?
-function componentDidMount() {
-  fetch({ producto })
+
+// Traer data del modelo producto
+function addProduct(producto) {
+  fetch('http://localhost:3000/products')
       .then(response => response.json())
-      .then(data => console.log(data));
+      .then((data) => {
+        const producto = {
+          id: data.id,
+          name: data.name,
+          description: data.description,
+          price: data.price,
+          image: data.image
+        }
+      });
 }   
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
       <main>
-         <Producto producto={ product }/>
+         {/* <Producto producto={ product }/> */}
+         <Producto products={addProduct}/>
       </main>
     </div>
   );
