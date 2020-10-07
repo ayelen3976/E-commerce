@@ -1,17 +1,17 @@
 import React from 'react';
 import ProductCard from './ProductCard';
+import style from './css/Producto.module.css';
 
-
-export default function ProductCard ({ products, addProduct }) {
+export default function Producto ({ productos, addProduct }) {
 
     return (
-        <div className='producto'>
-            {products.map(p => <ProductCard
+        <div className={style.contentProducts}>
+            {productos.map(p => <ProductCard
                 key={p.id}
                 name={p.name}
                 price={p.price}
                 description={p.description}
-                img={p.image}
+                // img={p.img}
                 addProduct={() => addProduct(p.id)}
             /> )}
         </div>

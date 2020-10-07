@@ -1,0 +1,26 @@
+.contentProducts{
+    display: block;
+    padding: 2em;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media(min-width: 768px){
+    .contentProducts{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+        margin: auto;
+    }
+}
+
+@media(min-width: 1200px){
+    .contentProducts{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 70%;
+        margin: auto;
+    }
+}
