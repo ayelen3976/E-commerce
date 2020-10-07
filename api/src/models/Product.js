@@ -4,9 +4,34 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('product', {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    img: {
+        type: DataTypes.BLOB,
+        allowNull: true,
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    stock: {
+      type: DataTypes.INTEGER,
+
+    }
+
+
   });
 };
