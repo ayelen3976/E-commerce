@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { product } from '../../api/src/models/Product';
+import Producto from './components/Producto';
 
 // Era con fetch?
 function componentDidMount() {
