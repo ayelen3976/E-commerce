@@ -11,10 +11,6 @@ function App() {
 
   const [prod, setProd] = useState([]);
 
-  function onSearch(){
-
-  }
-
   // Traer data del modelo producto
   function addProduct(producto) {
     fetch('http://localhost:3000/products')
@@ -38,7 +34,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <Nav onSearch={onSearch}/>
+        <Nav onSearch={onSearch} />
       </header>
       <main>
          {/* <Producto producto={ product }/> */}
