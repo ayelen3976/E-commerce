@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { product } from '../../api/src/models/Product';
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
           Learn React
         </a>
       </header>
+      <main>
+         <Producto producto={ product }/>
+      </main>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 //import product from '../../../api/src/models/Product';
+import { producto } from '../../../api/src/models/Product';
 
 export default function Producto ({ name, precio, stock, descripcion }) {
     return (
