@@ -1,7 +1,7 @@
   
 import React, { useState } from "react";
 
-export default function SearchBar({onSearch}) {
+export default function SearchBar({onSearch, onChange}) {
     const [prod, setProd] = useState("");
     return (
     <form onSubmit={(e) => {

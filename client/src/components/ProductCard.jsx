@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './css/ProductCard.module.css';
+import {Link} from 'react-router-dom';
 
 export default function ProductCard (props) {
 
@@ -10,8 +11,8 @@ export default function ProductCard (props) {
                 <h5 className={style.titulo}> { props.name } </h5>
                 <span className={style.precio}>$ { props.price } </span>
                 <p className={style.descripcion}> { props.description } </p>
-                {/* <button onClick={props.addProduct}>Agregar</button> */}
-                <button onClick={props.addProduct} className={style.btn1}> Añadir al carrito </button>
+                {/* <Link to={`/producto/${props.id}`}><button onClick={props.addProduct} className={style.btn1}> Ver detalle </button></Link> */}
+                <Link to={`/producto/${props.id}`}><button onClick={props.addProduct} className={style.btn1}> Añadir al carrito </button></Link>
               </div>
           </div>
     );
