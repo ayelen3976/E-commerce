@@ -1,16 +1,17 @@
 const server = require('express').Router();
 const { Product, Category } = require('../db.js');
+const { Sequelize } = require('sequelize');
 
 //READ
 
 server.get('/', (req, res, next) => {
-    return Product.findAll()
-        .then(products => {
-            res.json(products);
-        })
-        .catch(err => {
-            res.status(404, err)
-        });
+        return Product.findAll()
+            .then(products => {
+                res.json(products);
+            })
+            .catch(err => {
+                res.status(404, err)
+            });
 });
 
 server.get('/category', (req, res, next) => {
@@ -42,7 +43,32 @@ server.get('/category/:nombreCat', (req, res, next) => {
 	})
 });
 
+server.get('/search', (req, res, next) => {
+    const value = req.query.query;
+    // console.log(req.query)
+    // console.log(value)
+    const Op = Sequelize.Op
 
+    Product.findAll({
+        where: {
+            //or : [{name : value},{}]
+            //substring %value% LIKE
+            //[substring] : value 
+            [Op.or]: [
+                //opcion 1
+                { name: { [Op.substring]: value } },
+                //opcion 2
+                { description: { [Op.substring]: value } }
+            ]
+        }
+    })
+    .then(productList => {
+        res.json(productList)
+    })
+    .catch(err => {
+        res.status(400,err)
+    })
+})
 
 //CREATE
 
