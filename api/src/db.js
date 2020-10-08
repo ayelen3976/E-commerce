@@ -2,6 +2,7 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
+const Categories = require('./models/Category');
 const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
@@ -34,6 +35,7 @@ const { Product, Category } = sequelize.models;
 
 // Aca vendrian las relaciones
  Product.hasMany(Category);
+ Category.belongsToMany(Product, {through:'category_Product'});
  
 
 
