@@ -3,10 +3,12 @@ import logo from './logo.svg';
 import './App.css';
 import Nav from './components/Nav'
 import Producto from './components/Producto';
-import DetalleCard from './components/ProductCard';
+import ProductCard from './components/ProductCard';
 import {productos} from './data.js';
 import { useState } from 'react';
 import { Route } from 'react-router-dom';
+import Catalogo from './components/Catalogo';
+import DetalleCard from './components/DetalleCard';
 // import axios from "axios";
 
 
@@ -72,15 +74,21 @@ function App() {
         />
         
         <Route
-          exact path='/'
+          exact
+          path='/producto'
           //render={() => <Producto addProduct={addProduct}/>}   ------->  ÉSTE SERÍA EL POSTA
           render={() => <Producto addProduct={addProduct} productos={productos}/>}  // --> TOMA DATOS DE DATA.JS
         />
 
         <Route
-            exact
-            path='/producto/:productoId'
-            render={({match}) => <DetalleCard prodFilter={onFilter(match.params.productoId)} />}
+          path='/producto/:id'
+          render={() => <DetalleCard addProduct={addProduct} productos={productos}/>}
+        />
+
+        <Route 
+          exact
+          path='/'
+          render= {() => <Catalogo addProduct={addProduct} productos={productos}/>}
         />
     </div>
   );
