@@ -1,24 +1,87 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Nav from './components/Nav'
+import Producto from './components/Producto';
+import DetalleCard from './components/ProductCard';
+import {productos} from './data.js';
+import { useState } from 'react';
+import { Route } from 'react-router-dom';
+// import axios from "axios";
+
 
 function App() {
+
+  const [prod, setProd] = useState([]);
+
+  // Traer data del modelo producto
+  function addProduct(producto) {
+    fetch('http://localhost:3000/products')
+        .then((data) => {
+          const producto = {
+            id: data.id,
+            name: data.name,
+            description: data.description,
+            price: data.price,
+            image: data.image
+          }
+        });
+  }   
+
+  function onSearch(prodSearch){
+    fetch('http://localhost:3000/products')
+        .then((data) => {
+          if(data !== undefined){
+            const producto = {
+              id: data.id,
+              name: data.name,
+              description: data.description,
+              price: data.price,
+              image: data.image
+            };
+            setProd(oldProd => [...oldProd, prodSearch]);
+          } else {
+            alert("Producto no encontrado");
+          }
+        
+        });
+  }
+
+  // function onSearch(prodSearch){
+  //   setProd(oldProd => [...oldProd, prodSearch]);
+  // }
+
+  function onFilter(productoId) {
+    let producto = prod.filter(p => p.id === parseInt(productoId));
+    if(producto.length > 0) {
+        return producto[0];
+    } else {
+        return null;
+    }
+  }
+
+  function handleChange(event) {    
+    setProd({value: event.target.value});  
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Route 
+          path='/'
+          render = {() => <Nav onSearch={onSearch} /> }
+        />
+        
+        <Route
+          exact path='/'
+          //render={() => <Producto addProduct={addProduct}/>}   ------->  ÉSTE SERÍA EL POSTA
+          render={() => <Producto addProduct={addProduct} productos={productos}/>}  // --> TOMA DATOS DE DATA.JS
+        />
+
+        <Route
+            exact
+            path='/producto/:productoId'
+            render={({match}) => <DetalleCard prodFilter={onFilter(match.params.productoId)} />}
+        />
     </div>
   );
 }

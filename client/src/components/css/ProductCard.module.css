@@ -1,0 +1,53 @@
+.productCard{
+    border: 1px solid #f0f0f0;
+    display: block;
+    border-radius: 3px; 
+    width: 100%;
+    margin-bottom: 3em;
+}
+
+.productCard:hover{
+    box-shadow: 0 0 5px rgba(0,0,0,.5);
+}
+
+.productCard figure{
+    height: 200px;
+    width: 100%;
+    background-color: antiquewhite;
+    margin: 0;
+}
+
+.productCard h5{
+    font-size: 1.5em;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    letter-spacing: .25em;
+    padding: 0;
+    margin: 0;
+}
+
+.productCard .precio{
+    color: #82ae46;
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.productCard .btn1{
+    background-color: #82ae46;
+    color: #f0f0f0;
+    padding: 1em;
+    border: none;
+    border-radius: 3px;
+    margin-top: 1em;
+}
+
+.productCard  .infoProducto{
+    padding: 1.5em 1em;
+}
+
+
+@media(min-width: 768px){
+    .productCard{
+        width: 32%;
+    }
+}

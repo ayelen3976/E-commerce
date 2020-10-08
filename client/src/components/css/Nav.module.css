@@ -1,0 +1,14 @@
+.navContent{
+    background-color: #82ae46;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    padding: 1em 1em;
+}
+
+.navContent h2{
+    font-size: 1.5em;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
