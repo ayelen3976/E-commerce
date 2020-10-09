@@ -1,12 +1,12 @@
 import React from 'react';
 import ProductCard from './ProductCard';
+import Catalogo from './Catalogo';
 import style from './css/Producto.module.css';
 
 export default function Producto ({ productos, addProduct }) {
-
     return (
-        <div className={style.contentProducts}>
-            {productos.map(p => <ProductCard
+        <div>
+            {productos.map(p => <Catalogo
                 key={p.id}
                 name={p.name}
                 price={p.price}
