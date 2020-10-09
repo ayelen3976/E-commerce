@@ -35,8 +35,9 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { Product, Category } = sequelize.models;
 
 // Aca vendrian las relaciones
- Product.hasMany(Category);
- Category.belongsToMany(Product, {through:'category_Product'});
+Product.belongsToMany(Category, { through: 'productcategories' });
+
+Category.belongsToMany(Product, { through: 'productcategories' });
  
 
 

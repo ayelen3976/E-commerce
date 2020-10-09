@@ -5,42 +5,42 @@ const { Sequelize } = require('sequelize');
 //READ
 
 server.get('/', (req, res, next) => {
-        return Product.findAll()
-            .then(products => {
-                res.json(products);
-            })
-            .catch(err => {
-                res.status(404, err)
-            });
+    return Product.findAll()
+        .then(products => {
+            res.json(products);
+        })
+        .catch(err => {
+            res.status(404, err)
+        });
 });
 
 server.get('/category', (req, res, next) => {
     return Category.findAll()
-         .then(categories => {
-             res.json(categories);
-         })
-         .catch(err => {
-             res.status(404, err)
+        .then(categories => {
+            res.json(categories);
+        })
+        .catch(err => {
+            res.status(404, err)
         });
-        
+
 });
 
 
 
 server.get('/category/:nombreCat', (req, res, next) => {
-	const nombreCat = req.params.nombreCat;
+    const nombreCat = req.params.nombreCat;
 
-	return Category.findAll({
-		where: {
-			name: nombreCat
-		}
-	})
-	.then( categories =>{
-		res.json(categories);
-	})
-	.catch(err =>{
-		res.status(404,err)
-	})
+    return Category.findAll({
+        where: {
+            name: nombreCat
+        }
+    })
+        .then(categories => {
+            res.json(categories);
+        })
+        .catch(err => {
+            res.status(404, err)
+        })
 });
 
 server.get('/search', (req, res, next) => {
@@ -62,19 +62,19 @@ server.get('/search', (req, res, next) => {
             ]
         }
     })
-    .then(productList => {
-        res.json(productList)
-    })
-    .catch(err => {
-        res.status(400,err)
-    })
+        .then(productList => {
+            res.json(productList)
+        })
+        .catch(err => {
+            res.status(400, err)
+        })
 })
 
 //CREATE
 
 server.post('/', (req, res, next) => {
-    const {name, description, stock, price}= req.body
-    return Product.create({ name: name, description: description, stock: stock, price: price})
+    const { name, description, stock, price } = req.body
+    return Product.create({ name: name, description: description, stock: stock, price: price })
         .then(producto => {
             res.status(201).json(producto)
         })
@@ -86,7 +86,7 @@ server.post('/', (req, res, next) => {
 
 server.post('/category', (req, res, next) => {
     const { name, description } = req.body;
-    return Category.create({ name: name, description: description})
+    return Category.create({ name: name, description: description })
         .then(categoria => {
             res.status(201).json(categoria)
         })
@@ -94,30 +94,61 @@ server.post('/category', (req, res, next) => {
             res.status(404, err)
         });
 });
-
+//Seteado categorias a un producto
+server.post('/:id/category/:categoryId', (req, res, next) => {
+    const { id, categoryId } = req.params;
+    let producto;
+    Product.findByPk(id)
+        .then(product =>{
+            producto = product;
+            return Category.findByPk(categoryId)
+        })
+        .then(category => {
+            producto.setCategories(category)
+        })
+        .then(()=>{
+            res.send("Agregada con exito")
+        })
+});
 
 //DELETE
 
-server.delete('/:id' , (req,res,next) => {
+server.delete('/:id', (req, res, next) => {
     Product.destroy({
         where: {
-          id: req.params.id
+            id: req.params.id
         }
-      }).then(() => {
+    }).then(() => {
         res.json("Done");
-      })
+    })
 });
 
 
-server.delete('/category/:id', (req,res,next) => {
-	Category.destroy({
+server.delete('/category/:id', (req, res, next) => {
+    Category.destroy({
         where: {
-          id: req.params.id
+            id: req.params.id
         }
-      }).then(() => {
+    }).then(() => {
         res.json("Done");
-      })
+    })
 
+});
+
+server.delete('/:id/category/:categoryId', (req, res, next) => {
+    const { id, categoryId } = req.params;
+    let producto;
+    Product.findByPk(id)
+        .then(product =>{
+            producto = product;
+            return Category.findByPk(categoryId)
+        })
+        .then(category => {
+            producto.removeCategories(category)
+        })
+        .then(()=>{
+            res.send("Eliminada con exito con exito")
+        })
 });
 
 //UPDATE
@@ -125,10 +156,14 @@ server.delete('/category/:id', (req,res,next) => {
 
 server.put('/:id', (req, res, next) => {
     // Los valores modificados se sacaran del body mas adelante
+    const { name, price, stock, description, img } = req.body;
     Product.update({
-        price: 500,
-        stock: 10
-    } , {
+        name: name,
+        price: price,
+        stock: stock,
+        description: description,
+        img: img
+    }, {
         where: {
             id: req.params.id
         }
@@ -141,12 +176,12 @@ server.put('/:id', (req, res, next) => {
 });
 
 server.put('/category/:id', (req, res, next) => {
-	// Los valores modificados se sacaran del body mas adelante
-	const {name , description} = req.body;
+    // Los valores modificados se sacaran del body mas adelante
+    const { name, description } = req.body;
     Category.update({
         name: name,
         description: description
-    } , {
+    }, {
         where: {
             id: req.params.id
         }
@@ -157,13 +192,5 @@ server.put('/category/:id', (req, res, next) => {
         res.status(400, err)
     });
 });
-
-
-  
-
-
-
-
-
 
 module.exports = server;
