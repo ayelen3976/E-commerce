@@ -94,7 +94,22 @@ server.post('/category', (req, res, next) => {
             res.status(404, err)
         });
 });
-
+//Seteado categorias a un producto
+server.post('/:id/category/:categoryId', (req, res, next) => {
+    const { id, categoryId } = req.params;
+    let producto;
+    Product.findByPk(id)
+        .then(product =>{
+            producto = product;
+            return Category.findByPk(categoryId)
+        })
+        .then(category => {
+            producto.setCategories(category)
+        })
+        .then(()=>{
+            res.send("Agregada con exito")
+        })
+});
 
 //DELETE
 
@@ -118,6 +133,22 @@ server.delete('/category/:id', (req, res, next) => {
         res.json("Done");
     })
 
+});
+
+server.delete('/:id/category/:categoryId', (req, res, next) => {
+    const { id, categoryId } = req.params;
+    let producto;
+    Product.findByPk(id)
+        .then(product =>{
+            producto = product;
+            return Category.findByPk(categoryId)
+        })
+        .then(category => {
+            producto.removeCategories(category)
+        })
+        .then(()=>{
+            res.send("Eliminada con exito con exito")
+        })
 });
 
 //UPDATE
