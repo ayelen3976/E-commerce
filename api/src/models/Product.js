@@ -9,15 +9,15 @@ module.exports = (sequelize) => {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      
+
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     img: {
-        type: DataTypes.BLOB,
-        allowNull: true,
+      type: DataTypes.BLOB,
+      allowNull: true,
     },
     description: {
       type: DataTypes.TEXT,
@@ -32,9 +32,6 @@ module.exports = (sequelize) => {
       allowNull: true
 
     },
-   
-
-
-
   });
+  
 };
