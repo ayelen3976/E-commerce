@@ -6,12 +6,11 @@ import { Link } from 'react-router-dom';
 function Nav({onSearch, onChange}) {
   return (
     <nav className={style.navContent}>
-
+     <Link to='/'>
         <h2>
-
-          Diet Foods App
-
+         Diet Foods App
         </h2>
+     </Link>
 
         <SearchBar onSearch={onSearch}/>
 
