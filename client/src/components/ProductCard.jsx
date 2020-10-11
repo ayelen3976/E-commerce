@@ -7,7 +7,7 @@ export default function ProductCard (props) {
     
     return (
           <div className={style.productCard}>
-              <h1>Product Card</h1>
+              
               <figure> <img src={ props.img } alt={ props.name }/> </figure>
               <div className={style.infoProducto}>
                 <h5 className={style.titulo}> { props.name } </h5>

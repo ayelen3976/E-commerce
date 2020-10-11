@@ -7,6 +7,7 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
 
+//Connect to DB
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/development`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
@@ -34,8 +35,9 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { Product, Category } = sequelize.models;
 
 // Aca vendrian las relaciones
- Product.hasMany(Category);
- Category.belongsToMany(Product, {through:'category_Product'});
+Product.belongsToMany(Category, { through: 'productcategories' });
+
+Category.belongsToMany(Product, { through: 'productcategories' });
  
 
 
