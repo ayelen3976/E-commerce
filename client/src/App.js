@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Nav from './components/Nav'
 import Producto from './components/Producto';
 import ProductCard from './components/ProductCard';
+import Crud from './components/Crud';
 import {productos} from './data.js';
 import { useState } from 'react';
 import { Route } from 'react-router-dom';
 import Catalogo from './components/Catalogo';
 import DetalleCard from './components/DetalleCard';
+import { Link } from "react-router-dom";
 // import axios from "axios";
 
 
@@ -90,8 +91,23 @@ function App() {
           path='/'
           render= {() => <Catalogo addProduct={addProduct} productos={productos}/>}
         />
+      
+        <Route
+        path="/Crud"
+        render = {() => <Crud/>}
+        /> 
+  {/* ................................ */}
+  
+        
+        <footer className='footer'>
+        <Link to='/Crud'>
+        <button>pruebacrud</button>
+        </Link>
+        </footer>
+        
+    
     </div>
   );
-}
+} 
 
 export default App;

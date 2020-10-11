@@ -3,7 +3,7 @@ import style from './css/ProductCard.module.css';
 import {Link} from 'react-router-dom';
 
 export default function DetalleCard (props) {
-  //console.log(props.productos[match.params].id);
+  //console.log(props.productos[match.params].id);ddsfsffds
   return (
     <div className={style.productCard}>
         <h1>Detalle Card</h1>
