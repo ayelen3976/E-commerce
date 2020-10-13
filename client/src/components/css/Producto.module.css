@@ -1,8 +1,112 @@
+.btn-verde{
+    padding: 1em;
+    background-color: #82ae46;
+    color: #ffffff;
+}
+
+.btn-verde:hover{
+    padding: 1em;
+    background-color: #579500;
+    text-decoration: none;
+}
+
 .contentProducts{
     display: block;
     padding: 2em;
     width: 100%;
     box-sizing: border-box;
+}
+
+.app{
+    min-height: 100vh;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.appHeader{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: -2em;
+}
+
+.appHeader button{
+    background-color: #82ae46;
+    border: none;
+    border-radius: 50px;
+    padding: .5em 3em;
+    margin-top: 2em;
+}
+
+.appHeader button:hover{
+    background-color: #579500;   
+}
+
+.appHeader button a{
+    color: #ffffff;
+}
+
+.detailContent{
+    display: block;
+    margin-top: 6em;
+    padding-top: 3em;
+}
+
+.detailContent .infoContent{
+    background-color: #ffffff;
+}
+
+.detailContent h5{
+    font-size: 3em;
+}
+
+.detailContent .price{
+    font-weight: 700;
+    color: #82ae46;
+    font-size: 3em;
+}
+
+.detailContent figure{
+    width: 100%;
+    background-color: #ffff;
+}
+
+.detailContent figure img{
+    max-width: 100%;
+    height: auto;
+    margin:auto;
+    display: block;
+}
+
+.botonera{
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 3em;
+}
+
+.buttons{
+    color: #ffffff;
+    background-color: #82ae46;
+    border-radius: 50%;
+    border: none;
+    height: 50px;
+    width: 50px;
+}
+
+.buttons:hover{
+    background-color: #579500;
+}
+
+.infoContent{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
 }
 
 @media(min-width: 768px){
@@ -13,14 +117,27 @@
         width: 100%;
         margin: auto;
     }
+
+    .detailContent{
+        display: flex;
+        padding-top: 9em;
+    }
+
+    .detailContent figure{
+        width: 50%;
+    }
+
+    .infoContent{
+        width: 50%;
+    }
 }
 
 @media(min-width: 1200px){
-    .contentProducts{
+    .detailContent{
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        width: 70%;
+        width: 80%;
         margin: auto;
     }
 

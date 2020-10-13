@@ -1,14 +1,16 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import styles from './css/Producto.module.css';
 
 //Un componente que no es funcional no puede tener ciclos de vida
 const Home = () => {
 
     return (
-        <div className="App">
-            <header className="App-header">
+        <div className={styles.app}>
+            <header className={styles.appHeader}>
+                <img src="/images/logo_size.jpg" alt="" />
                 <h1>Green Shop</h1>
-                <Link to = '/products'>Entrar</Link>
+                <button><Link to = '/products'>Entrar</Link></button>
             </header>
         </div>
     );

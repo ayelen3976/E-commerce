@@ -3,19 +3,25 @@ import React from 'react';
 import { Card, CardMedia, CardContent } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
+import styles from './css/ProductCard.module.css';
 
 function ProductCard({id, name, description, price, classes, image ,stock}) {
     return (
         <Card className={classes.item}>
+            
             <CardMedia className={classes.media} image={image} />
             <CardContent>
-                <div className={classes.info}>
+                <div className={classes.info} className={styles.productCard}>
                     <h6>{name}</h6>
                     <p>{description}</p>
-                    <p>Price {price}$</p>
+                    <p className={styles.price}>${price}</p>
                     <p>Stock: {stock}</p>
-                    <Link to={'/products/' + id}><button>Ver detalle</button></Link>
-                    <Link to={'/products/' + id}><button>Añadir al carrito</button> </Link>
+                    <div>
+                        <Link to={'/products/' + id}><button><i class="fas fa-bars"></i></button></Link>
+                        <Link to={'/products/' + id}><button><i class="fas fa-shopping-cart"></i></button> </Link>
+                        <button><i class="fas fa-heart"></i></button>
+                    </div>
+                    
                 </div>
             </CardContent>
         </Card>
