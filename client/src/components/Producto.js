@@ -11,7 +11,7 @@ function Producto({ name, price, image, description }) {
             {/* <h1>Detalle Card</h1> */}
             <figure> <img src={image} alt={name} /> </figure>
             <div className={styles.infoContent}>
-                <h5> {name} </h5>
+                <h5>{name}</h5>
                 <span className={styles.price}>$ {price} </span>
                 <p> {description} </p>
                 <div className={styles.botonera}>
