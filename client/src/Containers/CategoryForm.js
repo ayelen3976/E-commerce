@@ -21,6 +21,7 @@ function CategoryForm() {
         axios.get('/products/category')
         .then(res => {
             setProducts(res.data);
+
         }).catch(err => console.log(err.response.data));
   },[]);
 
