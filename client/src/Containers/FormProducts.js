@@ -23,7 +23,7 @@ function FormProducts() {
             setProducts(res.data);
         })
         .catch(err => console.log(err.response.data));
-  });
+  },[]);
 
 //  ------------------Functions---------------------------
   function onChange(e) {

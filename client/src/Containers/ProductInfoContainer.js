@@ -2,11 +2,11 @@
 import React, { Component } from 'react';
 
 //Componentes
-import Nav from '../components/Nav'
+import Nav from '../Components/Nav'
 
 //Externos
 import axios from 'axios';
-import Producto from '../components/Producto';
+import Producto from '../Components/Producto';
 
 
 //ProductInfoContainer -> Toma la info del producto en particular y crea un detalle del mismo(Producto component)

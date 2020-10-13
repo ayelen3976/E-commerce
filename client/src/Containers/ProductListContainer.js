@@ -2,9 +2,9 @@
 import React, { Component } from 'react';
 
 //Componentes
-import Nav from '../components/Nav'
-import Catalogo from '../components/Catalogo';
-import Sidebar from '../components/Sidebar'
+import Nav from '../Components/Nav'
+import Catalogo from '../Components/Catalogo';
+// import Sidebar from '../components/Sidebar'
 
 //Externos
 import axios from 'axios';
@@ -31,7 +31,8 @@ class ProductListContainer extends Component {
                     productsData
                 })
                 //console.log(this.state)
-            }).catch(console.log)
+            })
+            .catch(console.log)
     }
 
 
@@ -41,10 +42,10 @@ class ProductListContainer extends Component {
         return(
             <div>
                 <Nav />
-                <div style={this.divFlex}>
-                    <Sidebar/>
                     <Catalogo productsData={productsData}/>
-                </div>
+                {/* <div style={this.divFlex}>
+                    <Sidebar/>
+                </div> */}
             </div>
         )
     }
