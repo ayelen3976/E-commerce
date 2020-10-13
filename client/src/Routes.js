@@ -11,6 +11,7 @@ import CategoryListContainer from './Containers/CategoryListContainer';
 import CategoryInfoContainer from './Containers/CategoryInfoContainer';
 
 
+
 const Routes = () => {
     return (
         <Switch>
@@ -21,6 +22,7 @@ const Routes = () => {
             <Route exact path='/category' component = {CategoryListContainer}/>
             <Route exact path='/ProductForm' component = {FormProducts}/>
             <Route exact path='/CategoryForm' component = {CategoryForm}/>
+            
         </Switch>
     )
 }

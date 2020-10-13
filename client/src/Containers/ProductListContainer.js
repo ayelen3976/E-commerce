@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 //Componentes
 import Nav from '../Components/Nav'
 import Catalogo from '../Components/Catalogo';
+// import Sidebar from '../components/Sidebar'
 
 //Externos
 import axios from 'axios';
@@ -14,6 +15,10 @@ class ProductListContainer extends Component {
 
     state = {
         productsData: []
+    }
+
+    divFlex= {
+        display:'flex'
     }
 
     componentDidMount() {
@@ -30,13 +35,17 @@ class ProductListContainer extends Component {
             .catch(console.log)
     }
 
+
     render() {
         const {productsData} = this.state;
 
         return(
             <div>
                 <Nav />
-                <Catalogo productsData={productsData} categoryBool = {false}/>
+                    <Catalogo productsData={productsData}/>
+                {/* <div style={this.divFlex}>
+                    <Sidebar/>
+                </div> */}
             </div>
         )
     }
