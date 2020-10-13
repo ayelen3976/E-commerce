@@ -1,5 +1,5 @@
 const server = require('express').Router();
-const { Category } = require('../db.js');
+const { Category ,Product } = require('../db.js');
 
 
 /////////// READ ///////////
@@ -14,6 +14,22 @@ server.get('/', (req, res, next) => {
             res.status(404, err)
         });
 });
+
+//Devuelve TODOS LOS PRODUCTOS de una categoria
+server.get('/filter/:id' , (req,res)=>{
+    return Category.findAll({
+        where: {
+            categoryID: req.params.id
+        },
+        include: Product
+    })
+    .then(category => {
+        res.json(category);
+    })
+    .catch(err => {
+        res.status(404, err)
+    });
+})
 
 //Buscamos una categoría por ID
 server.get('/:categoryID', (req, res, next) => {

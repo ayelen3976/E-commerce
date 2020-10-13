@@ -9,7 +9,7 @@ function FormProducts() {
   const [lgShow, setLgShow] = useState(false);
   const [show, setShow] = useState(false);
 
-  const [product, setProduct] = useState({ name: "", price: "" , description:""});
+  const [product, setProduct] = useState({ name: "", price: "" , description:"",category:[]});
   const [products, setProducts] = useState([]);
   const [id, setId] = useState("");
 
@@ -18,8 +18,9 @@ function FormProducts() {
   // const AddShow = () => setLgShow(true);//Por que no se usa?
 
   useEffect(() => {
-        axios.get('/products')
+        axios.get('/products/include/category')
         .then(res => {
+          // console.log(res.data)
             setProducts(res.data);
         })
         .catch(err => console.log(err.response.data));
@@ -222,6 +223,7 @@ function FormProducts() {
                 <td>{item.name}</td>
                 <td>{item.price}</td>
                 <td>{item.description}</td>
+                {/* <td>{console.log(item.categories[0].name)}</td> */}
                 <td>
                   <Button variant="primary" onClick={() => editar(item)}>
                     Editar
