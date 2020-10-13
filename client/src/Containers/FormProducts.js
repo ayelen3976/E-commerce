@@ -15,6 +15,7 @@ function FormProducts() {
   const [id, setId] = useState("");
 
   const [category, setCategory] = useState([])
+  const [categoryID, setCategoryID] = useState()
 
   const handleClose = () => setShow(false);
   const AddClose = () => setLgShow(false);
@@ -63,7 +64,9 @@ function FormProducts() {
       return newArr
   }
  
-  
+  const handleChangeCategory = selectedOption =>{
+    setCategoryID(selectedOption.value)
+  } 
 
   //  ------------------AGREGAR---------------------------
   const addProduct = (e) => {
@@ -147,7 +150,7 @@ function FormProducts() {
 //  ----------------Render-------------------------
   return (
     <div className="container">
-      
+      {console.log(categoryID)}
         {/* ---------------------Modal from AGREGAR---------------------- */}
       <Modal
         size="lg"
@@ -183,8 +186,8 @@ function FormProducts() {
               onChange={onChange}
               value={product.description}
             />
-             <Select onClick={product.category}  options={translate(category)} />
-            {console.log ('productCategory',product)}
+             <Select  options={translate(category)} onChange={handleChangeCategory} />
+            {console.log ('productCategory',)}
             <Button variant="primary" onClick={addProduct}>
               Añadir
             </Button>
