@@ -16,10 +16,7 @@ class CategoryInfoContainer extends Component {
         super(props)
 
         this.state = {
-            id: "",
-            name: "",
-            description: "",
-            image: ""
+            prodctsByCategory: []
         }
     }
 
@@ -28,37 +25,31 @@ class CategoryInfoContainer extends Component {
         const id = match.params.id;
         //console.log(id)
         //onsole.log(process.env.REACT_APP_URL_DATA_BASE)
-        const url = `/products/category/${id}`
+        const url = `/products/category/filter/${id}`
         axios.get(url)
             .then(res => {
 
                 const categoryData = res.data;
-                // console.log(categoryData)
+                // console.log(categoryData[0].products)
 
                 this.setState({
-                    id: categoryData.categoryID,
-                    name: categoryData.name,
-                    description: categoryData.description,
+                    prodctsByCategory: categoryData[0].products
                     // image: categoryData.img
                 })
 
-                // console.log(this.state)
-
+                //console.log(this.state)
             }).catch(console.log)
     }
 
     render() {
 
-        const categoryData = this.state;
+        const categoryData = this.state.prodctsByCategory;
+        // console.log(categoryData.prodctsByCategory)
 
         return (
             <div>
                 <Nav />
-                <CategoryDetails 
-                    name = {categoryData.name}
-                    description = {categoryData.description}
-                    image = 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcThCt6rKO1mS369Te5YY58fbfqxuIc15Hk5-Q&usqp=CAU'
-                />
+                <CategoryDetails products={categoryData}/>
             </div>
         )
     }

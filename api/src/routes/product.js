@@ -15,6 +15,23 @@ server.get('/', (req, res, next) => {
         });
 });
 
+//Devuelve un producto y su categoria
+server.get('/:id/category', (req, res, next) => {
+    return Product.findOne({
+        where: {
+            id: req.params.id
+        },
+        include: Category
+    })
+    .then(products => {
+        res.json(products);
+    })
+    .catch(err => {
+        res.status(404, err)
+    });
+});
+
+
 //Buscamos un producto por ID
 server.get('/:id', (req, res, next) => {
     return Product.findByPk(req.params.id)
