@@ -58,8 +58,8 @@ server.get('/search', (req, res, next) => {
 
 //Creamos un nuevo producto
 server.post('/', (req, res, next) => {
-    const { name, description, stock, price } = req.body
-    return Product.create({ name: name, description: description, stock: stock, price: price })
+    const { name, description, stock, price, img } = req.body
+    return Product.create({ name: name, description: description, stock: stock, price: price, img: img }) 
         .then(producto => {
             res.status(201).json(producto)
         })
