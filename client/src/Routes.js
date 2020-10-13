@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 //componentes
+//import Home from './Components/Home'
 import Home from './Components/Home'
 import ProductListContainer from './Containers/ProductListContainer';
 import ProductInfoContainer from './Containers/ProductInfoContainer';

@@ -1,0 +1,11 @@
+.btn-verde{
+    padding: 1em;
+    background-color: #82ae46;
+    color: #ffffff;
+}
+
+.btn-verde:hover{
+    padding: 1em;
+    background-color: #579500;
+    text-decoration: none;
+}
