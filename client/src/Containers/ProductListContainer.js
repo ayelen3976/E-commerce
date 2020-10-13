@@ -22,6 +22,10 @@ class ProductListContainer extends Component {
     }
 
     componentDidMount() {
+        this.buscarProductos()
+    }
+
+    buscarProductos (){
         axios.get('/products')
             .then(res => {
 
@@ -34,8 +38,7 @@ class ProductListContainer extends Component {
             })
             .catch(console.log)
     }
-
-
+    
     render() {
         const {productsData} = this.state;
 
