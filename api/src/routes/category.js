@@ -43,7 +43,7 @@ server.get('/:categoryID', (req, res, next) => {
 });
 
 //Mostramos las categorias que coincidan con el nombre pasado como parametro en la URL
-server.get('/:nombreCat', (req, res, next) => {
+server.get('/buscar/:nombreCat', (req, res, next) => {
     const nombreCat = req.params.nombreCat;
 
     return Category.findAll({

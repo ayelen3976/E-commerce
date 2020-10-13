@@ -16,6 +16,7 @@ function FormProducts() {
 
   const [category, setCategory] = useState([])
   const [categoryID, setCategoryID] = useState()
+  const [productID, setProductID] = useState()
 
   const handleClose = () => setShow(false);
   const AddClose = () => setLgShow(false);
@@ -90,13 +91,27 @@ function FormProducts() {
       }
     })
       .then(res => {
-        console.log(res)
+        
         setProducts(pro);
         setProduct({ name: "", price: "", description: "" });
         setLgShow(false)
+       agregarCat(res.data.id)
       })
+      
       .catch(console.log)
   };
+
+
+
+  //----------------------agregar categoria al producto
+
+  const agregarCat = (id)=>{
+    
+    let idProducto = id
+    let idCategoria = categoryID
+    console.log(idProducto + ' '+ idCategoria)
+    axios.post(`http://localhost:4000/products/${idProducto}/category/${idCategoria}`)
+  }
 
   //  ------------------DELETE---------------------------
   const deleteProduct = (id) => {

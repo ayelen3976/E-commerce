@@ -14,7 +14,6 @@ server.get('/', (req, res, next) => {
             res.status(404, err)
         });
 });
-
 server.get('/include/category', (req, res, next) => {
     return Product.findAll({
         include: Category
@@ -44,16 +43,6 @@ server.get('/:id/category', (req, res, next) => {
 });
 
 
-//Buscamos un producto por ID
-server.get('/:id', (req, res, next) => {
-    return Product.findByPk(req.params.id)
-        .then(product => {
-            res.send(product)        
-        })
-        .catch(err => {
-            res.status(400,err)
-        });
-});
 
 //Buscamos los productos que contengan la palabra pasada como query string en su name o en su description
 server.get('/search', (req, res, next) => {
@@ -80,6 +69,17 @@ server.get('/search', (req, res, next) => {
         })
         .catch(err => {
             res.status(400, err)
+        });
+});
+
+//Buscamos un producto por ID
+server.get('/:id', (req, res, next) => {
+    return Product.findByPk(req.params.id)
+        .then(product => {
+            res.send(product)        
+        })
+        .catch(err => {
+            res.status(400,err)
         });
 });
 
@@ -119,21 +119,6 @@ server.post('/:id/category/:categoryId', (req, res, next) => {
 
 /////////// DELETE ///////////
 
-//Borramos un producto de la lista en base al id pasado en la URL como parametro --> req.params
-server.delete('/:id', (req, res, next) => {
-    Product.destroy({
-        where: {
-            id: req.params.id
-        }
-    })
-    .then(() => {
-        res.json("Done");
-    })
-    .catch(err => {
-        res.status(400,err)
-    })
-});
-
 //Borramos la categoria de un producto en particular, ambos pasado como parametros en la URL
 server.delete('/:id/category/:categoryId', (req, res, next) => {
     const { id, categoryId } = req.params;
@@ -152,6 +137,21 @@ server.delete('/:id/category/:categoryId', (req, res, next) => {
         .catch(err => {
             res.status(400,err)
         })
+});
+
+//Borramos un producto de la lista en base al id pasado en la URL como parametro --> req.params
+server.delete('/:id', (req, res, next) => {
+    Product.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(() => {
+        res.json("Done");
+    })
+    .catch(err => {
+        res.status(400,err)
+    })
 });
 
 /////////// UPDATE ///////////
