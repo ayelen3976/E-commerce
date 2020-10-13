@@ -10,36 +10,36 @@ import axios from 'axios';
 
 
 //ProductListContainer -> la pagina principal
-class ProductListContainer extends Component {
+class CategoryListContainer extends Component {
 
     state = {
-        productsData: []
+        categoryData: []
     }
 
     componentDidMount() {
-        axios.get('/products')
+        axios.get('/products/category')
             .then(res => {
 
-                const productsData = res.data;
-                //console.log(productsData)
+                const categoryData = res.data;
+                console.log(categoryData)
                 this.setState({
-                    productsData
+                    categoryData
                 })
-                //console.log(this.state)
+                console.log(this.state)
             })
             .catch(console.log)
     }
 
     render() {
-        const {productsData} = this.state;
+        const {categoryData} = this.state;
 
         return(
             <div>
                 <Nav />
-                <Catalogo productsData={productsData} categoryBool = {false}/>
+                <Catalogo productsData={categoryData} categoryBool = {true}/>
             </div>
         )
     }
 }
 
-export default ProductListContainer;
+export default CategoryListContainer;
