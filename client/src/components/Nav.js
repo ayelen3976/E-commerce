@@ -39,10 +39,10 @@ function Nav(props) {
                     <Link to='/category'>Ver Categorias</Link>
                 </li>
                 <li class="nav-item">
-                    <Link to='/ProductForm'>Crud Productos</Link>
+                    <Link to='/ProductForm'>+ Productos</Link>
                 </li>
                 <li class="nav-item">
-                    <Link to='/CategoryForm'>Crud Categorias</Link>
+                    <Link to='/CategoryForm'>+ Categorias</Link>
                 </li>
                 </ul>
                 <SearchBar/>
