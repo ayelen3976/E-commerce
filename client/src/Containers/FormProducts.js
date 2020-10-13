@@ -19,6 +19,7 @@ function FormProducts() {
   // const AddShow = () => setLgShow(true);//Por que no se usa?
 
   useEffect(() => {
+    //            `/products/${ID DEL PRODUCT}/category/${ID DE LA CATEGORIA}`
         axios.get('/products/include/category')
         .then(res => {
           // console.log(res.data)
