@@ -17,7 +17,7 @@ function FormProducts() {
   const AddClose = () => setLgShow(false);
   // const AddShow = () => setLgShow(true);//Por que no se usa?
 
-  useEffect(() => {
+  useEffect(()=> {
         axios.get('/products/include/category')
         .then(res => {
           // console.log(res.data)
@@ -25,6 +25,7 @@ function FormProducts() {
         })
         .catch(err => console.log(err.response.data));
   },[]);
+  // },products);
 
 //  ------------------Functions---------------------------
   function onChange(e) {
