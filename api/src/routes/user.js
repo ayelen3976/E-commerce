@@ -1,5 +1,5 @@
 const server = require('express').Router();
-const  { User } = require('../db.js');
+const  { User , Order} = require('../db.js');
 // const { Sequelize } = require('sequelize');
 
 
@@ -14,6 +14,19 @@ server.get('/', (req, res, next) => {
             res.status(404, err)
         });
 });
+
+//FALTA PROBAR-----> Retorna Todas las ordenes de un usuario en particular
+server.get('/:id/order', (req, res, next) => {
+    return Order.findAll({
+        where: {
+            userId: req.params.id
+        }
+    })
+        .catch(err => {
+            res.status(400, err)
+        });
+});
+
 
 //Buscamos los usuarios que contengan la palabra pasada como query string en su:
 // userName, firstName, lastName ,email
