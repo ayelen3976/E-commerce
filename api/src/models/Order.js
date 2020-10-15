@@ -10,6 +10,10 @@ module.exports = (sequelize) => {
             autoIncrement: true,
             primaryKey: true,
         },
+        userId:{
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
         estado: {
             type: DataTypes.ENUM({
                 values: ['Carrito','Creada','Procesando','Cancelada','Completa']

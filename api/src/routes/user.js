@@ -106,16 +106,14 @@ server.post('/:idUser/cart',async (req,res,next) =>{
     //El ID va a ser el ID del Producto 
     const {id , cantidad} = req.body;
     const {idUser} = req.params;
-
+    console.log(id)
+    console.log(idUser)
     let product = await Product.findByPk(id)
-    let order = await Order.findOrCreate(
-        {
-            userId : id,
-            where : {userId: idUser, estado: 'Carrito'}
-        }
-    );
+    let order = await Order.create({ userId: idUser, estado: 'Carrito' })
+        .then(console.log("BIEN"))
+        .catch(res.send);
 
-    Orderline.create(
+    await Orderline.create(
         {
             orderId : order.dataValues.id,
             productId: id,
@@ -126,7 +124,7 @@ server.post('/:idUser/cart',async (req,res,next) =>{
             res.status(200).json({message:"El producto se agrego al carrito"});
         })
         .catch(err =>{
-            console.log(err)
+            console.log("ACA ES DONDE ESTAS TENIENDO EL ERROR")
             res.status(400).json({message: "El producto no se pudo agregar al carrito"});
         });
 });

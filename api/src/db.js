@@ -35,8 +35,6 @@ const { Product, Category, User, Order ,Orderline} = sequelize.models;
 // Aca vendrian las relaciones
 console.log(sequelize.models)
 
-User.hasMany(Order); //tiene muchas ordenes
-Order.belongsTo(User); //Pertenece a un usuario
 
 
 Order.belongsToMany(Product, { through: Orderline}); //tiene muchos productos N a N con productos
