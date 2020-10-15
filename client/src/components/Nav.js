@@ -1,15 +1,15 @@
 import React from 'react';
-import { AppBar, Typography, Toolbar, IconButton, Button } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+// import { AppBar, Typography, Toolbar, IconButton, Button } from '@material-ui/core';
+// import { withStyles } from '@material-ui/core/styles';
 import SearchBar from './SearchBar';
 import { Link } from 'react-router-dom';
-import styles from './css/Nav.module.css';
+// import styles from './css/Nav.module.css';
 
 
 function Nav(props) {
 
     //variable de estilo
-    const { classes } = props;
+    // const { classes } = props;
 
     return (
         // <AppBar className={classes.NavColor} position='static'>
@@ -53,12 +53,12 @@ function Nav(props) {
     )
 }
 
-export default withStyles({
-    NavColor: {
-        backgroundColor: '#82ae46'
-    }
-})(Nav);
-
+// export default withStyles({
+//     NavColor: {
+//         backgroundColor: '#82ae46'
+//     }
+// })(Nav);
+export default Nav;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
