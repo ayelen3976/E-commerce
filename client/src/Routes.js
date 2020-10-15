@@ -10,6 +10,7 @@ import FormProducts from './Containers/FormProducts';
 import CategoryForm from './Containers/CategoryForm';
 import CategoryListContainer from './Containers/CategoryListContainer';
 import CategoryInfoContainer from './Containers/CategoryInfoContainer';
+import Register from './Containers/register'
 
 
 
@@ -25,6 +26,7 @@ const Routes = () => {
             <Route exact path='/category' component = {CategoryListContainer}/>
             <Route exact path='/ProductForm' component = {FormProducts}/>
             <Route exact path='/CategoryForm' component = {CategoryForm}/>
+            <Route exact path='/registertest' component = {Register}/>
             
         </Switch>
     )
