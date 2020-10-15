@@ -110,7 +110,7 @@ server.post('/:idUser/cart',async (req,res,next) =>{
     console.log(idUser)
     let product = await Product.findByPk(id)
     let order = await Order.create({ userId: idUser, estado: 'Carrito' })
-        .then(console.log("BIEN"))
+        // .then(console.log("BIEN"))
         .catch(res.send);
 
     await Orderline.create(
@@ -124,7 +124,7 @@ server.post('/:idUser/cart',async (req,res,next) =>{
             res.status(200).json({message:"El producto se agrego al carrito"});
         })
         .catch(err =>{
-            console.log("ACA ES DONDE ESTAS TENIENDO EL ERROR")
+            console.log(err)
             res.status(400).json({message: "El producto no se pudo agregar al carrito"});
         });
 });
