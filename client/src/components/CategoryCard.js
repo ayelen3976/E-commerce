@@ -4,7 +4,8 @@ import { Card, CardMedia, CardContent } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 
-function CategoryCard({ id, name, description ,classes, image}) {
+// function CategoryCard({ id, name, description ,classes, image}) {
+function CategoryCard({ id, name, description ,classes}) {
     return (
         <Card className={classes.item}>
             {/* cambiar la imagen en la base de datos */}
