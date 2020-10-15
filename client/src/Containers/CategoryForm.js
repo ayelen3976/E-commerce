@@ -122,7 +122,7 @@ function CategoryForm() {
           <Modal.Title id="example-modal-sizes-title-lg">ADD</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h1>CRUD APP</h1>
+          <h1>Agregue su categoria</h1>
           <form>
             <input
               type="text"
@@ -177,8 +177,8 @@ function CategoryForm() {
 
   
       {/* ------------------Button ADD-------------------------  */}
-      <h1>CRUD APP</h1>
-      <Button onClick={() => setLgShow(true)}>ADD</Button>
+      <h1>Agregue su categoria</h1>
+      <Button onClick={() => setLgShow(true)}>AÑADIR</Button>
       <Link to = '/products'><Button>VOLVER</Button></Link>
 
       {/* ----------------Table--------------------------    */}
