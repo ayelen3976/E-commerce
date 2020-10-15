@@ -1,5 +1,5 @@
 const server = require('express').Router();
-const  { User , Order} = require('../db.js');
+const { User, Order, Product , Orderline } = require('../db.js');
 // const { Sequelize } = require('sequelize');
 
 
@@ -84,30 +84,77 @@ server.post('/', (req, res,next) => {
         });
 })
 
+//CREO UNA NUEVA ORDEN
+// server.post('/cart',(req,res) =>{
+//     const {cantidad,precio,orderId,productId} = req.body
+//     console.log(req.body);
+//     console.log(Orderline)
+
+//     Orderline.create({cantidad,precio,orderId,productId})
+//     .then(order =>{
+//         console.log(typeof(order))
+//         res.send(order)
+//     })
+//     .catch(err =>{
+//         console.log(typeof(err))
+//         res.send(err)
+//     })
+// })
+
+//Agregamos un producto al carrito de un usuario en particular
+server.post('/:idUser/cart',async (req,res,next) =>{
+    //El ID va a ser el ID del Producto 
+    const {id , cantidad} = req.body;
+    const {idUser} = req.params;
+
+    let product = await Product.findByPk(id)
+    let order = await Order.findOrCreate(
+        {
+            userId : id,
+            where : {userId: idUser, estado: 'Carrito'}
+        }
+    );
+
+    Orderline.create(
+        {
+            orderId : order.dataValues.id,
+            productId: id,
+            cantidad: cantidad,
+            precio: product.dataValues.price
+        })
+        .then(()=>{
+            res.status(200).json({message:"El producto se agrego al carrito"});
+        })
+        .catch(err =>{
+            console.log(err)
+            res.status(400).json({message: "El producto no se pudo agregar al carrito"});
+        });
+});
+
 ////////////////////// UPDATE ///////////////////
 server.put('/:id', (req, res, next) => {
     // Los valores modificados se sacaran del body mas adelante
-    const { userName, firstName, lastName, profilePic, description, email ,edad} = req.body;
+    const { userName, firstName, lastName, profilePic, description, email, edad } = req.body;
     User.update({
         userName,
         firstName,
         lastName,
         profilePic,
         description,
-        email ,
+        email,
         edad
     }, {
         where: {
             id: req.params.id
         }
     })
-    .then(result => {
-        //el update devuelve un array con la cantidad de filas afectadas.
-        res.status(200).json("done");
-    })
-    .catch(err => {
-        res.status(400, err)
-    });
+        .then(result => {
+            //el update devuelve un array con la cantidad de filas afectadas.
+            res.status(200).json("done");
+        })
+        .catch(err => {
+            res.status(400, err)
+        });
 });
 ////////////////////// DELETE ///////////////////
 server.delete('/:id', (req, res, next) => {
@@ -116,8 +163,8 @@ server.delete('/:id', (req, res, next) => {
             id: req.params.id
         }
     })
-    .then(() => {
-        res.json("Done");
+        .then(() => {
+            res.json("Done");
     })
     .catch(err => {
         res.status(400,err)

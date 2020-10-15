@@ -1,32 +1,43 @@
 const server = require('express').Router();
-const { Order } = require('../db.js');
+const { Order,Product } = require('../db.js');
+
 
 
 //////////////// READ ////////////////
 
-//Get con query segun el estatus de la orden
+//Este get puede o no recibir un estado por parametro, si lo recibe devuelvo todos las ordenes
+//que se encuentren en ese estado
 server.get('/', (req, res, next) => {
     const value = req.query.status;
     // console.log(req.query)
     // console.log(value)
-    const Op = Sequelize.Op;
-
-    Order.findAll({
-        where: {
-            estado:  value ,
-        }
-    })
-        .then(orderList => {
-            res.json(orderList);
+    if(value){
+        Order.findAll({
+            where: {
+                estado:  value ,
+            }
         })
-        .catch(err => {
-            res.status(400, err);
-        });
+            .then(orderList => {
+                if(orderList) res.json(orderList);
+                res.send("No se encontraron ordenes con ese estado")
+            })
+            .catch(err => {
+                res.status(400, err);
+            });
+    }else {
+        Order.findAll()
+            .then(orderList => {
+                res.json(orderList);
+            })
+            .catch(err => {
+                res.status(400, err);
+            });
+    }
 });
 
 //DEVUELVE UNA ORDEN EN PARTICULAR >>> Preguntar si tiene que devolver los productos que incluyen o solo el estado
 server.get('/:id', (req, res, next) => {
-    return Order.findByPk(req.params.id)
+    return Order.findByPk(req.params.id,{include:[Product]})
         .then(order => {
             res.send(order);     
         })
@@ -35,8 +46,9 @@ server.get('/:id', (req, res, next) => {
         });
 });
 
-//////////////// UPDATE //////////////// >>Preguntar si tiene que modificar la OrderLine o solo el estado
-//orders/:id
+//////////////// UPDATE //////////////// 
+
+//Modificamos el estado de una Order.
 server.put('/:id', (req, res, next) => {
     // Los valores modificados se sacaran del body mas adelante
     const { estado } = req.body;
