@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import {Table, Modal, Button} from "react-bootstrap";
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import Select from 'react-select';
 
 function FormProducts() {
   const [lgShow, setLgShow] = useState(false);
@@ -13,6 +14,10 @@ function FormProducts() {
   const [products, setProducts] = useState([]);
   const [id, setId] = useState("");
 
+  const [category, setCategory] = useState([])
+  const [categoryID, setCategoryID] = useState()
+  const [productID, setProductID] = useState()
+
   const handleClose = () => setShow(false);
   const AddClose = () => setLgShow(false);
   // const AddShow = () => setLgShow(true);//Por que no se usa?
@@ -20,14 +25,28 @@ function FormProducts() {
   useEffect(()=> {
         axios.get('/products/include/category')
         .then(res => {
-          // console.log(res.data)
+           console.log(res.data)
             setProducts(res.data);
         })
         .catch(err => console.log(err.response.data));
+
+        axios.get('/products/category')
+        .then(response=>{
+          setCategory(response.data)
+        })
+        
+        
+        
+        
   },[]);
   // },products);
 
 //  ------------------Functions---------------------------
+
+  
+
+
+
   function onChange(e) {
     var val = e.target.value;
     setProduct({
@@ -35,6 +54,21 @@ function FormProducts() {
       [e.target.name]: val
     });
   }
+
+  
+  function translate(arr){
+      let newArr = []
+      arr.forEach(obj =>{
+        newArr.push({
+          value:obj.categoryID,
+          label:obj.name})
+      })
+      return newArr
+  }
+ 
+  const handleChangeCategory = selectedOption =>{
+    setCategoryID(selectedOption.value)
+  } 
 
   //  ------------------AGREGAR---------------------------
   const addProduct = (e) => {
@@ -54,15 +88,31 @@ function FormProducts() {
         name: product.name,
         price: product.price,
         description: product.description
+        
       }
     })
-      .then(() => {
+      .then(res => {
+        
         setProducts(pro);
         setProduct({ name: "", price: "", description: "" });
         setLgShow(false)
+       agregarCat(res.data.id)
       })
+      
       .catch(console.log)
   };
+
+
+
+  //----------------------agregar categoria al producto
+
+  const agregarCat = (id)=>{
+    
+    let idProducto = id
+    let idCategoria = categoryID
+    console.log(idProducto + ' '+ idCategoria)
+    axios.post(`http://localhost:4000/products/${idProducto}/category/${idCategoria}`)
+  }
 
   //  ------------------DELETE---------------------------
   const deleteProduct = (id) => {
@@ -116,18 +166,20 @@ function FormProducts() {
 //  ----------------Render-------------------------
   return (
     <div className="container">
+      {console.log(categoryID)}
         {/* ---------------------Modal from AGREGAR---------------------- */}
       <Modal
         size="lg"
         show={lgShow}
-         onHide={AddClose}
+        onHide={AddClose}
         aria-labelledby="example-modal-sizes-title-lg"
       >
         <Modal.Header closeButton>
-          <Modal.Title id="example-modal-sizes-title-lg">ADD</Modal.Title>
+          <Modal.Title id="example-modal-sizes-title-lg">Crear nuevo producto</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h1>CRUD APP</h1>
+          
+      
           <form>
             <input
               type="text"
@@ -150,8 +202,10 @@ function FormProducts() {
               onChange={onChange}
               value={product.description}
             />
+             <Select  options={translate(category)} onChange={handleChangeCategory} />
+            {console.log ('productCategory',)}
             <Button variant="primary" onClick={addProduct}>
-              Add
+              Añadir
             </Button>
           </form>
         </Modal.Body>
@@ -196,9 +250,9 @@ function FormProducts() {
 
   
       {/* ------------------Button ADD-------------------------  */}
-      <h1>CRUD APP</h1>
-      <Button onClick={() => setLgShow(true)}>ADD</Button>
-      <Link to = '/products'><Button>VOLVER</Button></Link>
+      
+      <Button onClick={() => setLgShow(true)}>Añadir producto</Button>
+      <Link to = '/products'><Button>Volver</Button></Link>
 
       {/* ----------------Table--------------------------    */}
       <Table striped bordered hover>
@@ -209,6 +263,7 @@ function FormProducts() {
             <th>Description</th>
             <th>Editar</th>
             <th>Eliminar</th>
+          {/* <th> <Select options={options} /></th> */}
           </tr>
         </thead>
         <tbody>

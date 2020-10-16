@@ -13,9 +13,11 @@ import CategoryInfoContainer from './Containers/CategoryInfoContainer';
 
 
 
+
 const Routes = () => {
     return (
         <Switch>
+            
             <Route exact path='/' component={Home} />
             <Route exact path='/products' component = {ProductListContainer}/>
             <Route exact path='/products/:id' component = {ProductInfoContainer}/>

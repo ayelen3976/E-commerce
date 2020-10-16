@@ -45,16 +45,6 @@ server.get('/:id/category', (req, res, next) => {
 });
 
 
-//Buscamos un producto por ID
-server.get('/:id', (req, res, next) => {
-    return Product.findByPk(req.params.id)
-        .then(product => {
-            res.send(product)        
-        })
-        .catch(err => {
-            res.status(400,err)
-        });
-});
 
 //Buscamos los productos que contengan la palabra pasada como query string en su name o en su description
 server.get('/search', (req, res, next) => {
@@ -81,6 +71,17 @@ server.get('/search', (req, res, next) => {
         })
         .catch(err => {
             res.status(400, err)
+        });
+});
+
+//Buscamos un producto por ID
+server.get('/:id', (req, res, next) => {
+    return Product.findByPk(req.params.id)
+        .then(product => {
+            res.send(product)        
+        })
+        .catch(err => {
+            res.status(400,err)
         });
 });
 
@@ -154,6 +155,7 @@ server.delete('/:id', (req, res, next) => {
         res.status(400,err)
     })
 });
+
 /////////// UPDATE ///////////
 
 //Actualizamos los datos de un producto el FRONT se encarga de que nos llegue todo de manera correcta
