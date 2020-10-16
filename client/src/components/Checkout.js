@@ -1,8 +1,13 @@
 import React from 'react';
-function Checkout() {
+import Nav from './Nav';
+export default function Checkout() {
     return(
         <div>
-            
+               <Nav /> 
+
+        <div cl> 
+
+        </div>
         </div>
     )
 }

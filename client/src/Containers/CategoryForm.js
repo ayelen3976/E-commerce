@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+// import shortid from "shortid";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Table, Modal, Button} from "react-bootstrap";
 import axios from 'axios';
@@ -14,6 +15,7 @@ function CategoryForm() {
 
   const handleClose = () => setShow(false);
   const AddClose = () => setLgShow(false);
+  // const AddShow = () => setLgShow(true);//Por que no se usa?
 
   useEffect(() => {
         axios.get('/products/category')
@@ -120,7 +122,7 @@ function CategoryForm() {
           <Modal.Title id="example-modal-sizes-title-lg">ADD</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h1>CRUD APP</h1>
+          <h1>Agregue su categoria</h1>
           <form>
             <input
               type="text"
@@ -175,8 +177,8 @@ function CategoryForm() {
 
   
       {/* ------------------Button ADD-------------------------  */}
-      <h1>CRUD APP</h1>
-      <Button onClick={() => setLgShow(true)}>ADD</Button>
+      <h1>Agregue su categoria</h1>
+      <Button onClick={() => setLgShow(true)}>AÑADIR</Button>
       <Link to = '/products'><Button>VOLVER</Button></Link>
 
       {/* ----------------Table--------------------------    */}

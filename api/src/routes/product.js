@@ -14,6 +14,35 @@ server.get('/', (req, res, next) => {
             res.status(404, err)
         });
 });
+server.get('/include/category', (req, res, next) => {
+    return Product.findAll({
+        include: Category
+    })
+    .then(products => {
+        res.json(products);
+    })
+    .catch(err => {
+        res.status(404, err)
+    });
+});
+
+//Devuelve un producto y su categoria
+server.get('/:id/category', (req, res, next) => {
+    return Product.findOne({
+        where: {
+            id: req.params.id
+        },
+        include: Category
+    })
+    .then(products => {
+        res.json(products);
+    })
+    .catch(err => {
+        res.status(404, err)
+    });
+});
+
+
 
 //Buscamos los productos que contengan la palabra pasada como query string en su name o en su description
 server.get('/search', (req, res, next) => {
@@ -143,7 +172,7 @@ server.put('/:id', (req, res, next) => {
             id: req.params.id
         }
     })
-    .then(result => {
+    .then(res => {
         //el update devuelve un array con la cantidad de filas afectadas.
         res.status(200).json("done");
     })

@@ -28,23 +28,7 @@ class ProductListContainer extends Component {
         getProductsData();
      }
 
-    buscarProductos (){
-        axios.get('/products')
-            .then(res => {
-
-                const productsData = res.data;
-                //console.log(productsData)
-                this.setState({
-                    productsData
-                })
-
-
-                //console.log(this.state)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    } 
+    
     
     render() {
         const {productsData} = this.props;
@@ -62,13 +46,13 @@ class ProductListContainer extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({//dispatch actions
     getProductsData: () => dispatch(GetProducts())
     
     
     })
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => ({// setea el estado
     productsData: state.productsP.products
 
 })

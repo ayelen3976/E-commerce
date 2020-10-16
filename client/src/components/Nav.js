@@ -1,10 +1,9 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+// import { AppBar, Typography, Toolbar, IconButton, Button } from '@material-ui/core';
+// import { withStyles } from '@material-ui/core/styles';
 import SearchBar from './SearchBar';
 import { Link } from 'react-router-dom';
-import { Button} from 'react-bootstrap';
-import './css/Nav.module.css'
-// New code
+// import styles from './css/Nav.module.css';
 
 
 function Nav(props) {
@@ -40,15 +39,15 @@ function Nav(props) {
                     <Link to='/category'>Ver Categorias</Link>
                 </li>
                 <li class="nav-item">
-                    <Link to='/ProductForm'>Crud Productos</Link>
+                    <Link to='/ProductForm'>+ Productos</Link>
                 </li>
                 <li class="nav-item">
-                    <Link to='/CategoryForm'>Crud Categorias</Link>
+                    <Link to='/CategoryForm'>+ Categorias</Link>
                 </li>
                 </ul>
                 <SearchBar/>
                 
-                <Link to='/checkout'>
+                <Link to='/Checkout'>
    
                   <button className='Shopcart'><i class="fas fa-shopping-cart"></i></button> 
                 </Link>
@@ -59,12 +58,12 @@ function Nav(props) {
     )
 }
 
-export default withStyles({
-    NavColor: {
-        backgroundColor: '#82ae46'
-    }
-})(Nav);
-
+// export default withStyles({
+//     NavColor: {
+//         backgroundColor: '#82ae46'
+//     }
+// })(Nav);
+export default Nav;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
