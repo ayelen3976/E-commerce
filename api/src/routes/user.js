@@ -127,8 +127,8 @@ server.post('/:idUser/cart',async (req,res,next) =>{
 ////////////////////// UPDATE ///////////////////
 
 //Ruta para editar las cantidades del carrito
-server.put('/:idUser/:productId', async(req,res,next) => {
-    const { idUser , productId} = req.params;
+server.put('/:idUser/cart', async(req,res,next) => {
+    const { idUser } = req.params;
     const {cantidad} = req.body;
     let order = await Order.findOne({ where: { userId: idUser, estado: 'Carrito' } });
     Orderline.update({cantidad: cantidad},{where: {orderId:order.id}})
@@ -138,7 +138,7 @@ server.put('/:idUser/:productId', async(req,res,next) => {
         });
 });
 
-
+//Ruta para modificar los datos de un usuario.
 server.put('/:id', (req, res, next) => {
     // Los valores modificados se sacaran del body mas adelante
     const { userName, firstName, lastName, profilePic, description, email, edad } = req.body;
@@ -157,7 +157,7 @@ server.put('/:id', (req, res, next) => {
     })
         .then(result => {
             //el update devuelve un array con la cantidad de filas afectadas.
-            res.status(200).json("done");
+            res.status(200).json({message: 'Modificado', user: result});
         })
         .catch(err => {
             res.status(400, err)
