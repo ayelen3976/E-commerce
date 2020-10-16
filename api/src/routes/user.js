@@ -15,16 +15,26 @@ server.get('/', (req, res, next) => {
         });
 });
 
-//FALTA PROBAR-----> Retorna Todas las ordenes de un usuario en particular
-server.get('/:id/order', (req, res, next) => {
-    return Order.findAll({
-        where: {
-            userId: req.params.id
-        }
-    })
-        .catch(err => {
-            res.status(400, err)
-        });
+//Retorna Todas las ordenes de un usuario en particular
+server.get('/:userId/order', (req, res, next) => {
+    const { userId } = req.params;
+    // console.log(id)
+    Order.findAll({ where: { userId: userId } })
+        .then(orderList=> {
+            res.send(orderList)
+        })
+        .catch(res.send)
+});
+
+//Ruta para traer todos los items de un carrito
+server.get('/:userId/cart', (req, res, next) => {
+    const { userId } = req.params;
+    Order.findOne({ where: { userId:userId , estado: 'Carrito' } })
+        .then(orden => {
+           Orderline.findAll({ where: { orderId: orden.id }})
+                .then(response => { res.status(200).json(response) })
+        })
+        .catch(res.send);
 });
 
 
@@ -84,22 +94,7 @@ server.post('/', (req, res,next) => {
         });
 })
 
-//CREO UNA NUEVA ORDEN
-// server.post('/cart',(req,res) =>{
-//     const {cantidad,precio,orderId,productId} = req.body
-//     console.log(req.body);
-//     console.log(Orderline)
 
-//     Orderline.create({cantidad,precio,orderId,productId})
-//     .then(order =>{
-//         console.log(typeof(order))
-//         res.send(order)
-//     })
-//     .catch(err =>{
-//         console.log(typeof(err))
-//         res.send(err)
-//     })
-// })
 
 //Agregamos un producto al carrito de un usuario en particular
 server.post('/:idUser/cart',async (req,res,next) =>{
@@ -130,6 +125,20 @@ server.post('/:idUser/cart',async (req,res,next) =>{
 });
 
 ////////////////////// UPDATE ///////////////////
+
+//Ruta para editar las cantidades del carrito
+server.put('/:idUser/:productId', async(req,res,next) => {
+    const { idUser , productId} = req.params;
+    const {cantidad} = req.body;
+    let order = await Order.findOne({ where: { userId: idUser, estado: 'Carrito' } });
+    Orderline.update({cantidad: cantidad},{where: {orderId:order.id}})
+        .then(res.status(200).json({message: 'La cantidad fue modificada'}))
+        .catch(err=>{
+            res.status(400).json({message: 'No pudo ser modificado', error: err})
+        });
+});
+
+
 server.put('/:id', (req, res, next) => {
     // Los valores modificados se sacaran del body mas adelante
     const { userName, firstName, lastName, profilePic, description, email, edad } = req.body;
@@ -155,6 +164,22 @@ server.put('/:id', (req, res, next) => {
         });
 });
 ////////////////////// DELETE ///////////////////
+
+//Vaciando un carrito
+//pasar por body el nuevo "status" del carrito como "Cancelado"
+server.delete('/:id/cart', (req, res, next) => {
+    const {id} = req.params;
+    Order.findOne({where :{userId : id , estado : 'Carrito'}})
+        .then(orden =>{
+            Order.update({estado: 'Cancelada' } , {where: {id : orden.id}})
+                .then(res.status(200).json({message: 'El carrito fue vaciado'}))
+        })
+        .catch(err =>{
+            res.status(400).json({message: 'No se pudo vaciar el carrito',error : err})
+        })
+});
+
+//borrado de un usuario
 server.delete('/:id', (req, res, next) => {
     User.destroy({
         where: {
@@ -168,5 +193,6 @@ server.delete('/:id', (req, res, next) => {
         res.status(400,err)
     })
 });
+
 
 module.exports = server;
