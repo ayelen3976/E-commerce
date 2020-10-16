@@ -149,10 +149,11 @@ function FormProducts() {
         axios.put(url, {
           name: product.name,
           price: product.price,
-          description: product.description
+          description: product.description,
+          category:product.category
         }).then(() => {
           setId("");
-          setProduct({ name: "", price: "", description: "" });
+          setProduct({ name: "", price: "", description: "" , category:""});
           setShow(false);
         }).catch(console.log)
       }
@@ -202,7 +203,7 @@ function FormProducts() {
               onChange={onChange}
               value={product.description}
             />
-             <Select  options={translate(category)} onChange={handleChangeCategory} />
+             <Select value={product.category} options={translate(category)} onChange={handleChangeCategory} />
             {console.log ('productCategory',)}
             <Button variant="primary" onClick={addProduct}>
               Añadir
@@ -237,6 +238,8 @@ function FormProducts() {
             onChange={onChange}
             value={product.description}
           />
+          <Select  options={translate(category)} onChange={handleChangeCategory} />
+          
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -261,6 +264,7 @@ function FormProducts() {
             <th>Producto</th>
             <th>Precio</th>
             <th>Description</th>
+            <th>Categorias</th>
             <th>Editar</th>
             <th>Eliminar</th>
           {/* <th> <Select options={options} /></th> */}
@@ -279,6 +283,7 @@ function FormProducts() {
                 <td>{item.name}</td>
                 <td>{item.price}</td>
                 <td>{item.description}</td>
+            <td> <Button className="BsPlusSquareFill"> {item.category}+ </Button> </td>
                 {/* <td>{console.log(item.categories[0].name)}</td> */}
                 <td>
                   <Button variant="primary" onClick={() => editar(item)}>

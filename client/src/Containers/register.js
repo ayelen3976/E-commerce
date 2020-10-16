@@ -1,79 +1,114 @@
 import React from 'react';
-
-import Form from 'react-bootstrap/Form';
-import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
+import bootstrap, {Form} from 'react-bootstrap';
 import axios from 'axios'
 
+class Register extends React.Component{
+  constructor(props){
+    super(props)
+    this.state= {
+      name:"",
+      lastnmae:"",
+      username:"",
+      email:"",
+      edad:"",
+      profilePic:""
+    }
+    this.onChange= this.onChange.bind(this);
+    this.onSubmit= this.onSubmit.bind(this);
+  }
 
-//Una lista de products cards
+  onChange(e){
+    this.setState({
+      [e.target.name]:e.target.value
+    })
+    console.log(`la propiedad seria ${[e.target.name]}:${e.target.value}`)
+  }
 
-const boxsize = {
-    margin: "200px"
-}
-const Register = ()=>{
-   
 
-    return (
-        <div className={boxsize}>
-       
-
-  <Form.Group controlId="formGridAddress1">
-    <Form.Label>Nombre</Form.Label>
-    <Form.Control placeholder="1234 Main St" />
-  </Form.Group>
-
-  <Form.Group controlId="formGridAddress2">
-    <Form.Label>Apellido</Form.Label>
-    <Form.Control placeholder="Apartment, studio, or floor" />
-  </Form.Group>
-  
-  <Form.Group as={Col} controlId="formGridEmail">
-      <Form.Label>Email</Form.Label>
-      <Form.Control type="email" placeholder="Enter email" />
-    </Form.Group>
-        <Form>
-        <Form.Row>
-            
-
-            <Form.Group as={Col} controlId="formGridPassword">
-            <Form.Label>Contraseña</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
-            </Form.Group>
-  </Form.Row>
-  <Form.Row>
-    <Form.Group as={Col} controlId="formGridCity">
-      <Form.Label></Form.Label>
-      <Form.Control />
-    </Form.Group>
-
-    <Form.Group as={Col} controlId="formGridState">
-      <Form.Label>State</Form.Label>
-      <Form.Control as="select" defaultValue="Choose...">
-        <option>Choose...</option>
-        <option>...</option>
-      </Form.Control>
-    </Form.Group>
-
-    <Form.Group as={Col} controlId="formGridZip">
-      <Form.Label>Zip</Form.Label>
-      <Form.Control />
-    </Form.Group>
-  </Form.Row>
-
-  <Form.Group id="formGridCheckbox">
-    <Form.Check type="checkbox" label="Check me out" />
-  </Form.Group>
-
-  <Button variant="primary" type="submit" onClick={(e)=>{console.log(e)}}>
-    Submit
-  </Button>
-</Form>
-</div>
+  onSubmit(e){
+    e.preventDefault();
+    axios({
+      method: 'post',
+      url: 'http://localhost:4000/users',
+      data: {
+        lastName: this.state.name,
+        lastName: this.state.lastname,
+        userName: this.state.username,
+        email: this.state.email,
+        edad: this.state.edad,
+        profilePic: this.state.profilePic
         
+      }
+    })
+  }
+
+  render(){
+    return (
+      <form onSubmit={this.onSubmit}>
+        <h1>Unite a la comunidad de Green-Shop</h1>
+        <div className="form-group">
+          <label className="control-label">Nombre</label>
+          <input 
+          value={this.state.name}
+          onChange={this.onChange}
+          type="text"
+          name="name"
+          className="form control"
+          />
+          <br/>
+
+    <label className="control-label">Apellido</label>
+          <input 
+          value={this.state.lastname}
+          onChange={this.onChange}
+          type="text"
+          name="lastname"
+          className="form control"
+          />
+          <br/>
+          <label className="control-label">Username</label>
+          <input 
+          value={this.state.username}
+          onChange={this.onChange}
+          type="text"
+          name="username"
+          className="form control"
+          />
+          <br/>
+          <label className="control-label">Edad</label>
+          <input 
+          value={this.state.edad}
+          onChange={this.onChange}
+          type="text"
+          name="edad"
+          className="form control"
+          />
+          <br/>
+          <label className="control-label">Email</label>
+          <input 
+          value={this.state.email}
+          onChange={this.onChange}
+          type="text"
+          name="email"
+          className="form control"
+          />
+          <Form>
+  <Form.Group>
+    <Form.File id="exampleFormControlFile1" value={this.state.profilePic} label="Foto de perfil" />
+  </Form.Group>
+</Form>
+
+          <button className="btn btn-primary btn-lg">
+            Registrarse
+          </button>
+        </div>
+      </form>
     )
+  }
+    
 
+    }
 
-};
+   
 
 export default Register;
