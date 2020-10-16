@@ -65,32 +65,32 @@ server.get('/search', (req, res, next) => {
             res.json(userList)
         })
         .catch(err => {
-            res.status(400, err)
+            res.status(400).json({message: 'No se encontraron usuarios',error : err})
         });
 });
 
 //Nos trae solo el usuario cuyo id se pasa como parametro
-server.get('/:id', (req, res, next) => {
-    return User.findByPk(req.params.id)
+server.get('/:id', async (req, res, next) => {
+    await User.findByPk(req.params.id)
         .then(user => {
             res.send(user)        
         })
         .catch(err => {
-            res.status(400,err)
+            res.status(400).json({message: 'No se encontro el usuario',error : err})
         });
 });
 
 ////////////////////// CREATE ///////////////////
 //Creamos un usuario con los parametros recibidos por el body
-server.post('/', (req, res,next) => {
+server.post('/', async (req, res,next) => {
     const { userName, firstName, lastName, profilePic, description, email ,edad} = req.body;
-    
-    return User.create({userName,firstName,lastName,profilePic,description,email,edad})
-        .then(producto => {
-            res.status(201).json(producto)
+    // console.log(req.body);
+    return await User.create({userName,firstName,lastName,profilePic,description,email,edad})
+        .then(user => {
+            res.status(201).json(user)
         })
         .catch(err => {
-            res.status(404, err)
+            res.status(res.status(400).json({message: "Estas ingresando valores invalidos"}))
         });
 })
 
@@ -139,10 +139,10 @@ server.put('/:idUser/cart', async(req,res,next) => {
 });
 
 //Ruta para modificar los datos de un usuario.
-server.put('/:id', (req, res, next) => {
+server.put('/:id', async(req, res, next) => {
     // Los valores modificados se sacaran del body mas adelante
     const { userName, firstName, lastName, profilePic, description, email, edad } = req.body;
-    User.update({
+    await User.update({
         userName,
         firstName,
         lastName,
@@ -160,16 +160,16 @@ server.put('/:id', (req, res, next) => {
             res.status(200).json({message: 'Modificado', user: result});
         })
         .catch(err => {
-            res.status(400, err)
+            res.status(400).json({message: 'No se pudo actualizar el usuario',error : err})
         });
 });
 ////////////////////// DELETE ///////////////////
 
 //Vaciando un carrito
 //pasar por body el nuevo "status" del carrito como "Cancelado"
-server.delete('/:id/cart', (req, res, next) => {
+server.delete('/:id/cart',async (req, res, next) => {
     const {id} = req.params;
-    Order.findOne({where :{userId : id , estado : 'Carrito'}})
+    await Order.findOne({where :{userId : id , estado : 'Carrito'}})
         .then(orden =>{
             Order.update({estado: 'Cancelada' } , {where: {id : orden.id}})
                 .then(res.status(200).json({message: 'El carrito fue vaciado'}))
@@ -180,8 +180,8 @@ server.delete('/:id/cart', (req, res, next) => {
 });
 
 //borrado de un usuario
-server.delete('/:id', (req, res, next) => {
-    User.destroy({
+server.delete('/:id',async (req, res, next) => {
+    await User.destroy({
         where: {
             id: req.params.id
         }
@@ -190,7 +190,7 @@ server.delete('/:id', (req, res, next) => {
             res.json("Done");
     })
     .catch(err => {
-        res.status(400,err)
+        res.status(res.status(400).json({message: "No se pudo eliminar el usuario"}))
     })
 });
 

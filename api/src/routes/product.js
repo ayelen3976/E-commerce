@@ -15,6 +15,7 @@ server.get('/', (req, res, next) => {
         });
 });
 
+//Buscamos y devolvemos todos los productos incluida la categoria
 server.get('/include/category', (req, res, next) => {
     return Product.findAll({
         include: Category
