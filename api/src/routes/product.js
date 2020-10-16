@@ -120,21 +120,6 @@ server.post('/:id/category/:categoryId', (req, res, next) => {
 
 /////////// DELETE ///////////
 
-//Borramos un producto de la lista en base al id pasado en la URL como parametro --> req.params
-server.delete('/:id', (req, res, next) => {
-    Product.destroy({
-        where: {
-            id: req.params.id
-        }
-    })
-    .then(() => {
-        res.json("Done");
-    })
-    .catch(err => {
-        res.status(400,err)
-    })
-});
-
 //Borramos la categoria de un producto en particular, ambos pasado como parametros en la URL
 server.delete('/:id/category/:categoryId', (req, res, next) => {
     const { id, categoryId } = req.params;
@@ -155,6 +140,20 @@ server.delete('/:id/category/:categoryId', (req, res, next) => {
         })
 });
 
+//Borramos un producto de la lista en base al id pasado en la URL como parametro --> req.params
+server.delete('/:id', (req, res, next) => {
+    Product.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(() => {
+        res.json("Done");
+    })
+    .catch(err => {
+        res.status(400,err)
+    })
+});
 /////////// UPDATE ///////////
 
 //Actualizamos los datos de un producto el FRONT se encarga de que nos llegue todo de manera correcta
