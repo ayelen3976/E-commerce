@@ -43,6 +43,7 @@ Product.belongsToMany(Order, { through: Orderline }) //Puede estar en varias ord
 Product.belongsToMany(Category, { through: 'productcategories' });//Pertenece a muchas categorias
 Category.belongsToMany(Product, { through: 'productcategories' }); //Tiene muchos productos
 
+Category.belongsToMany(Product, { through: 'productcategories' }); 
  
 
 

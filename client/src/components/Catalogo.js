@@ -12,7 +12,7 @@ function Catalogo({ productsData, categoryBool }) {
 
                 <Grid container spacing={9} justify='center'>
                     { 
-                    productsData.map((producto, index) => {
+                    productsData?.map((producto, index) => {
                         if(producto.stock>0){
                            return (
                             <ProductCard
@@ -54,7 +54,7 @@ function Catalogo({ productsData, categoryBool }) {
         <div>
 
             <Grid container spacing={9} justify='center'>
-                {productsData.map((categoria, index) => {
+                {productsData?.map((categoria, index) => {
                     return (
                         <CategoryCard
                             key={categoria.id}

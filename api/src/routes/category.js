@@ -69,7 +69,7 @@ server.post('/', (req, res, next) => {
             res.status(201).json(categoria)
         })
         .catch(err => {
-            res.status(404, err)
+            res.status(404,console.log(err))
         });
 });
 
@@ -114,4 +114,4 @@ server.put('/:id', (req, res, next) => {
         });
 });
 
-module.exports = server;
+module.exports = server

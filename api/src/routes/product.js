@@ -87,8 +87,8 @@ server.get('/:id', (req, res, next) => {
 
 //Creamos un nuevo producto
 server.post('/', (req, res, next) => {
-    const { name, description, stock, price,img } = req.body
-    return Product.create({ name: name, description: description, stock: stock, price: price,img: img })
+    const { name, description, stock, price, img } = req.body
+    return Product.create({ name: name, description: description, stock: stock, price: price, img:img })
         .then(producto => {
             res.status(201).json(producto)
         })
@@ -172,7 +172,7 @@ server.put('/:id', (req, res, next) => {
             id: req.params.id
         }
     })
-    .then(result => {
+    .then(res => {
         //el update devuelve un array con la cantidad de filas afectadas.
         res.status(200).json("done");
     })

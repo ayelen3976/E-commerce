@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 import Select from 'react-select';
 
 function FormProducts() {
-  const [lgShow, setLgShow] = useState(false);
-  const [show, setShow] = useState(false);
+ 
+
 
   const [product, setProduct] = useState({ name: "", price: "" , description:"", stock:"",img:"",category:[]});
   const [products, setProducts] = useState([]);
@@ -18,6 +18,10 @@ function FormProducts() {
   const [categoryID, setCategoryID] = useState()
   const [productID, setProductID] = useState()
 
+
+  // ------------controladores de modal----------------------
+  const [show, setShow] = useState(false);
+  const [lgShow, setLgShow] = useState(false);
   const handleClose = () => setShow(false);
   const AddClose = () => setLgShow(false);
   // const AddShow = () => setLgShow(true);//Por que no se usa?
@@ -318,7 +322,11 @@ function FormProducts() {
             <th>Description</th>
             <th>Stock</th>
             <th>Categorias</th>
+<<<<<<< HEAD
             <th>Foto</th>
+=======
+            <th style={{width: "10%"}}>Img</th>
+>>>>>>> 98fe141912c57651eacd230d1e091dbd981f9283
             <th>Editar</th>
             <th>Eliminar</th>
           {/* <th> <Select options={options} /></th> */}
@@ -338,8 +346,14 @@ function FormProducts() {
                 <td>{item.price}</td>
                 <td>{item.description}</td>
                 <td>{item.stock}</td>
+<<<<<<< HEAD
                 <td><img alt="pic" src={item.img} style={{width: "100%"}} /></td>
             <td> <Button className="BsPlusSquareFill"> {item.category}+ </Button> </td>
+=======
+               
+            <td> <Button className="BsPlusSquareFill"> {item.category}+ </Button> </td>
+            <td><img alt="pic" src={item.img} style={{width: "100%"}} /></td>
+>>>>>>> 98fe141912c57651eacd230d1e091dbd981f9283
                 {/* <td>{console.log(item.categories[0].name)}</td> */}
                 <td>
                   <Button variant="primary" onClick={() => editar(item)}>

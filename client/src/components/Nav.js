@@ -32,7 +32,7 @@ function Nav(props) {
             <img src="/images/logo_size.jpg" alt="" />
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                <li class="nav-item active">
+                <li class="nav-item active" handle>
                     <Link to='/products'>Ver Productos</Link>
                 </li>
                 <li class="nav-item">
@@ -46,6 +46,11 @@ function Nav(props) {
                 </li>
                 </ul>
                 <SearchBar/>
+                
+                <Link to='/Checkout'>
+   
+                  <button className='Shopcart'><i class="fas fa-shopping-cart"></i></button> 
+                </Link>
             </div>
         </nav>
 
