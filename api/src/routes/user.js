@@ -82,15 +82,15 @@ server.get('/:id', (req, res, next) => {
 
 ////////////////////// CREATE ///////////////////
 //Creamos un usuario con los parametros recibidos por el body
-server.post('/', (req, res,next) => {
+server.post('/', async (req, res,next) => {
     const { userName, firstName, lastName, profilePic, description, email ,edad} = req.body;
-    
-    return User.create({userName,firstName,lastName,profilePic,description,email,edad})
-        .then(producto => {
-            res.status(201).json(producto)
+    // console.log(req.body);
+    return await User.create({userName,firstName,lastName,profilePic,description,email,edad})
+        .then(user => {
+            res.status(201).json(user)
         })
         .catch(err => {
-            res.status(404, err)
+            res.status(res.status(400).json({message: "Estas ingresando valores invalidos"}))
         });
 })
 

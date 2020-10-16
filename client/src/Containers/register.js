@@ -29,16 +29,20 @@ class Register extends React.Component{
     e.preventDefault();
     axios({
       method: 'post',
-      url: 'http://localhost:4000/users',
+      url: 'http://localhost:4000/user',
       data: {
-        lastName: this.state.name,
+        firstName: this.state.name,
         lastName: this.state.lastname,
         userName: this.state.username,
         email: this.state.email,
         edad: this.state.edad,
-        profilePic: this.state.profilePic
+        profilePic: this.state.profilePic,
+        description: "queonda"
         
       }
+    })
+    .then(user=>{
+      console.log(user)
     })
   }
 

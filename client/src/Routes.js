@@ -26,7 +26,7 @@ const Routes = () => {
             <Route exact path='/category' component = {CategoryListContainer}/>
             <Route exact path='/ProductForm' component = {FormProducts}/>
             <Route exact path='/CategoryForm' component = {CategoryForm}/>
-            <Route exact path='/registertest' component = {PageRegister}/>
+            <Route exact path='/register' component = {PageRegister}/>
             
         </Switch>
     )
