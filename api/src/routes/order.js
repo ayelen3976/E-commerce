@@ -35,7 +35,7 @@ server.get('/', (req, res, next) => {
     }
 });
 
-//DEVUELVE UNA ORDEN EN PARTICULAR >>> Preguntar si tiene que devolver los productos que incluyen o solo el estado
+//DEVUELVE UNA ORDEN EN PARTICULAR 
 server.get('/:id', (req, res, next) => {
     return Order.findByPk(req.params.id,{include:[Product]})
         .then(order => {
