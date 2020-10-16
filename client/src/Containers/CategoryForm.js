@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import shortid from "shortid";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Table, Modal, Button} from "react-bootstrap";
 import axios from 'axios';
@@ -15,14 +14,13 @@ function CategoryForm() {
 
   const handleClose = () => setShow(false);
   const AddClose = () => setLgShow(false);
-  // const AddShow = () => setLgShow(true);//Por que no se usa?
 
   useEffect(() => {
         axios.get('/products/category')
         .then(res => {
             setProducts(res.data);
-
-        }).catch(err => console.log(err.response.data));
+        })
+        .catch(err => console.log(err.response.data));
   },[]);
 
 //  ------------------Functions---------------------------

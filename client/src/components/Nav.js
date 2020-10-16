@@ -1,15 +1,16 @@
 import React from 'react';
-import { AppBar, Typography, Toolbar, IconButton, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import SearchBar from './SearchBar';
 import { Link } from 'react-router-dom';
-import styles from './css/Nav.module.css';
+import { Button} from 'react-bootstrap';
+import './css/Nav.module.css'
+// New code
 
 
 function Nav(props) {
 
     //variable de estilo
-    const { classes } = props;
+    // const { classes } = props;
 
     return (
         // <AppBar className={classes.NavColor} position='static'>
@@ -32,7 +33,7 @@ function Nav(props) {
             <img src="/images/logo_size.jpg" alt="" />
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                <li class="nav-item active">
+                <li class="nav-item active" handle>
                     <Link to='/products'>Ver Productos</Link>
                 </li>
                 <li class="nav-item">
@@ -46,6 +47,11 @@ function Nav(props) {
                 </li>
                 </ul>
                 <SearchBar/>
+                
+                <Link to='/checkout'>
+   
+                  <button className='Shopcart'><i class="fas fa-shopping-cart"></i></button> 
+                </Link>
             </div>
         </nav>
 

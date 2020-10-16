@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import shortid from "shortid";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {Table, Modal, Button, Form} from "react-bootstrap";
+import {Table, Modal, Button} from "react-bootstrap";
 import axios from 'axios';
 import { Link } from "react-router-dom";
 
@@ -9,7 +9,7 @@ function FormProducts() {
   const [lgShow, setLgShow] = useState(false);
   const [show, setShow] = useState(false);
 
-  const [product, setProduct] = useState({ name: "", price: "" , description:"",category:[] , img:"" });
+  const [product, setProduct] = useState({ name: "", price: "" , description:"", img:""} );
   const [products, setProducts] = useState([]);
   const [id, setId] = useState("");
 
@@ -19,14 +19,13 @@ function FormProducts() {
   // const AddShow = () => setLgShow(true);//Por que no se usa?
 
   useEffect(() => {
-    //            `/products/${ID DEL PRODUCT}/category/${ID DE LA CATEGORIA}`
-        axios.get('/products/include/category')
+
+         axios.get('/products')
         .then(res => {
-          // console.log(res.data)
-            setProducts(res.data);
-        })
+        setProducts(res.data)})
         .catch(err => console.log(err.response.data));
   },[]);
+
 
 //  ------------------Functions---------------------------
   function onChange(e) {
@@ -38,7 +37,7 @@ function FormProducts() {
     });
   }
 
-   function Handleimage(e){
+  function Handleimage(e){
     var file = e.target.files[0]
     // const previmg = document.querySelector(".anyimg")// 
     if(file) {
@@ -52,18 +51,17 @@ function FormProducts() {
       })
       reader.readAsDataURL(file)
     }
-    
-   }
 
+   }
   //  ------------------AGREGAR---------------------------
   const addProduct = (e) => {
     e.preventDefault();
     var val = {
-      // id: shortid.generate(),
+      //  id: shortid.generate(),
       name: product.name,
       price: product.price,
       description: product.description,
-      img: product.img
+      img:product.img
     };
     var pro = products;
     pro.push(val);
@@ -83,7 +81,7 @@ function FormProducts() {
       })
       .catch(console.log('no se mando data'))
   };
-
+ 
   //  ------------------DELETE---------------------------
   const deleteProduct = (id) => {
     const arrayFiltrado = products.filter((item) => item.id !== id);
@@ -98,7 +96,7 @@ function FormProducts() {
 
   //  ------------------EDIT---------------------------
   const editar = (item) => {
-    setProduct({ name: item.name, price: item.price, description: item.description, img: item.img });
+    setProduct({ name: item.name, price: item.price, description: item.description , img:item.img});
     setId(item.id);
     setShow(true);
   };
@@ -110,7 +108,7 @@ function FormProducts() {
       name: product.name,
       price: product.price,
       description: product.description,
-      img: product.img
+      img:product.img
     };
     var pro = products;
     const url = `/products/${id}`
@@ -124,7 +122,7 @@ function FormProducts() {
           img: product.img
         }).then(() => {
           setId("");
-          setProduct({ name: "", price: "", description: "", img: "" });
+          setProduct({ name: "", price: "", description: "", img:"" });
           setShow(false);
         }).catch(console.log)
       }
@@ -175,8 +173,9 @@ function FormProducts() {
            <input
               type="file"
               name="img"
-              onChange={ Handleimage}
+              onChange={Handleimage}
             /> 
+    
   
             <Button variant="primary" onClick={addProduct}>
               Add
@@ -214,8 +213,8 @@ function FormProducts() {
           <input
               type="file"
               name="img"
-              onChange={Handleimage}
-          /> 
+              onChange={ Handleimage}
+            />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -237,7 +236,7 @@ function FormProducts() {
       <Table striped bordered hover>
         <thead style={{ textAlign: "center" }}>
           <tr>
-            <th>Img</th>
+          <th style={{width: "10%"}}>Img</th>
             <th>Producto</th>
             <th>Precio</th>
             <th>Description</th>
@@ -255,11 +254,10 @@ function FormProducts() {
           ) : (
             products.map((item) => (
               <tr key={item.id}>
-                 <td><img alt="pic" src={item.img} style={{width: "10%"}} /></td>
+              <td><img alt="pic" src={item.img} style={{width: "100%"}} /></td>
                 <td>{item.name}</td>
                 <td>{item.price}</td>
                 <td>{item.description}</td>
-                {/* <td>{console.log(item.categories[0].name)}</td> */}
                 <td>
                   <Button variant="primary" onClick={() => editar(item)}>
                     Editar
