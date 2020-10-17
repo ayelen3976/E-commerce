@@ -3,7 +3,7 @@ import Nav from './Nav';
 import {connect} from 'react-redux';
 import {ShopcartTotal} from '../Redux/Reducers/ShopCart'; 
 
-  export default function Checkout() {
+ function Checkout() {
     return(
         <div>
         <Nav /> 
@@ -17,7 +17,7 @@ import {ShopcartTotal} from '../Redux/Reducers/ShopCart';
         </div>
     )
 }
-/* const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => ({
     totalItemsInCart: ShopcartTotal(state.shopP.cart)
-}) */
-// export default connect(mapStateToProps)(Checkout);
+})
+export default connect(mapStateToProps)(Checkout);
