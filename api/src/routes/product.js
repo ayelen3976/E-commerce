@@ -5,32 +5,32 @@ const { Sequelize } = require('sequelize');
 /////////// READ ///////////
 
 //Buscamos y devolvemos todos los productos
-server.get('/', (req, res, next) => {
-    return Product.findAll()
+server.get('/',async (req, res, next) => {
+    await Product.findAll()
         .then(products => {
             res.json(products);
         })
         .catch(err => {
-            res.status(404, err)
+            res.status(404).json({message: "No se encontraron Productos" , error: err})
         });
 });
 
 //Buscamos y devolvemos todos los productos incluida la categoria
-server.get('/include/category', (req, res, next) => {
-    return Product.findAll({
+server.get('/include/category', async(req, res, next) => {
+    await Product.findAll({
         include: Category
     })
     .then(products => {
         res.json(products);
     })
     .catch(err => {
-        res.status(404, err)
+        res.status(404).json({message: "No se encontraron Productos con categorias" , error: err})
     });
 });
 
 //Devuelve un producto y su categoria
-server.get('/:id/category', (req, res, next) => {
-    return Product.findOne({
+server.get('/:id/category', async(req, res, next) => {
+    await Product.findOne({
         where: {
             id: req.params.id
         },
@@ -40,20 +40,20 @@ server.get('/:id/category', (req, res, next) => {
         res.json(products);
     })
     .catch(err => {
-        res.status(404, err)
+        res.status(404).json({message: "No se encontro el producto y su categoria" , error: err})
     });
 });
 
 
 
 //Buscamos los productos que contengan la palabra pasada como query string en su name o en su description
-server.get('/search', (req, res, next) => {
+server.get('/search', async(req, res, next) => {
     const value = req.query.query;
     // console.log(req.query)
     // console.log(value)
     const Op = Sequelize.Op
 
-    Product.findAll({
+    await Product.findAll({
         where: {
             //or : [{name : value},{}]
             //substring %value% LIKE
@@ -70,40 +70,40 @@ server.get('/search', (req, res, next) => {
             res.json(productList)
         })
         .catch(err => {
-            res.status(400, err)
+            res.status(404).json({message: "No se encontraron Productos con esa palabra" , error: err})
         });
 });
 
 //Buscamos un producto por ID
-server.get('/:id', (req, res, next) => {
-    return Product.findByPk(req.params.id)
+server.get('/:id', async(req, res, next) => {
+    await Product.findByPk(req.params.id)
         .then(product => {
             res.send(product)        
         })
         .catch(err => {
-            res.status(400,err)
+            res.status(404).json({message: "No se encontro el producto requerido" , error: err})
         });
 });
 
 /////////// CREATE ///////////
 
 //Creamos un nuevo producto
-server.post('/', (req, res, next) => {
+server.post('/', async(req, res, next) => {
     const { name, description, stock, price, img } = req.body
-    return Product.create({ name: name, description: description, stock: stock, price: price, img:img })
+    return await Product.create({ name: name, description: description, stock: stock, price: price, img:img })
         .then(producto => {
             res.status(201).json(producto)
         })
         .catch(err => {
-            res.status(404, err)
+            res.status(404).json({message: "No se pudo agregar el producto"})
         });
-});
+})
 
 //Seteado categorias a un producto
-server.post('/:id/category/:categoryId', (req, res, next) => {
+server.post('/:id/category/:categoryId', async(req, res, next) => {
     const { id, categoryId } = req.params;
     let producto;
-    Product.findByPk(id)
+    await Product.findByPk(id)
         .then(product =>{
             producto = product;
             return Category.findByPk(categoryId)
@@ -115,17 +115,17 @@ server.post('/:id/category/:categoryId', (req, res, next) => {
             res.send("Agregada con exito")
         })
         .catch(err => {
-            res.status(400,err)
+            res.status(404).json({message: "No se pudo setear el producto a la categoria indicada" , error: err})
         })
 });
 
 /////////// DELETE ///////////
 
 //Borramos la categoria de un producto en particular, ambos pasado como parametros en la URL
-server.delete('/:id/category/:categoryId', (req, res, next) => {
+server.delete('/:id/category/:categoryId',async (req, res, next) => {
     const { id, categoryId } = req.params;
     let producto;
-    Product.findByPk(id)
+    await Product.findByPk(id)
         .then(product =>{
             producto = product;
             return Category.findByPk(categoryId)
@@ -137,13 +137,13 @@ server.delete('/:id/category/:categoryId', (req, res, next) => {
             res.send("Eliminada con exito con exito")
         })
         .catch(err => {
-            res.status(400,err)
+            res.status(404).json({message: "No se pudo eliminar la categoria del producto" , error: err})
         })
 });
 
 //Borramos un producto de la lista en base al id pasado en la URL como parametro --> req.params
-server.delete('/:id', (req, res, next) => {
-    Product.destroy({
+server.delete('/:id', async(req, res, next) => {
+    await Product.destroy({
         where: {
             id: req.params.id
         }
@@ -152,7 +152,7 @@ server.delete('/:id', (req, res, next) => {
         res.json("Done");
     })
     .catch(err => {
-        res.status(400,err)
+        res.status(404).json({message: "No se pudo borrar el producto" , error: err})
     })
 });
 
@@ -160,10 +160,10 @@ server.delete('/:id', (req, res, next) => {
 
 //Actualizamos los datos de un producto el FRONT se encarga de que nos llegue todo de manera correcta
 //la busqueda se realiza por id.
-server.put('/:id', (req, res, next) => {
+server.put('/:id', async(req, res, next) => {
     // Los valores modificados se sacaran del body mas adelante
     const { name, price, stock, description, img } = req.body;
-    Product.update({
+    await Product.update({
         name: name,
         price: price,
         stock: stock,
@@ -179,7 +179,7 @@ server.put('/:id', (req, res, next) => {
         res.status(200).json("done");
     })
     .catch(err => {
-        res.status(400, err)
+        res.status(404).json({message: "No se pudo actualizar el producto" , error: err})
     });
 });
 

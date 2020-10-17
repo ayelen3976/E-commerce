@@ -16,7 +16,7 @@ function FormProducts() {
 
   const [category, setCategory] = useState([])
   const [categoryID, setCategoryID] = useState()
-  const [productID, setProductID] = useState()
+  // const [productID, setProductID] = useState()
 
 
   // ------------controladores de modal----------------------

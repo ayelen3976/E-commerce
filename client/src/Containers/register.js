@@ -1,5 +1,5 @@
 import React from 'react';
-import bootstrap, {Form} from 'react-bootstrap';
+import  {Form} from 'react-bootstrap';
 import axios from 'axios'
 
 class Register extends React.Component{
