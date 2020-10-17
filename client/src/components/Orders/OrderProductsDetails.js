@@ -30,7 +30,7 @@ class OrderProdcutDetails extends Component {
         console.log(ordersData)
         return (
             <div>
-                <OrderDetails orderArray={ordersData}/>
+                <OrderDetails orderArray={ordersData} boolArray={true}/>
             </div>
         )
     }

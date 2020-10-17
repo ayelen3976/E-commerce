@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Order({id,userId,estado,booleanOrder,orderId,productId,cantidad,precio}) {
   const classes = useStyles();
-  if(!booleanOrder){
+  if(booleanOrder=== false){
 
     return (
       <div className={classes.root}>
@@ -82,7 +82,7 @@ export default function Order({id,userId,estado,booleanOrder,orderId,productId,c
               <Grid item xs container direction="raw" spacing={2}>
                 <Grid item xs>
                   <Typography gutterBottom variant="subtitle1">
-                    ORDER LINE DEL USUARIO : {userId}
+                    Lista de ordenes
                   </Typography>
                   <Typography variant="body2" gutterBottom>
                     PRODUCTO ID: {productId}
@@ -96,7 +96,7 @@ export default function Order({id,userId,estado,booleanOrder,orderId,productId,c
                     CANTIDAD: {cantidad}
                   </Typography>
                   <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                    PRECIO: {precio}
+                    PRECIO: ${precio}
                   </Typography>
                 </Grid>
               </Grid>
