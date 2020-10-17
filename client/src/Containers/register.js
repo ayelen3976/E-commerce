@@ -20,6 +20,8 @@ class Register extends React.Component{
     }
     this.onChange= this.onChange.bind(this);
     this.onSubmit= this.onSubmit.bind(this);
+    this.onCloseAction=this.onCloseAction.bind(this);
+    this.onCloseActionError=this.onCloseActionError.bind(this)
    
   }
 
@@ -62,13 +64,17 @@ class Register extends React.Component{
 
 onCloseAction(){
   
- return this.state.onCloseAction=false
+  this.setState({
+    openAction:false
+  })
 
 };
 
 
 onCloseActionError(){
-  return this.state.openActionError=false
+  this.setState({
+    openActionError:false
+  })
 
 }
 
@@ -136,7 +142,7 @@ onCloseActionError(){
 
 
 
-              <Snackbar open={true} autoHideDuration={2000} onClose={this.onCloseAction}>
+              <Snackbar open={this.state.openAction} autoHideDuration={2000} onClose={this.onCloseAction}>
           <Alert severity="success">
             This is a success message!
           </Alert>
