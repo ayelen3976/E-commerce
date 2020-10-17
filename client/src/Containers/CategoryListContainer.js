@@ -1,4 +1,5 @@
-//Only React
+//Only React. 
+// I want the file where addToShopCart function was defined 
 import React, { Component } from 'react';
 
 //Componentes
@@ -13,9 +14,7 @@ import GetCategory from '../Redux/Actions/Listcategory';
 //ProductListContainer -> la pagina principal
 class CategoryListContainer extends Component {
 
-    state = {
-        categoryData: []
-    }
+  
 
     componentDidMount() {
         const { getCategoryData } = this.props;

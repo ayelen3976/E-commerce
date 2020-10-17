@@ -1,18 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+
 // import { AppBar, Typography, Toolbar, IconButton, Button } from '@material-ui/core';
 // import { withStyles } from '@material-ui/core/styles';
 import SearchBar from './SearchBar';
 import { Link } from 'react-router-dom';
-// import styles from './css/Nav.module.css';
+// import styles from './css/Nav.module.css'; //it work. are you here
 
-
-function Nav(props) {
-    const roundButton={
-        'border-radius':'25px',
-    }
-    const bigCart={
-        'font-size':'30px',
-    }
+function Nav({ totalItemsInCart }) {
 
     //variable de estilo
     // const { classes } = props;
@@ -54,8 +50,7 @@ function Nav(props) {
                 <SearchBar/>
                 
                 <Link to='/Checkout'>
-   
-                  <button style={roundButton} className='Shopcart'><i class="fas fa-shopping-cart" style={bigCart}></i></button> 
+                  <button className='Shopcart'><i class="fas fa-shopping-cart"></i><span>{totalItemsInCart?.length}</span></button> 
                 </Link>
             </div>
         </nav>
@@ -64,12 +59,19 @@ function Nav(props) {
     )
 }
 
+// bcz mapStateToProps gets the state, that's the default behaviour in redux !!
+const mapStateToProps = (state) => ({
+    totalItemsInCart: state.shopP.cart
+})
+
 // export default withStyles({
 //     NavColor: {
 //         backgroundColor: '#82ae46'
 //     }
 // })(Nav);
-export default Nav;
+
+export default connect(mapStateToProps)(Nav);
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
