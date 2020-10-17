@@ -8,7 +8,7 @@ import Catalogo from '../Components/Catalogo';
 import { connect } from 'react-redux';
 import GetProducts from '../Redux/Actions/Listproducts';   
 //Externos
-import axios from 'axios';
+// import axios from 'axios';
 
 
 

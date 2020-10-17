@@ -7,7 +7,7 @@ import styles from './css/ProductCard.module.css';
 
 function ProductCard({id, name, description, price, classes, image ,stock, deshabilitado}) {
     
-    if(deshabilitado=="true"){
+    if(deshabilitado){
         return (
             <Card className={classes.item} >
             

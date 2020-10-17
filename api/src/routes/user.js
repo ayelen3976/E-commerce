@@ -1,50 +1,58 @@
 const server = require('express').Router();
+const { response } = require('express');
 const { User, Order, Product , Orderline } = require('../db.js');
 // const { Sequelize } = require('sequelize');
 
 
 ////////////////////// READ ///////////////////
 //Buscamos todos los usuarios
-server.get('/', (req, res, next) => {
-    return User.findAll()
+server.get('/', async (req, res, next) => {
+    await User.findAll()
         .then(users => {
             res.json(users);
         })
         .catch(err => {
-            res.status(404, err)
+            res.status(404).json({message: "No se encontraron Usuarios" , error: err})
         });
 });
 
 //Retorna Todas las ordenes de un usuario en particular
-server.get('/:userId/order', (req, res, next) => {
+server.get('/:userId/order', async(req, res, next) => {
     const { userId } = req.params;
     // console.log(id)
-    Order.findAll({ where: { userId: userId } })
+    await Order.findAll({ where: { userId: userId } })
         .then(orderList=> {
             res.send(orderList)
         })
-        .catch(res.send)
+        .catch(err =>{
+            res.status(404).json({message: "No se encontraron Ordenes para ese usuario" , error: err})
+        })
 });
 
 //Ruta para traer todos los items de un carrito
-server.get('/:userId/cart', (req, res, next) => {
+server.get('/:userId/cart', async (req, res, next) => {
     const { userId } = req.params;
-    Order.findOne({ where: { userId:userId , estado: 'Carrito' } })
+    await Order.findOne({ where: { userId: userId, estado: 'Carrito' } })
         .then(orden => {
-           Orderline.findAll({ where: { orderId: orden.id }})
-                .then(response => { res.status(200).json(response) })
+            console.log(orden)
+            Orderline.findAll({ where: { orderId: orden.dataValues.id} })
+                .then(response => {
+                    res.status(200).json(response)
+                })
         })
-        .catch(res.send);
+        .catch(err =>{
+            res.status(404).json({message: "No se encontraron Items" , error: err})
+        });
 });
 
 
 //Buscamos los usuarios que contengan la palabra pasada como query string en su:
 // userName, firstName, lastName ,email
-server.get('/search', (req, res, next) => {
+server.get('/search',async (req, res, next) => {
     const value = req.query.query;
     const Op = Sequelize.Op
 
-    User.findAll({
+    await User.findAll({
         where: {
             //or : [{name : value},{}]
             //substring %value% LIKE
@@ -90,9 +98,10 @@ server.post('/', async (req, res,next) => {
             res.status(201).json(user)
         })
         .catch(err => {
-            res.status(res.status(400).json({message: "Estas ingresando valores invalidos"}))
+            res.status(res.status(400).json({message: "Estas ingresando valores invalidos" ,error : err}))
         });
 })
+
 
 
 
@@ -101,16 +110,22 @@ server.post('/:idUser/cart',async (req,res,next) =>{
     //El ID va a ser el ID del Producto 
     const {id , cantidad} = req.body;
     const {idUser} = req.params;
-    console.log(id)
-    console.log(idUser)
+    // console.log(id)
+    // console.log(idUser)
     let product = await Product.findByPk(id)
-    let order = await Order.create({ userId: idUser, estado: 'Carrito' })
-        // .then(console.log("BIEN"))
-        .catch(res.send);
-
+    let order = await Order.findOrCreate(
+        {
+            where:{ 
+                userId: idUser, 
+                estado: 'Carrito' 
+            } 
+        })
+        // console.log(order[0].dataValues.id)
+    let orderId = order[0].dataValues.id
+    console.log(orderId)
     await Orderline.create(
         {
-            orderId : order.dataValues.id,
+            orderId : orderId,
             productId: id,
             cantidad: cantidad,
             precio: product.dataValues.price
