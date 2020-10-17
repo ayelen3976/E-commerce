@@ -7,31 +7,6 @@ import styles from "./css/ProductCard.module.css";
 import { connect } from "react-redux";
 import {addToShoppingCart} from "../Redux/Actions/Shopcart";
 
-<<<<<<< HEAD
-function ProductCard({id, name, description, price, classes, image ,stock, deshabilitado}) {
-    
-    if(deshabilitado){
-        return (
-            <Card className={classes.item} >
-            
-            <CardMedia className={classes.media} image={image} />
-            <CardContent>
-                <div className={classes.info} className={styles.productCard}>
-                    <h6>{name}</h6>
-                    <p>{description}</p>
-                    <p className={styles.price}>${price}</p>
-                    <p>Sin stock</p>
-                    
-                    <div>
-                        <Link to={'/products/' + id}><button><i class="fas fa-bars"></i></button></Link>
-                        
-                        <button><i class="fas fa-heart"></i></button>
-                    </div>
-                    
-                </div>
-            </CardContent>
-        </Card>
-=======
 function ProductCard({
   id,
   name,
@@ -42,6 +17,7 @@ function ProductCard({
   stock,
   deshabilitado,
   addNewItemToCart,
+  
 }) {
   const handleCartAddClick = () => {
     addNewItemToCart({
@@ -52,7 +28,6 @@ function ProductCard({
       image,
     });
   };
->>>>>>> 78a0de21f8360bc2d2226f7148358efc7f5455fa
 
   if (deshabilitado == "true") {
     return (

@@ -15,11 +15,7 @@ import GetProducts from '../Redux/Actions/Listproducts';
 //ProductListContainer -> la pagina principal
 class ProductListContainer extends Component {
 
-<<<<<<< HEAD
-
-=======
   
->>>>>>> 78a0de21f8360bc2d2226f7148358efc7f5455fa
 
     divFlex= {
         display:'flex'
