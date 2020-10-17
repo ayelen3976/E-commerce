@@ -1,22 +1,20 @@
-import { SHOP_CART } from '../consts/actionTypes'
-
-export default function agregarAlCarrito(newData,id) {
-    const URL= "http://localhost:4000"
-    return function (dispatch) {
-        return  axios({
-            method: 'POST',
-            url: `${URL}/users/${id}/cart`,
-            data: {
-                product: newData
-            }
-        }).then(res => {
+import { SHOP_CART } from './actiontypes'
+/* const URL= "http://localhost:4000"
+export const Shopcart= userId => dispatch => {
+	axios
+		.post(`${URL}/user/${userId}/cart`)
+        .then(res =>
             dispatch({
-                type: SHOP_CART ,
+                type: SHOP_CART,
                 payload: res.data
             })
-        })      
-        .catch((err) => {
-            console.log(err)
-        })
-    }
-}
+        )
+
+    };
+    */
+
+    // We are getting the newItemToAdd from the mapDispatchToProps in ProductCard.js file
+   export  const addToShoppingCart = (newItemToAdd) => ({
+        type: SHOP_CART,
+        item: newItemToAdd
+   })
