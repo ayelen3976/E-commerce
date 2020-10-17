@@ -1,50 +1,58 @@
 const server = require('express').Router();
+const { response } = require('express');
 const { User, Order, Product , Orderline } = require('../db.js');
 // const { Sequelize } = require('sequelize');
 
 
 ////////////////////// READ ///////////////////
 //Buscamos todos los usuarios
-server.get('/', (req, res, next) => {
-    return User.findAll()
+server.get('/', async (req, res, next) => {
+    await User.findAll()
         .then(users => {
             res.json(users);
         })
         .catch(err => {
-            res.status(404, err)
+            res.status(404).json({message: "No se encontraron Usuarios" , error: err})
         });
 });
 
 //Retorna Todas las ordenes de un usuario en particular
-server.get('/:userId/order', (req, res, next) => {
+server.get('/:userId/order', async(req, res, next) => {
     const { userId } = req.params;
     // console.log(id)
-    Order.findAll({ where: { userId: userId } })
+    await Order.findAll({ where: { userId: userId } })
         .then(orderList=> {
             res.send(orderList)
         })
-        .catch(res.send)
+        .catch(err =>{
+            res.status(404).json({message: "No se encontraron Ordenes para ese usuario" , error: err})
+        })
 });
 
 //Ruta para traer todos los items de un carrito
-server.get('/:userId/cart', (req, res, next) => {
+server.get('/:userId/cart', async (req, res, next) => {
     const { userId } = req.params;
-    Order.findOne({ where: { userId:userId , estado: 'Carrito' } })
+    await Order.findOne({ where: { userId: userId, estado: 'Carrito' } })
         .then(orden => {
-           Orderline.findAll({ where: { orderId: orden.id }})
-                .then(response => { res.status(200).json(response) })
+            console.log(orden)
+            Orderline.findAll({ where: { orderId: orden.dataValues.id} })
+                .then(response => {
+                    res.status(200).json(response)
+                })
         })
-        .catch(res.send);
+        .catch(err =>{
+            res.status(404).json({message: "No se encontraron Items" , error: err})
+        });
 });
 
 
 //Buscamos los usuarios que contengan la palabra pasada como query string en su:
 // userName, firstName, lastName ,email
-server.get('/search', (req, res, next) => {
+server.get('/search',async (req, res, next) => {
     const value = req.query.query;
     const Op = Sequelize.Op
 
-    User.findAll({
+    await User.findAll({
         where: {
             //or : [{name : value},{}]
             //substring %value% LIKE
@@ -65,34 +73,35 @@ server.get('/search', (req, res, next) => {
             res.json(userList)
         })
         .catch(err => {
-            res.status(400, err)
+            res.status(400).json({message: 'No se encontraron usuarios',error : err})
         });
 });
 
 //Nos trae solo el usuario cuyo id se pasa como parametro
-server.get('/:id', (req, res, next) => {
-    return User.findByPk(req.params.id)
+server.get('/:id', async (req, res, next) => {
+    await User.findByPk(req.params.id)
         .then(user => {
             res.send(user)        
         })
         .catch(err => {
-            res.status(400,err)
+            res.status(400).json({message: 'No se encontro el usuario',error : err})
         });
 });
 
 ////////////////////// CREATE ///////////////////
 //Creamos un usuario con los parametros recibidos por el body
-server.post('/', (req, res,next) => {
+server.post('/', async (req, res,next) => {
     const { userName, firstName, lastName, profilePic, description, email ,edad} = req.body;
-    
-    return User.create({userName,firstName,lastName,profilePic,description,email,edad})
-        .then(producto => {
-            res.status(201).json(producto)
+    // console.log(req.body);
+    return await User.create({userName,firstName,lastName,profilePic,description,email,edad})
+        .then(user => {
+            res.status(201).json(user)
         })
         .catch(err => {
-            res.status(404, err)
+            res.status(res.status(400).json({message: "Estas ingresando valores invalidos" ,error : err}))
         });
 })
+
 
 
 
@@ -101,16 +110,22 @@ server.post('/:idUser/cart',async (req,res,next) =>{
     //El ID va a ser el ID del Producto 
     const {id , cantidad} = req.body;
     const {idUser} = req.params;
-    console.log(id)
-    console.log(idUser)
+    // console.log(id)
+    // console.log(idUser)
     let product = await Product.findByPk(id)
-    let order = await Order.create({ userId: idUser, estado: 'Carrito' })
-        // .then(console.log("BIEN"))
-        .catch(res.send);
-
+    let order = await Order.findOrCreate(
+        {
+            where:{ 
+                userId: idUser, 
+                estado: 'Carrito' 
+            } 
+        })
+        // console.log(order[0].dataValues.id)
+    let orderId = order[0].dataValues.id
+    console.log(orderId)
     await Orderline.create(
         {
-            orderId : order.dataValues.id,
+            orderId : orderId,
             productId: id,
             cantidad: cantidad,
             precio: product.dataValues.price
@@ -139,10 +154,10 @@ server.put('/:idUser/cart', async(req,res,next) => {
 });
 
 //Ruta para modificar los datos de un usuario.
-server.put('/:id', (req, res, next) => {
+server.put('/:id', async(req, res, next) => {
     // Los valores modificados se sacaran del body mas adelante
     const { userName, firstName, lastName, profilePic, description, email, edad } = req.body;
-    User.update({
+    await User.update({
         userName,
         firstName,
         lastName,
@@ -160,16 +175,16 @@ server.put('/:id', (req, res, next) => {
             res.status(200).json({message: 'Modificado', user: result});
         })
         .catch(err => {
-            res.status(400, err)
+            res.status(400).json({message: 'No se pudo actualizar el usuario',error : err})
         });
 });
 ////////////////////// DELETE ///////////////////
 
 //Vaciando un carrito
 //pasar por body el nuevo "status" del carrito como "Cancelado"
-server.delete('/:id/cart', (req, res, next) => {
+server.delete('/:id/cart',async (req, res, next) => {
     const {id} = req.params;
-    Order.findOne({where :{userId : id , estado : 'Carrito'}})
+    await Order.findOne({where :{userId : id , estado : 'Carrito'}})
         .then(orden =>{
             Order.update({estado: 'Cancelada' } , {where: {id : orden.id}})
                 .then(res.status(200).json({message: 'El carrito fue vaciado'}))
@@ -180,8 +195,8 @@ server.delete('/:id/cart', (req, res, next) => {
 });
 
 //borrado de un usuario
-server.delete('/:id', (req, res, next) => {
-    User.destroy({
+server.delete('/:id',async (req, res, next) => {
+    await User.destroy({
         where: {
             id: req.params.id
         }
@@ -190,7 +205,7 @@ server.delete('/:id', (req, res, next) => {
             res.json("Done");
     })
     .catch(err => {
-        res.status(400,err)
+        res.status(res.status(400).json({message: "No se pudo eliminar el usuario"}))
     })
 });
 

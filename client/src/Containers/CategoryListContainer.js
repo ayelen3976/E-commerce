@@ -8,7 +8,7 @@ import Catalogo from '../Components/Catalogo';
 import { connect } from 'react-redux';
 import GetCategory from '../Redux/Actions/Listcategory';  
 //Externos
-import axios from 'axios';
+// import axios from 'axios';
 
 
 //ProductListContainer -> la pagina principal

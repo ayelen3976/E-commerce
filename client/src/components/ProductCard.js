@@ -17,6 +17,7 @@ function ProductCard({
   stock,
   deshabilitado,
   addNewItemToCart,
+  
 }) {
   const handleCartAddClick = () => {
     addNewItemToCart({

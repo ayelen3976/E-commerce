@@ -12,13 +12,14 @@ import CategoryListContainer from './Containers/CategoryListContainer';
 import CategoryInfoContainer from './Containers/CategoryInfoContainer';
 import PageRegister from './Components/PageRegister';
 import Checkout from  './Components/Checkout';
+import OrderContainer from './Components/Orders/OrderContainer';
+import OrderProdcutDetails from './Components/Orders/OrderProductsDetails';
 
 
 
 const Routes = () => {
     return (
         <Switch>
-            
             <Route exact path='/' component={Home} />
             <Route exact path='/products' component = {ProductListContainer}/>
             <Route exact path='/products/:id' component = {ProductInfoContainer}/>
@@ -28,6 +29,8 @@ const Routes = () => {
             <Route exact path='/CategoryForm' component = {CategoryForm}/>
             <Route exact path='/register' component = {PageRegister}/>
             <Route exact path='/Checkout' component = {Checkout}/>
+            <Route exact path='/admin/orders' component={OrderContainer}/>
+            <Route exact path='/admin/order/:orderId' component={OrderProdcutDetails}/>
         </Switch>
     )
 }
