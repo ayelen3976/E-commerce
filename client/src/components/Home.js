@@ -11,6 +11,8 @@ const Home = () => {
                 <img src="/images/logo_size.jpg" alt="" />
                 <h1>Green Shop</h1>
                 <button><Link to = '/products'>Entrar</Link></button>
+                <button><Link to = '/register'>Register</Link></button>
+                <button><Link to = '/login'>Login</Link></button>
             </header>
         </div>
     );

@@ -10,7 +10,8 @@ import FormProducts from './Containers/FormProducts';
 import CategoryForm from './Containers/CategoryForm';
 import CategoryListContainer from './Containers/CategoryListContainer';
 import CategoryInfoContainer from './Containers/CategoryInfoContainer';
-
+import PageRegister from './Components/PageRegister';
+import Checkout from  './Components/Checkout';
 
 
 
@@ -25,7 +26,8 @@ const Routes = () => {
             <Route exact path='/category' component = {CategoryListContainer}/>
             <Route exact path='/ProductForm' component = {FormProducts}/>
             <Route exact path='/CategoryForm' component = {CategoryForm}/>
-            
+            <Route exact path='/register' component = {PageRegister}/>
+            <Route exact path='/Checkout' component = {Checkout}/>
         </Switch>
     )
 }

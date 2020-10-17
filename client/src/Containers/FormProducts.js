@@ -7,10 +7,10 @@ import { Link } from "react-router-dom";
 import Select from 'react-select';
 
 function FormProducts() {
-  const [lgShow, setLgShow] = useState(false);
-  const [show, setShow] = useState(false);
+ 
 
-  const [product, setProduct] = useState({ name: "", price: "" , description:"",category:[]});
+
+  const [product, setProduct] = useState({ name: "", price: "" , description:"", stock:"",img:"",category:[]});
   const [products, setProducts] = useState([]);
   const [id, setId] = useState("");
 
@@ -18,6 +18,10 @@ function FormProducts() {
   const [categoryID, setCategoryID] = useState()
   const [productID, setProductID] = useState()
 
+
+  // ------------controladores de modal----------------------
+  const [show, setShow] = useState(false);
+  const [lgShow, setLgShow] = useState(false);
   const handleClose = () => setShow(false);
   const AddClose = () => setLgShow(false);
   // const AddShow = () => setLgShow(true);//Por que no se usa?
@@ -55,6 +59,24 @@ function FormProducts() {
     });
   }
 
+
+  function Handleimage(e){
+    var file = e.target.files[0]
+    // const previmg = document.querySelector(".anyimg")// 
+    if(file) {
+      const reader = new FileReader()
+      reader.addEventListener("load", function() {
+        setProduct({ 
+          ...product,
+         img: this.result
+       })
+        // previmg.setAttribute("src", this.result)
+      })
+      reader.readAsDataURL(file)
+    }
+
+   }
+
   
   function translate(arr){
       let newArr = []
@@ -87,14 +109,16 @@ function FormProducts() {
       data: {
         name: product.name,
         price: product.price,
-        description: product.description
+        description: product.description,
+        stock: product.stock,
+        img:product.img
         
       }
     })
       .then(res => {
         
         setProducts(pro);
-        setProduct({ name: "", price: "", description: "" });
+        setProduct({ name: "", price: "", description: "", stock:"",category:"" , img:""});
         setLgShow(false)
        agregarCat(res.data.id)
       })
@@ -128,7 +152,7 @@ function FormProducts() {
 
   //  ------------------EDIT---------------------------
   const editar = (item) => {
-    setProduct({ name: item.name, price: item.price, description: item.description });
+    setProduct({ name: item.name, price: item.price, description: item.description, stock:item.stock, category:item.category,img:item.img });
     setId(item.id);
     setShow(true);
   };
@@ -139,7 +163,10 @@ function FormProducts() {
       id: id,
       name: product.name,
       price: product.price,
-      description: product.description
+      description: product.description,
+      stock:product.stock,
+      category: product.category,
+      img:product.img
     };
     var pro = products;
     const url = `/products/${id}`
@@ -149,10 +176,13 @@ function FormProducts() {
         axios.put(url, {
           name: product.name,
           price: product.price,
-          description: product.description
+          description: product.description,
+          stock: product.stock,
+          category:product.category,
+          img:product.img
         }).then(() => {
           setId("");
-          setProduct({ name: "", price: "", description: "" });
+          setProduct({ name: "", price: "", description: "" ,stock:"", category:"",img:""});
           setShow(false);
         }).catch(console.log)
       }
@@ -202,7 +232,20 @@ function FormProducts() {
               onChange={onChange}
               value={product.description}
             />
-             <Select  options={translate(category)} onChange={handleChangeCategory} />
+
+            <input
+              type="text"
+              placeholder="Ingrese stock"
+              name="stock"
+              onChange={onChange}
+              value={product.stock}
+            />
+            <input
+              type="file"
+              name="img"
+              onChange={Handleimage}
+            />
+             <Select value={product.category} options={translate(category)} onChange={handleChangeCategory} />
             {console.log ('productCategory',)}
             <Button variant="primary" onClick={addProduct}>
               Añadir
@@ -237,6 +280,22 @@ function FormProducts() {
             onChange={onChange}
             value={product.description}
           />
+
+            <input
+              type="text"
+              placeholder="Ingrese modificacion stock"
+              name="stock"
+              onChange={onChange}
+              value={product.stock}
+            />
+            <input
+              type="file"
+              name="img"
+              onChange={Handleimage}
+            />
+
+          <Select  options={translate(category)} onChange={handleChangeCategory} />
+          
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -261,6 +320,9 @@ function FormProducts() {
             <th>Producto</th>
             <th>Precio</th>
             <th>Description</th>
+            <th>Stock</th>
+            <th>Categorias</th>
+            <th style={{width: "10%"}}>Img</th>
             <th>Editar</th>
             <th>Eliminar</th>
           {/* <th> <Select options={options} /></th> */}
@@ -279,6 +341,10 @@ function FormProducts() {
                 <td>{item.name}</td>
                 <td>{item.price}</td>
                 <td>{item.description}</td>
+                <td>{item.stock}</td>
+               
+            <td> <Button className="BsPlusSquareFill"> {item.category}+ </Button> </td>
+            <td><img alt="pic" src={item.img} style={{width: "100%"}} /></td>
                 {/* <td>{console.log(item.categories[0].name)}</td> */}
                 <td>
                   <Button variant="primary" onClick={() => editar(item)}>

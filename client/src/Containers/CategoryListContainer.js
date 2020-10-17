@@ -4,7 +4,8 @@ import React, { Component } from 'react';
 //Componentes
 import Nav from '../Components/Nav'
 import Catalogo from '../Components/Catalogo';
-
+import { connect } from 'react-redux';
+import GetCategory from '../Redux/Actions/Listcategory';  
 //Externos
 import axios from 'axios';
 
@@ -17,21 +18,12 @@ class CategoryListContainer extends Component {
     }
 
     componentDidMount() {
-        axios.get('/products/category')
-            .then(res => {
-
-                const categoryData = res.data;
-                console.log(categoryData)
-                this.setState({
-                    categoryData
-                })
-                console.log(this.state)
-            })
-            .catch(console.log)
+        const { getCategoryData } = this.props;
+        getCategoryData();
     }
 
     render() {
-        const {categoryData} = this.state;
+        const {categoryData} = this.props;
 
         return(
             <div>
@@ -42,4 +34,16 @@ class CategoryListContainer extends Component {
     }
 }
 
-export default CategoryListContainer;
+
+const mapDispatchToProps = (dispatch) => ({
+    getCategoryData: () => dispatch(GetCategory())
+    
+    
+    })
+
+const mapStateToProps = (state) => ({
+    categoryData: state.categoryP.category
+
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryListContainer);

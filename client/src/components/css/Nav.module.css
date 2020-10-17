@@ -3,3 +3,25 @@
 .navbar{
     background-color: #82ae46;
 }
+Nav div button{
+    background-color: #82ae46;
+    border: none;
+    padding: .5em;
+    color: #ffffff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+.Shopcart{
+    background-color: #82ae46;
+    border: none;
+    padding: .5em;
+    color: #ffffff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.Shopcart button:hover{
+    background-color: #487a01;
+}
