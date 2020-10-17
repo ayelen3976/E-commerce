@@ -14,6 +14,8 @@ server.get('/', (req, res, next) => {
             res.status(404, err)
         });
 });
+
+//Buscamos y devolvemos todos los productos incluida la categoria
 server.get('/include/category', (req, res, next) => {
     return Product.findAll({
         include: Category
