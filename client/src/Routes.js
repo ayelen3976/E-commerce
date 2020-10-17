@@ -11,11 +11,7 @@ import CategoryForm from './Containers/CategoryForm';
 import CategoryListContainer from './Containers/CategoryListContainer';
 import CategoryInfoContainer from './Containers/CategoryInfoContainer';
 import PageRegister from './Components/PageRegister';
-<<<<<<< HEAD
-
-=======
 import Checkout from  './Components/Checkout';
->>>>>>> 98fe141912c57651eacd230d1e091dbd981f9283
 
 
 
@@ -31,11 +27,7 @@ const Routes = () => {
             <Route exact path='/ProductForm' component = {FormProducts}/>
             <Route exact path='/CategoryForm' component = {CategoryForm}/>
             <Route exact path='/register' component = {PageRegister}/>
-<<<<<<< HEAD
-            
-=======
             <Route exact path='/Checkout' component = {Checkout}/>
->>>>>>> 98fe141912c57651eacd230d1e091dbd981f9283
         </Switch>
     )
 }

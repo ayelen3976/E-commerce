@@ -1,20 +1,26 @@
 import React from 'react';
 import bootstrap, {Form} from 'react-bootstrap';
-import axios from 'axios'
+import axios from 'axios';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
+
 
 class Register extends React.Component{
   constructor(props){
     super(props)
     this.state= {
       name:"",
-      lastnmae:"",
+      lastname:"",
       username:"",
       email:"",
       edad:"",
-      profilePic:""
+      profilePic:"",
+      openAction:false,
+      openActionError:false
     }
     this.onChange= this.onChange.bind(this);
     this.onSubmit= this.onSubmit.bind(this);
+   
   }
 
   onChange(e){
@@ -26,6 +32,7 @@ class Register extends React.Component{
 
 
   onSubmit(e){
+    console.log(this.state)
     e.preventDefault();
     axios({
       method: 'post',
@@ -41,10 +48,30 @@ class Register extends React.Component{
         
       }
     })
-    .then(user=>{
-      console.log(user)
+    .then(res =>{
+      this.state.openAction= true 
+
+
+    }
+
+    ). catch(err=>{
+      this.state.openActionError=true
     })
-  }
+  };
+
+
+onCloseAction(){
+  
+ return this.state.onCloseAction=false
+
+};
+
+
+onCloseActionError(){
+  return this.state.openActionError=false
+
+}
+
 
   render(){
     return (
@@ -106,7 +133,28 @@ class Register extends React.Component{
             Registrarse
           </button>
         </div>
+
+
+
+              <Snackbar open={true} autoHideDuration={2000} onClose={this.onCloseAction}>
+          <Alert severity="success">
+            This is a success message!
+          </Alert>
+        </Snackbar>  
+          
+              <Snackbar open={this.state.openActionError} autoHideDuration={6000} onClose={this.onCloseActionError}>
+                      <Alert severity="error">
+                      This is a success message!
+                      </Alert>
+                  </Snackbar>
+
+
       </form>
+      
+      
+        
+      
+      
     )
   }
     

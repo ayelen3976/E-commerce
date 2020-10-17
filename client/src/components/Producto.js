@@ -7,6 +7,7 @@ import styles from './css/Producto.module.css';
 function Producto({ name, price, image, description }) {
     //console.log(props.productos[match.params].id);
     return (
+        <div> 
         <div className={styles.detailContent}>
             {/* <h1>Detalle Card</h1> */}
             <figure> <img src={image} alt={name} /> </figure>
@@ -20,6 +21,7 @@ function Producto({ name, price, image, description }) {
                     <button className={styles.buttons}> <i class="fas fa-heart"></i> </button>
                 </div>
             </div>
+        </div>
         </div>
     );
 };

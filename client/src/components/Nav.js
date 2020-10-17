@@ -7,6 +7,12 @@ import { Link } from 'react-router-dom';
 
 
 function Nav(props) {
+    const roundButton={
+        'border-radius':'25px',
+    }
+    const bigCart={
+        'font-size':'30px',
+    }
 
     //variable de estilo
     // const { classes } = props;
@@ -49,7 +55,7 @@ function Nav(props) {
                 
                 <Link to='/Checkout'>
    
-                  <button className='Shopcart'><i class="fas fa-shopping-cart"></i></button> 
+                  <button style={roundButton} className='Shopcart'><i class="fas fa-shopping-cart" style={bigCart}></i></button> 
                 </Link>
             </div>
         </nav>

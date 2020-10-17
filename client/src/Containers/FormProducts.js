@@ -22,8 +22,11 @@ function FormProducts() {
   // ------------controladores de modal----------------------
   const [show, setShow] = useState(false);
   const [lgShow, setLgShow] = useState(false);
+  const [categoryShow, setCategoryShow]= useState(false);
+  const [modalId,setModalId]=useState()
   const handleClose = () => setShow(false);
   const AddClose = () => setLgShow(false);
+  const handlerCloseCategory =() =>setCategoryShow(false)
   // const AddShow = () => setLgShow(true);//Por que no se usa?
 
   useEffect(()=> {
@@ -47,7 +50,9 @@ function FormProducts() {
 
 //  ------------------Functions---------------------------
 
-  
+  function handlerShowCategory(e){
+    
+  }
 
 
 
@@ -135,7 +140,8 @@ function FormProducts() {
     let idProducto = id
     let idCategoria = categoryID
     console.log(idProducto + ' '+ idCategoria)
-    axios.post(`http://localhost:4000/products/${idProducto}/category/${idCategoria}`)
+    axios.post(`http://localhost:4000/products/${idProducto}/category/${idCategoria}`);
+    
   }
 
   //  ------------------DELETE---------------------------
@@ -306,7 +312,26 @@ function FormProducts() {
           </Button>
         </Modal.Footer>
       </Modal>
+      {/* ------------------Modal Category-------------------------  */}
 
+      <Modal show={categoryShow} onHide={handlerCloseCategory}>
+        <Modal.Header closeButton>
+          <Modal.Title>Agregar Categoria</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+          <Select  options={translate(category)} onChange={handleChangeCategory} />
+          
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handlerCloseCategory}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={agregarCat(modalId)}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
   
       {/* ------------------Button ADD-------------------------  */}
       
@@ -317,16 +342,12 @@ function FormProducts() {
       <Table striped bordered hover>
         <thead style={{ textAlign: "center" }}>
           <tr>
+            <th style={{width: "10%"}}>Img</th>
             <th>Producto</th>
             <th>Precio</th>
             <th>Description</th>
             <th>Stock</th>
-            <th>Categorias</th>
-<<<<<<< HEAD
-            <th>Foto</th>
-=======
-            <th style={{width: "10%"}}>Img</th>
->>>>>>> 98fe141912c57651eacd230d1e091dbd981f9283
+            <th>Categorias</th> 
             <th>Editar</th>
             <th>Eliminar</th>
           {/* <th> <Select options={options} /></th> */}
@@ -342,18 +363,13 @@ function FormProducts() {
           ) : (
             products.map((item) => (
               <tr key={item.id}>
+              <td><img alt="pic" src={item.img} style={{width: "100%"}} /></td> 
                 <td>{item.name}</td>
                 <td>{item.price}</td>
                 <td>{item.description}</td>
                 <td>{item.stock}</td>
-<<<<<<< HEAD
-                <td><img alt="pic" src={item.img} style={{width: "100%"}} /></td>
-            <td> <Button className="BsPlusSquareFill"> {item.category}+ </Button> </td>
-=======
-               
-            <td> <Button className="BsPlusSquareFill"> {item.category}+ </Button> </td>
-            <td><img alt="pic" src={item.img} style={{width: "100%"}} /></td>
->>>>>>> 98fe141912c57651eacd230d1e091dbd981f9283
+            <td> <Button className="BsPlusSquareFill" onClick={() =>{setCategoryShow(true) 
+              setModalId(item.id)}}> {item.category}+ </Button> </td>
                 {/* <td>{console.log(item.categories[0].name)}</td> */}
                 <td>
                   <Button variant="primary" onClick={() => editar(item)}>
