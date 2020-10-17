@@ -15,9 +15,7 @@ import axios from 'axios';
 //ProductListContainer -> la pagina principal
 class ProductListContainer extends Component {
 
-    state = {
-        productsData: []
-    }
+  
 
     divFlex= {
         display:'flex'
