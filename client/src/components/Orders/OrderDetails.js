@@ -6,7 +6,7 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import ForwardIcon from '@material-ui/icons/Forward';
 // import Button from '@material-ui/core/Button';
 
-function OrderDetails({orderArray}) {
+function OrderDetails({orderArray ,goTo}) {
     
     const columnas = [
         { title: 'Order ID', field: 'orderId' ,type:'numeric'},
@@ -41,7 +41,7 @@ function OrderDetails({orderArray}) {
                     {
                         icon: ForwardIcon,
                         tooltip: 'Ver Detalles de la Orden',
-                        onClick: (event,rowData) => alert('Ver detalles de la orden' + rowData.orderId)
+                        onClick: (event,rowData) => goTo(`/admin/orders/${rowData.userId}`)
                     },
                     {
                         icon: EditIcon,
