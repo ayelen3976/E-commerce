@@ -5,7 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import styles from "./css/ProductCard.module.css";
 import { connect } from "react-redux";
-import {addToShoppingCart} from "../Redux/Actions/Shopcart";
+import {addToShoppingCart, removeFromCart} from "../Redux/Actions/Shopcart";
 
 function ProductCard({
   id,
@@ -20,12 +20,13 @@ function ProductCard({
   
 }) {
   const handleCartAddClick = () => {
-    addNewItemToCart({
+    addNewItemToCart(id, {
       id,
       name,
       description,
       price,
       image,
+      stock,
     });
   };
 
@@ -87,13 +88,14 @@ function ProductCard({
   );
 }
 
-// "itemToAdd" => is the item that ur clicking and want to add it to the cart, oke. this can have any name, no?
+
 
 const mapDispatchToProps = (dispatch) => ({
-  addNewItemToCart: (itemToAdd) => dispatch(addToShoppingCart(itemToAdd)),
+  addNewItemToCart: (id, itemToAdd) => dispatch(addToShoppingCart(id, itemToAdd)),
+  removeFromCart: (item) => dispatch(removeFromCart(item))
 });
 
-// Yeah try running this, save the file
+
 
 export default connect(null, mapDispatchToProps)(withStyles({
     item: {

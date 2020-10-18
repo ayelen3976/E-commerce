@@ -133,7 +133,7 @@ server.post('/:idUser/cart',async (req,res,next) =>{
         {
             orderId : orderId,
             productId: id,
-            cantidad: cantidad,
+            cantidad: cantidad, 
             precio: product.dataValues.price
         })
         .then(()=>{

@@ -1,20 +1,31 @@
 import { SHOP_CART } from './actiontypes'
-/* const URL= "http://localhost:4000"
-export const Shopcart= userId => dispatch => {
+import { DELETE_SHOP_CART} from './actiontypes'
+import axios from 'axios';
+
+const URL = "http://localhost:4000"
+
+
+
+export const addToShoppingCart  = (userId, newItemToAdd) => dispatch => {
+
 	axios
-		.post(`${URL}/user/${userId}/cart`)
-        .then(res =>
-            dispatch({
+		.post(`/user/${userId}/cart`, {
+    })
+		.then(res =>
+			dispatch({
                 type: SHOP_CART,
-                payload: res.data
-            })
-        )
+                item: newItemToAdd,
+			})
+		)
+};
+  
 
-    };
-    */
-
-    // We are getting the newItemToAdd from the mapDispatchToProps in ProductCard.js file
-   export  const addToShoppingCart = (newItemToAdd) => ({
+  /*  export  const addToShoppingCart = (newItemToAdd) => ({
         type: SHOP_CART,
         item: newItemToAdd
-   })
+   }) */
+
+   export  const removeFromCart = (newItemToAdd) => ({
+    type: DELETE_SHOP_CART,
+    item: newItemToAdd
+})
