@@ -13,7 +13,8 @@ import CategoryInfoContainer from './Containers/CategoryInfoContainer';
 import PageRegister from './Components/PageRegister';
 import Checkout from  './Components/Checkout';
 import OrderContainer from './Components/Orders/OrderContainer';
-import OrderProdcutDetails from './Components/Orders/OrderProductsDetails';
+import OrderDetails from './Components/Orders/OrderDetails';
+
 
 
 
@@ -30,7 +31,7 @@ const Routes = () => {
             <Route exact path='/register' component = {PageRegister}/>
             <Route exact path='/Checkout' component = {Checkout}/>
             <Route exact path='/admin/orders' component={OrderContainer}/>
-            <Route exact path='/admin/order/:orderId' component={OrderProdcutDetails}/>
+            {/* <Route exact path='/admin/order/:orderId' component={OrderDetails}/> */}
         </Switch>
     )
 }

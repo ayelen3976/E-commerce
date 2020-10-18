@@ -1,43 +1,43 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {getOrders} from '../../Redux/Actions/orderActions';
 
 //Componentes
 import OrderDetails from './OrderDetails';
 
-import axios from 'axios';
 
 
 
 class OrderContainer extends Component {
 
-    state = {
-        ordersData: []
-    }
 
     componentDidMount() {
-        this.getOrders();
-    }
-
-    getOrders = async () => {
-        const userId = 1;
-        const url = `/user/${userId}/order`
-        let res = await axios.get(url)
-        let ordersData = res.data;
-        console.log(res)
-        this.setState({
-            ordersData
-        })
+        this.props.getOrders();
     }
 
     render() {
-        const { ordersData } = this.state;
-        // console.log(ordersData)
+        const { orderData } = this.props;
+        // console.log(orderReducer)
+        console.log(this.props)
+    
         return (
             <div>
-                <OrderDetails orderArray={ordersData} />
+                
+                <OrderDetails orderArray={orderData} goTo={(path)=> this.props.history.push(path)} />
             </div>
         )
     }
 }
 
-export default OrderContainer;
+const mapStateToProps = state => {
+    return {
+        orderData: state.ordersP.orders,
+    }
+}
+
+const mapDispatchToProps = {
+    getOrders
+}
+
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(OrderContainer)) ;

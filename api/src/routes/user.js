@@ -108,19 +108,25 @@ server.post('/', async (req, res,next) => {
 //Agregamos un producto al carrito de un usuario en particular
 server.post('/:idUser/cart',async (req,res,next) =>{
     //El ID va a ser el ID del Producto 
-    const {id , cantidad} = req.body;
+    const {id , cantidad ,direccion,telefono} = req.body;
     const {idUser} = req.params;
     // console.log(id)
     // console.log(idUser)
-    let product = await Product.findByPk(id)
+    let user = await User.findByPk(idUser).catch(err=> res.status(400).json({message:"No se encontro el usuario," ,error:err}))
+    let product = await Product.findByPk(id).catch(err=> res.status(400).json({message:"No se encontro el producto," ,error:err}))
     let order = await Order.findOrCreate(
         {
             where:{ 
-                userId: idUser, 
+                userId: user.dataValues.id, 
                 estado: 'Carrito' 
-            } 
+            } ,
+            defaults: {
+                direccion,
+                telefono,
+                email: user.dataValues.email
+            }
         })
-        // console.log(order[0].dataValues.id)
+     console.log(order[0].dataValues.id)
     let orderId = order[0].dataValues.id
     console.log(orderId)
     await Orderline.create(

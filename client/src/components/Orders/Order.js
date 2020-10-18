@@ -1,112 +1,69 @@
-// import React from 'react'
+import React from 'react'
+import { DataGrid } from '@material-ui/data-grid';
 
-// import { Grid } from '@material-ui/core';
-
-// function Order({id,userId,estado}){
-
-//   return (
-//     <div>
-//        <Grid container  direction="row" justify="center" alignItems="center" spacing={24}>
-//               <p> Order ID: {id} </p>
-//               <p> User ID: {userId} </p>
-//               <p> Estado De Orden: {estado} </p>
-//         </Grid>
-//     </div>
-//   )
-// }
-
-// export default Order;
-
-///PRUEBA
-
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import { Link } from 'react-router-dom';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1
+const columns = [
+  { field: 'id', headerName: 'ID', width: 70 },
+  { field: 'firstName', headerName: 'First name', width: 130 },
+  { field: 'lastName', headerName: 'Last name', width: 130 },
+  {
+    field: 'age',
+    headerName: 'Age',
+    type: 'number',
+    width: 90,
   },
-  paper: {
-    padding: theme.spacing(2),
-    margin: '10px',
-    minWidth: '800px',
-    minHeight: '100px'
-    }
-}));
+  {
+    field: 'fullName',
+    headerName: 'Full name',
+    description: 'This column has a value getter and is not sortable.',
+    sortable: false,
+    width: 160,
+    valueGetter: (params) =>
+      `${params.getValue('firstName') || ''} ${params.getValue('lastName') || ''}`,
+  },
+];
 
-export default function Order({id,userId,estado,booleanOrder,orderId,productId,cantidad,precio}) {
-  const classes = useStyles();
-  if(booleanOrder=== false){
+// const rows = [
+//   { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
+//   { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
+//   { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
+//   { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
+//   { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
+//   { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
+//   { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
+//   { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
+//   { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+// ];
 
-    return (
-      <div className={classes.root}>
-        <Paper className={classes.paper}>
-          <Grid container spacing={2}>
-            <Grid item xs={10} sm container>
-              <Grid item xs container direction="row" spacing={2}>
-                <Grid item xs>
-                  <Typography gutterBottom variant="subtitle1">
-                    ESTADO: {estado}
-                  </Typography>
-                  <Typography variant="body2" gutterBottom>
-                    USER ID: {userId}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    ORDER ID: {id}
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                    <Link to={`/admin/order/${id}`} >Ver detalle de orden</Link>
-                  </Typography>
-                </Grid>
-              </Grid>
-              <Grid item>
-                {/* <Typography variant="subtitle1">$19.00</Typography> */}
-              </Grid>
-            </Grid>
-          </Grid>
-        </Paper>
-      </div>
-    );
-  } else {
-    return (
-      <div className={classes.root}>
-        <Paper className={classes.paper}>
-          <Grid container spacing={2}>
-            <Grid item xs={10} sm container>
-              <Grid item xs container direction="raw" spacing={2}>
-                <Grid item xs>
-                  <Typography gutterBottom variant="subtitle1">
-                    Lista de ordenes
-                  </Typography>
-                  <Typography variant="body2" gutterBottom>
-                    PRODUCTO ID: {productId}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    ORDER ID: {orderId}
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                    CANTIDAD: {cantidad}
-                  </Typography>
-                  <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                    PRECIO: ${precio}
-                  </Typography>
-                </Grid>
-              </Grid>
-              <Grid item>
-                {/* <Typography variant="subtitle1">$19.00</Typography> */}
-              </Grid>
-            </Grid>
-          </Grid>
-        </Paper>
-      </div>
-    );
-  }
+function Order({orderId,userId,estado,direccion,telefono,email}) {
+  const rows = [
+    {orderId: {orderId},userId:{userId},estado:{estado},direccion:{direccion},telefono:{telefono},email:{email} }
+  ]
+  return (
+    <div style={{ height: 400, width: '100%' }}>
+      <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection />
+    </div>
+  )
 }
+
+export default Order
+
+{/* <div  >
+  <p>ID DE ORDEN: {orderId}</p>
+  <p>ID DE USUARIO: {userId}</p>
+  <p>ESTADO: {estado}</p>
+  <p>Direccion: {direccion}</p>
+  <p>Telefono: {telefono}</p>
+  <p>Email: {email}</p>
+</div> */}
+
+
+orderArray?.map(order => {
+  rows.push({
+      orderId: order.orderId,
+      userId: order.userId,
+      estado: order.estado,
+      direccion: order.direccion,
+      telefono: order.telefono,
+      email: order.email
+  })
+})

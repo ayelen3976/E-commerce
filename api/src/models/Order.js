@@ -14,6 +14,18 @@ module.exports = (sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
+        direccion: {
+            type: DataTypes.TEXT,
+            allowNull: true,
+        },
+        telefono: {
+            type: DataTypes.TEXT,
+            allowNull: true,
+        },
+        email: {
+            type: DataTypes.TEXT,
+            allowNull: true,
+        },
         estado: {
             type: DataTypes.ENUM({
                 values: ['Carrito','Creada','Procesando','Cancelada','Completa']
