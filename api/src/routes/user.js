@@ -112,8 +112,8 @@ server.post('/:idUser/cart',async (req,res,next) =>{
     const {idUser} = req.params;
     // console.log(id)
     // console.log(idUser)
-    let product = await Product.findByPk(id)
-    let order = await Order.findOrCreate(
+    let product = await Product.findByPk(id) // what is this? find by id 
+    let order = await Order.findOrCreate( // and this?, create order wair
         {
             where:{ 
                 userId: idUser, 
@@ -127,7 +127,7 @@ server.post('/:idUser/cart',async (req,res,next) =>{
         {
             orderId : orderId,
             productId: id,
-            cantidad: cantidad,
+            cantidad: cantidad, 
             precio: product.dataValues.price
         })
         .then(()=>{

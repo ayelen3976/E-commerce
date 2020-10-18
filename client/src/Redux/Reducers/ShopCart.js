@@ -1,11 +1,9 @@
 import { SHOP_CART } from '../Actions/actiontypes';
-
+import { DELETE_SHOP_CART} from '../Actions/actiontypes'
 export const initialState={
-    cart: [],
-    user: null,
+
+    cart: {}
 }
-export const ShopcartTotal=(shop)=>
-shop?.reduce((amount, item) => item.price + amount, 0)
 
 export default function shopcartReducer(state=initialState, action){
     console.log(action);
@@ -13,12 +11,26 @@ export default function shopcartReducer(state=initialState, action){
         case  SHOP_CART :
         return{
             ...state,
-            cart: [...state.cart, action.item],
+            cart: { ...state.cart, [action.item.id]: (state.cart[action.item.id] || 0) + 1 } 
+            
+        };
+  
+       case   DELETE_SHOP_CART : {
+           const cart = { ...state.cart, [action.item.id]: state.cart[action.item.id] - 1 };
+           if (cart[action.item.id] <= 0) {
+               delete cart[action.item.id];
+           }
+
+
+        return{
+            ...state,
+            cart
         };
 
+       }
      default:
     return state;
-                }   }
+                }}
                 
 
 

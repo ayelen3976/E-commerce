@@ -50,7 +50,7 @@ function Nav({ totalItemsInCart }) {
                 <SearchBar/>
                 
                 <Link to='/Checkout'>
-                  <button className='Shopcart'><i class="fas fa-shopping-cart"></i><span>{totalItemsInCart?.length}</span></button> 
+                  <button className='Shopcart'><i class="fas fa-shopping-cart"></i><span>{totalItemsInCart}</span></button> 
                 </Link>
             </div>
         </nav>
@@ -59,9 +59,9 @@ function Nav({ totalItemsInCart }) {
     )
 }
 
-// bcz mapStateToProps gets the state, that's the default behaviour in redux !!
+
 const mapStateToProps = (state) => ({
-    totalItemsInCart: state.shopP.cart
+    totalItemsInCart: Object.keys(state.shopP.cart).length
 })
 
 // export default withStyles({
