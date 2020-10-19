@@ -1,4 +1,5 @@
-const server = require('express').Router();
+    const server = require('express').Router();
+const { response } = require('express');
 const { Order,Product } = require('../db.js');
 
 
@@ -61,7 +62,7 @@ server.put('/:id', async(req, res, next) => {
             }
         })
         .then(() => {
-            res.status(200).json("done");
+            res.status(200).json('done');
         })
         .catch(err => {
             res.status(404).json({message: "No se pudo modificar el estado de la orden" , error: err})
