@@ -20,7 +20,7 @@ function ProductCard({
   
 }) {
   const handleCartAddClick = () => {
-    addNewItemToCart(id, {
+    addNewItemToCart({
       id,
       name,
       description,
@@ -91,7 +91,7 @@ function ProductCard({
 
 
 const mapDispatchToProps = (dispatch) => ({
-  addNewItemToCart: (id, itemToAdd) => dispatch(addToShoppingCart(id, itemToAdd)),
+  addNewItemToCart: (itemToAdd) => dispatch(addToShoppingCart(itemToAdd)),
   removeFromCart: (item) => dispatch(removeFromCart(item))
 });
 

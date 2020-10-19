@@ -1,47 +1,114 @@
-import React,{ useState }  from 'react';
-import {  Button } from 'react-bootstrap'
-import Nav from './Nav';
+import React from 'react';
 import { connect } from 'react-redux';
-import Grid from '@material-ui/core/Grid';
 import {addToShoppingCart, removeFromCart} from "../Redux/Actions/Shopcart";
+import './css/Checkout.css'
+import {Card, Button, Table} from 'react-bootstrap'
+import { makeStyles } from '@material-ui/core/styles';
+import {Paper, Grid  } from '@material-ui/core';
 
 
-function Checkout({ products, subTotal,  addNewItemToCart, removeItemFromCart}) {
-    
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
 
-    console.log(products);
+ function Checkout({ products, subTotal,  addNewItemToCart, removeItemFromCart}) {
+  const classes = useStyles();
+
+  console.log(products);
    
-    const sumarCantidad = (product) =>{
-        addNewItemToCart( 1, product) 
-    }
-    const restarCantidad = (product) =>{
-        removeItemFromCart(1, product)
-    }
-    return (
-        <Grid container direction="column" justify="center" alignItems="center" spacing={20}>
-                <div className='summary'>
-                    <div><p>Subtotal:{subTotal}</p> </div>
-                </div>
-                <div>
-              <h1>PRODUCTS</h1>
-              <div>
-           {products.map(({ product, count }) => (
-              <p key={product.id}>
-                <p>{product.name}</p>
-                <p>{product.price}</p>
-                <p>{product.description}</p>
-                <p>stock:{product.stock}</p>
-                <Button disabled={count <= 0} onClick={(e) => restarCantidad(product)}>-</Button>
-                <span>{count}</span>
-                <Button onClick={(e) => sumarCantidad(product)}>+</Button>
-               </p>
-            ))}
-               
-        </div>
+  const sumarCantidad = (product) =>{
+      addNewItemToCart( product) 
+  }
+  const restarCantidad = (product) =>{
+      removeItemFromCart(product)
+  }
 
-     </div>
-        </Grid>
-    )
+  return (
+<div >
+
+ <div className='right'>
+   
+    <Paper className={classes.paper}> 
+    <thbody >
+    <h1 className='summary'>SUMMARY</h1> 
+    <tr>
+    <td><h4>SUBTOTAL:</h4> </td>
+  
+     <td><h4>${subTotal}</h4></td>
+    </tr> 
+
+         <tr >
+         <td><h4>SHIPPING</h4></td>
+
+         <td><h4>FREE</h4></td>
+        </tr> 
+    <tr>
+  
+     </tr> 
+  
+    </thbody > 
+    <h1 className='shipping'></h1>
+    <h1>TOTAL:  ${subTotal}</h1>
+</Paper>
+<div className='confirm'>
+  <Button  size="lg" variant="outline-warning">NEXT </Button>
+  <Button size="lg"  variant="outline-warning">CANCEL</Button>
+  </div>
+  </div>
+
+<div>
+<h1 className='shop-cart'>Shopping Cart</h1>
+  <Grid item xs={6}>
+{ products.map(({product, count})=>(   
+    <div className='Card'>
+     <Card key={product.id}>
+     {/* <Card.Header>{product.name}</Card.Header> */}
+    <Card.Body>
+    <Table >
+    <tbody>
+        <tr>
+        
+  
+  <th className = 'card-body-img'>
+    <img   style={{width: "100%"}} src={product.img} alt=''/>
+    </th>
+    <th>
+     <h4>{product.name}</h4>
+     <h5>{product.description}</h5>
+     <h4>${product.price}</h4>
+     </th>
+     <th>
+     <div className="contador">
+    <span>{count}</span>
+    <Button  size="sm" style={{height: '10%'}}  variant="warning"  disabled={count <= 0} onClick={(e) => restarCantidad(product)}>-</Button>
+    <Button size="sm" style={{height: '10%'}}  variant="warning" onClick={(e) => sumarCantidad(product)}>+</Button>
+    </div>
+    </th>
+    </tr>
+    </tbody>
+    </Table>
+    </Card.Body>
+    </Card>
+    </div>)
+)}
+
+
+  </Grid>
+  </div>
+
+
+
+
+
+</div>
+  );
 }
 const mapStateToProps = (state) => {
     let subTotal = 0;
@@ -61,10 +128,9 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => ({
     
-    addNewItemToCart: (id, itemToAdd) => dispatch(addToShoppingCart(id, itemToAdd)),
-    removeItemFromCart: (id, item) => dispatch(removeFromCart(id, item)),
+    addNewItemToCart: (itemToAdd) => dispatch(addToShoppingCart( itemToAdd)),
+    removeItemFromCart: ( item) => dispatch(removeFromCart(item)),
   });
   
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
+  export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

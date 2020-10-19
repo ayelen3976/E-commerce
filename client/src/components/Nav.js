@@ -51,7 +51,7 @@ function Nav({ totalItemsInCart }) {
 
 
 const mapStateToProps = (state) => ({
-    totalItemsInCart: Object.keys(state.shopP.cart).length
+    totalItemsInCart: Object.keys(state.shopP.cart).lenght
 })
 
 
