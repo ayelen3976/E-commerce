@@ -5,7 +5,7 @@ import './css/Checkout.css'
 import {Card, Button, Table} from 'react-bootstrap'
 import { makeStyles } from '@material-ui/core/styles';
 import {Paper, Grid  } from '@material-ui/core';
-
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,7 +29,9 @@ const useStyles = makeStyles((theme) => ({
   const restarCantidad = (product) =>{
       removeItemFromCart(product)
   }
-
+  // const createOrderOnline = (userId,idProducto,cantidad) => {
+  //   createOrderOnline(userId = 1,idProducto, cantidad=subTotal)
+  // }
   return (
 <div >
 
@@ -58,8 +60,8 @@ const useStyles = makeStyles((theme) => ({
     <h1>TOTAL:  ${subTotal}</h1>
 </Paper>
 <div className='confirm'>
-  <Button  size="lg" variant="outline-warning">NEXT </Button>
-  <Button size="lg"  variant="outline-warning">CANCEL</Button>
+  <Button  size="lg" variant="outline-warning" >NEXT </Button>
+  <Button size="lg"  variant="outline-warning" style={{marginLeft:'10px'}}><Link to='/products' style={{color: "#ffc107",textDecoration: 'none'}}>CANCEL</Link></Button>
   </div>
   </div>
 
@@ -130,6 +132,7 @@ const mapDispatchToProps = (dispatch) => ({
     
     addNewItemToCart: (itemToAdd) => dispatch(addToShoppingCart( itemToAdd)),
     removeItemFromCart: ( item) => dispatch(removeFromCart(item)),
+    // createOrderOnline: (userId,idProducto,cantidad) =>dispatchEvent(createOrder(userId,idProducto,cantidad))
   });
   
 

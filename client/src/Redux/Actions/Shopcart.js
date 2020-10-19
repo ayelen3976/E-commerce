@@ -19,7 +19,20 @@ const URL = "http://localhost:4000"
       telefono: 12312321,     
        email: "asdsad@ahdasd.com"     }   })};
   */
-  
+ export function createOrder(userId =1 , idProducto , cantidad) {
+     const url = `user/${1}/cart`
+     axios({
+          method: 'post',
+          url: url,
+          data: {
+            id : idProducto,
+            cantidad : cantidad
+          }
+        })
+        .then(res => {
+             console.log("done")
+        })
+ }
 
    export  const addToShoppingCart = (newItemToAdd) => ({
         type: SHOP_CART,
