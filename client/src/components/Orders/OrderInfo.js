@@ -16,10 +16,11 @@ class OrderContainer extends Component {
     componentDidMount() {
         this.props.getOrdersLine(parseInt(this.props.match.params.orderId));
     }
-
+    
     render() {
         const { orderData } = this.props;
-    
+        
+        console.log(orderData)
         return (
             <div>
                 <Order orderArray={orderData}/>

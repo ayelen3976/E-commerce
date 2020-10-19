@@ -12,6 +12,7 @@ export function getOrders() {
 }
 
 export function getOrdersLine(userId){
+    console.log(userId)
     const url = `/user/${userId}/cart`
     return(dispatch) =>{
         axios.get(url)

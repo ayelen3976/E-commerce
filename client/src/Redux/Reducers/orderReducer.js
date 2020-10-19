@@ -1,5 +1,9 @@
 import { GET_ORDERS ,GET_ORDERS_LINE ,EDIT_ORDER_STATE,FIND_ORDER_BY_PK} from '../Actions/actiontypes';
-const initialState = [];
+const initialState = [{
+    orders: "",
+    orderLine:""
+}];
+
 
 function reducer(state = initialState, {type , payload}) {
     switch (type) {
@@ -12,11 +16,13 @@ function reducer(state = initialState, {type , payload}) {
             orderLine: payload
         }
         case EDIT_ORDER_STATE:
-            state.map(order =>{
+            state.orders.map(order =>{
                 if(order.id === payload.orderId){
                     order.estado = payload.estado
                 }
             })
+            // ...state,
+            // cart: { ...state.cart, [action.item.id]: (state.cart[action.item.id] || 0) + 1 } 
             return state;     
         default:
             return state;

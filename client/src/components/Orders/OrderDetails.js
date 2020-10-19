@@ -6,7 +6,7 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import ForwardIcon from '@material-ui/icons/Forward';
 // import Button from '@material-ui/core/Button';
 
-function OrderDetails({orderArray ,goTo}) {
+function OrderDetails({orderArray ,goTo ,editOrderState}) {
     
     const columnas = [
         { title: 'Order ID', field: 'orderId' ,type:'numeric'},
@@ -51,7 +51,7 @@ function OrderDetails({orderArray ,goTo}) {
                     {
                         icon: DeleteForeverIcon,
                         tooltip: 'Eliminar Orden',
-                        onClick: (event,rowData) => alert('Desea eliminar esta orden' + rowData.orderId)
+                        onClick: (event,rowData) =>  editOrderState("Carrito",rowData.orderId)
                     },
                 ]}
                 options= {{
@@ -66,6 +66,7 @@ function OrderDetails({orderArray ,goTo}) {
         </div>
     )
 }
+
     
 export default OrderDetails;
     

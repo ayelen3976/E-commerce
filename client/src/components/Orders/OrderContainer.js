@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {getOrders} from '../../Redux/Actions/orderActions';
+import {getOrders ,editOrderState} from '../../Redux/Actions/orderActions';
 
 //Componentes
 import OrderDetails from './OrderDetails';
@@ -24,7 +24,7 @@ class OrderContainer extends Component {
         return (
             <div>
                 
-                <OrderDetails orderArray={orderData} goTo={(path)=> this.props.history.push(path)} />
+                <OrderDetails editOrderState={editOrderState} orderArray={orderData} goTo={(path)=> this.props.history.push(path)} />
             </div>
         )
     }
@@ -37,7 +37,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    getOrders
+    getOrders,
+    editOrderState
 }
 
 export default withRouter(connect(mapStateToProps,mapDispatchToProps)(OrderContainer)) ;
