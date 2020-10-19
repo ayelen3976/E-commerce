@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 
 //componentes
 //import Home from './Components/Home'
@@ -18,9 +19,14 @@ import OrderInfo from './Components/Orders/OrderInfo';
 
 
 
+
 const Routes = () => {
     return (
+        <BrowserRouter> 
+        
+    
         <Switch>
+            
             <Route exact path='/' component={Home} />
             <Route exact path='/products' component = {ProductListContainer}/>
             <Route exact path='/products/:id' component = {ProductInfoContainer}/>
@@ -33,6 +39,7 @@ const Routes = () => {
             <Route exact path='/admin/orders' component={OrderContainer}/>
             <Route exact path='/admin/orders/:orderId' component={OrderInfo}/>
         </Switch>
+        </BrowserRouter>
     )
 }
 

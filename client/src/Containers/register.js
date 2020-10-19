@@ -1,20 +1,32 @@
 import React from 'react';
-import  {Form} from 'react-bootstrap';
-import axios from 'axios'
+import bootstrap, {Form, Modal,Button, Col} from 'react-bootstrap';
+import InputGroup from 'react-bootstrap/InputGroup'
+import axios from 'axios';
+import { Link } from 'react-router-dom'
+ 
+
 
 class Register extends React.Component{
   constructor(props){
     super(props)
     this.state= {
       name:"",
-      lastnmae:"",
+      lastname:"",
       username:"",
       email:"",
       edad:"",
-      profilePic:""
+      profilePic:"",
+      openAction:false,
+      openActionError:false
+      
     }
     this.onChange= this.onChange.bind(this);
-    this.onSubmit= this.onSubmit.bind(this);
+    this.onSubmitear= this.onSubmitear.bind(this);
+    this.onCloseAction=this.onCloseAction.bind(this);
+    this.onCloseActionError=this.onCloseActionError.bind(this);
+    this.openModal=this.openModal.bind(this);
+    this.openModalError=this.openModalError.bind(this);
+   
   }
 
   onChange(e){
@@ -25,11 +37,12 @@ class Register extends React.Component{
   }
 
 
-  onSubmit(e){
+  onSubmitear(e){
+    console.log(this.state)
     e.preventDefault();
     axios({
       method: 'post',
-      url: 'http://localhost:4000/user',
+      url: '/user',
       data: {
         firstName: this.state.name,
         lastName: this.state.lastname,
@@ -41,72 +54,174 @@ class Register extends React.Component{
         
       }
     })
-    .then(user=>{
-      console.log(user)
-    })
-  }
+    .then(res =>{
+      this.openModal()
 
-  render(){
+
+    }
+
+    ). catch(err=>{
+      this.openModalError()
+    })
+  };
+
+
+onCloseAction(){
+  
+  this.setState({
+    openAction:false
+  })
+
+};
+
+
+onCloseActionError(){
+  this.setState({
+    openActionError:false
+  })
+
+}
+
+openModal(){
+  this.setState({
+    openAction:true
+  })
+}
+
+openModalError(){
+  this.setState({
+    openActionError:true
+  })
+}
+
+ render(){
     return (
-      <form onSubmit={this.onSubmit}>
-        <h1>Unite a la comunidad de Green-Shop</h1>
+      <div>
+        <div>
+           
+      <Form >
+        
+         
         <div className="form-group">
-          <label className="control-label">Nombre</label>
-          <input 
+          <Form.Row> 
+          <Form.Group controlId="formBasicEmail" as={Col} md="7">
+          <Form.Label >Nombre</Form.Label>
+          
+          <Form.Control 
           value={this.state.name}
           onChange={this.onChange}
           type="text"
           name="name"
-          className="form control"
+          placeholder="Ponga aqui su nombre"
           />
-          <br/>
-
-    <label className="control-label">Apellido</label>
-          <input 
+          
+          </Form.Group>
+           
+          
+        <Form.Group controlId="formBasicText"> 
+    <Form.Label >Apellido</Form.Label>
+          <Form.Control 
           value={this.state.lastname}
           onChange={this.onChange}
           type="text"
           name="lastname"
-          className="form control"
+          placeholder="Ponga aqui su apellido"
           />
-          <br/>
-          <label className="control-label">Username</label>
-          <input 
+          
+          </Form.Group>
+          </Form.Row>
+          <Form.Row> 
+          <Form.Group as={Col} md="7"> 
+          <Form.Label>Username</Form.Label>
+          <Form.Control 
           value={this.state.username}
           onChange={this.onChange}
           type="text"
           name="username"
-          className="form control"
+          placeholder="Ponga aqui su nombre de usuario"
           />
-          <br/>
-          <label className="control-label">Edad</label>
-          <input 
+          </Form.Group>
+
+          <Form.Group>
+        
+          <Form.Label>Edad</Form.Label>
+          <Form.Control 
           value={this.state.edad}
           onChange={this.onChange}
           type="text"
           name="edad"
-          className="form control"
+          placeholder="introduzca su edad"
           />
-          <br/>
-          <label className="control-label">Email</label>
-          <input 
+          </Form.Group>
+          </Form.Row>
+        <Form.Group controlID="formBasicEmail" md="3"> 
+          <Form.Label>Email</Form.Label>
+          <Form.Control 
           value={this.state.email}
           onChange={this.onChange}
           type="text"
           name="email"
-          className="form control"
+          placeholder="ponga aqui su email personal"
           />
+          </Form.Group>
+
+          <Form.Group controlID="formBasicPassword">
+            <Form.Label>Contraseña</Form.Label>
+            <Form.Control
+            type="password"
+            placeholder="ponga aqui su contraseña"
+            
+            
+            />
+          </Form.Group>
+
           <Form>
   <Form.Group>
     <Form.File id="exampleFormControlFile1" value={this.state.profilePic} label="Foto de perfil" />
   </Form.Group>
-</Form>
 
-          <button className="btn btn-primary btn-lg">
+
+          <Button variant="outline-warning" onClick={(e)=>this.onSubmitear(e)}  >
             Registrarse
-          </button>
+          </Button>
+          </Form>
         </div>
-      </form>
+    
+    <Modal show={this.state.openAction} onHide={this.onCloseAction}>
+        <Modal.Header closeButton onClick={this.onCloseAction}>
+          
+        </Modal.Header>
+        <Modal.Body> <h4> Usuario creado con exito</h4></Modal.Body>
+        <Modal.Footer>
+          <Button variant="outline-warning"  closeButton  onClick={this.onCloseAction} > 
+          <Link to='/products'>Cerrar</Link>
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
+      <Modal show={this.state.openActionError} onHide={this.onCloseActionError}>
+        <Modal.Header closeButton onClick={this.onCloseAction}>
+          
+        </Modal.Header>
+        <Modal.Body> <h4> Ups! Parece que hubo un error. Por favor llene los campos correctamente y vuelva a intentarlo</h4></Modal.Body>
+        <Modal.Footer>
+          <Button variant="outline-warning"  closeButton  onClick={this.onCloseActionError} > 
+          Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
+      </Form>
+      
+      
+        
+        </div>
+      </div>
+      
+      
+      
     )
   }
     
