@@ -109,7 +109,7 @@ server.post('/:id/category/:categoryId', async(req, res, next) => {
             return Category.findByPk(categoryId)
         })
         .then(category => {
-            producto.setCategories(category)
+            producto.addCategories(category)
         })
         .then(()=>{
             res.send("Agregada con exito")

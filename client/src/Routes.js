@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 
 //componentes
 //import Home from './Components/Home'
@@ -14,12 +15,18 @@ import PageRegister from './Components/PageRegister';
 import Checkout from  './Components/Checkout';
 import OrderContainer from './Components/Orders/OrderContainer';
 import OrderProdcutDetails from './Components/Orders/OrderProductsDetails';
+import Nav from './Components/Nav'
+
 
 
 
 const Routes = () => {
     return (
+        <BrowserRouter> 
+        
+    
         <Switch>
+            
             <Route exact path='/' component={Home} />
             <Route exact path='/products' component = {ProductListContainer}/>
             <Route exact path='/products/:id' component = {ProductInfoContainer}/>
@@ -32,6 +39,7 @@ const Routes = () => {
             <Route exact path='/admin/orders' component={OrderContainer}/>
             <Route exact path='/admin/order/:orderId' component={OrderProdcutDetails}/>
         </Switch>
+        </BrowserRouter>
     )
 }
 
