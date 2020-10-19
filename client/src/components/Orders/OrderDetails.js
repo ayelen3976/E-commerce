@@ -4,7 +4,6 @@ import MaterialTable from 'material-table';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import ForwardIcon from '@material-ui/icons/Forward';
-// import Button from '@material-ui/core/Button';
 
 function OrderDetails({orderArray ,goTo ,editOrderState}) {
     

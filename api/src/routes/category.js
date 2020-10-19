@@ -63,8 +63,8 @@ server.get('/buscar/:nombreCat',async (req, res, next) => {
 
 //Creamos una nueva categoría con los parametros recibidos por el body
 server.post('/', async(req, res, next) => {
-    const { name, description } = req.body;
-    await Category.create({ name: name, description: description })
+    const { name, description ,img } = req.body;
+    await Category.create({ name, description, img })
         .then(categoria => {
             res.status(201).json(categoria)
         })

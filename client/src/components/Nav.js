@@ -1,46 +1,67 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-
-// import { AppBar, Typography, Toolbar, IconButton, Button } from '@material-ui/core';
-// import { withStyles } from '@material-ui/core/styles';
-import SearchBar from './SearchBar';
 import { Link } from 'react-router-dom';
-import style  from './css/Nav.module.css'; //it work. are you here
-import { green } from '@material-ui/core/colors';
+
+import SearchBar from './SearchBar';
+
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import PeopleAltIcon from '@material-ui/icons/PeopleAlt'
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 function Nav({ totalItemsInCart }) {
+    const [anchorEl, setAnchorEl] = React.useState(null);
 
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
     //variable de estilo
     // const { classes } = props;
 
     return (
 
         <nav className="navbar navbar-expand-lg navbar navbar-dark bg-warning" >
-            
+
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="fontWhite"><i className="fas fa-bars"></i></span>
             </button>
-            {/* <img src="/images/logo_size.jpg" alt="" /> */}
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
-                <li className="nav-item active" handle>
-                    <Link to='/products'>Ver Productos</Link>
-                </li>
-                <li className="nav-item">
-                    <Link to='/category'>Ver Categorias</Link>
-                </li>
-                <li className="nav-item">
-                    <Link to='/ProductForm'>+ Productos</Link>
-                </li>
-                <li className="nav-item">
-                    <Link to='/CategoryForm'>+ Categorias</Link>
-                </li>
+                    <li className="nav-item active" handle>
+                        <Link to='/products'>Ver Productos</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to='/category'>Ver Categorias</Link>
+                    </li>
+                    {/* <li className="nav-item">
+                        <Link to='/ProductForm'>+ Productos</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to='/CategoryForm'>+ Categorias</Link>
+                    </li> */}
                 </ul>
-                <SearchBar/>
-                
+                <SearchBar/><div>
+                    <PeopleAltIcon onClick={handleClick} style={{ color: "white", fontSize: 30, marginLeft: "550px" }} />
+                    <Menu
+                        id="simple-menu"
+                        anchorEl={anchorEl}
+                        keepMounted
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}
+                    >
+                        <MenuItem onClick={handleClose}><Link style={{color: "black",textDecoration:"none"}}>Ingresar</Link></MenuItem>
+                        <MenuItem onClick={handleClose}><Link to='/register' style={{color: "black",textDecoration:"none"}}>Registrarse</Link></MenuItem>
+                        <MenuItem onClick={handleClose}><Link to='/ProductForm' style={{color: "black",textDecoration:"none"}}>Crud Productos</Link></MenuItem>
+                        <MenuItem onClick={handleClose}><Link to='/CategoryForm' style={{color: "black",textDecoration:"none"}}>Crud Categorias</Link></MenuItem>
+                        <MenuItem onClick={handleClose}><Link to='/admin/orders' style={{color: "black",textDecoration:"none"}}>Orders</Link></MenuItem>
+                    </Menu>
+                </div>
                 <Link to='/Checkout'>
-                    <ShoppingCartIcon style={{color: "white",fontSize: 30}}><button><span>{totalItemsInCart}</span></button></ShoppingCartIcon> 
+                    <ShoppingCartIcon style={{ color: "white", fontSize: 26, marginRight: "40px" }}><button><span>{totalItemsInCart}</span></button></ShoppingCartIcon>
                 </Link>
             </div>
         </nav>

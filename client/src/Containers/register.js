@@ -180,6 +180,7 @@ openModalError(){
     <Form.File id="exampleFormControlFile1" value={this.state.profilePic} label="Foto de perfil" />
   </Form.Group>
 
+          <Button variant="outline-warning" style={{marginRight:'10px'}}><Link to='/products' style={{color:'#ffc107',textDecoration:'none'}}>Volver a Orders</Link></Button>
 
           <Button variant="outline-warning" onClick={(e)=>this.onSubmitear(e)}  >
             Registrarse

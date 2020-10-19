@@ -61,7 +61,7 @@ function Catalogo({ productsData, categoryBool }) {
                             id={categoria.categoryID}
                             name={categoria.name} //en nuestra base de datos se llama name
                             description={categoria.description}
-                             // image = 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcThCt6rKO1mS369Te5YY58fbfqxuIc15Hk5-Q&usqp=CAU'
+                            image = {categoria.img}
                         />
                     )
                 })}

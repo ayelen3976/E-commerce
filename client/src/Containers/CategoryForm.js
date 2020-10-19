@@ -9,7 +9,7 @@ function CategoryForm() {
   const [lgShow, setLgShow] = useState(false);
   const [show, setShow] = useState(false);
 
-  const [product, setProduct] = useState({ name: "", description:""});
+  const [product, setProduct] = useState({ name: "", description:"" ,img:""});
   const [products, setProducts] = useState([]);
   const [id, setId] = useState("");
 
@@ -68,7 +68,8 @@ function CategoryForm() {
       url: '/products/category',
       data: {
         name: product.name,
-        description: product.description
+        description: product.description,
+        img: product.img
       }
     })
       .then(() => {
@@ -144,7 +145,7 @@ function CategoryForm() {
           <Form>
             <Form.Control
               type="text"
-              placeholder="Ingrese producto"
+              placeholder="Ingrese categoría"
               name="name"
               onChange={onChange}
               value={product.name}
@@ -231,7 +232,7 @@ function CategoryForm() {
           ) : (
             products.map((item) => (
               <tr key={item.categoryID}>
-                <td><img alt="pic" src={item.img} style={{width: "100%"}} /></td>
+                <td><img alt="pic" src={item.img} style={{width: "10%"}} /></td>
                 <td>{item.name}</td>
                 <td>{item.description}</td>
                 <td>

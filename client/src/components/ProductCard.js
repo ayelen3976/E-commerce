@@ -29,7 +29,6 @@ function ProductCard({
       stock,
     });
   };
-
   if (deshabilitado == "true") {
     return (
       <Card className={classes.item}>
