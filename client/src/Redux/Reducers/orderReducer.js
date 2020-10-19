@@ -21,9 +21,12 @@ function reducer(state = initialState, {type , payload}) {
                     order.estado = payload.estado
                 }
             })
+            return state;
             // ...state,
             // cart: { ...state.cart, [action.item.id]: (state.cart[action.item.id] || 0) + 1 } 
-            return state;     
+            // return {...state,
+            //     orders: {...state.orders,[payload.id]: (state.orders[payload.id])}
+            // }     
         default:
             return state;
     }

@@ -41,7 +41,8 @@ class ProductInfoContainer extends Component {
                     name: productsData.name,
                     description: productsData.description,
                     price: productsData.price,
-                    image: productsData.img
+                    image: productsData.img,
+                    stock: productsData.stock
                 })
 
                 //console.log(this.state)
@@ -63,6 +64,7 @@ class ProductInfoContainer extends Component {
                     description={product.description}
                     price={product.price}
                     image={product.image}
+                    stock={product.stock}
                 />
             </div>
         )

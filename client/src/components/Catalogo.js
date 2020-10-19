@@ -13,7 +13,7 @@ function Catalogo({ productsData, categoryBool }) {
                 <Grid container spacing={9} justify='center'>
                     { 
                     productsData?.map((producto, index) => {
-                        if(producto.stock>0){
+                        // if(producto.stock>0){
                            return (
                             <ProductCard
                                 key={producto.id}
@@ -24,22 +24,23 @@ function Catalogo({ productsData, categoryBool }) {
                                 image={producto.img}
                                 stock={producto.stock}
                             />
-                             )}  else {
+                           )
+                            //  )}  else {
 
-                                    return (
-                                     <ProductCard
-                                        key={producto.id}
-                                        id={producto.id}
-                                        name={producto.name} //en nuestra base de datos se llama name
-                                        description={producto.description}
-                                        price={producto.price}
-                                        image={producto.img}
-                                        stock={"00"}
-                                        deshabilitado={"true"}
-                                    />
-                                            )
+                            //         return (
+                            //          <ProductCard
+                            //             key={producto.id}
+                            //             id={producto.id}
+                            //             name={producto.name} //en nuestra base de datos se llama name
+                            //             description={producto.description}
+                            //             price={producto.price}
+                            //             image={producto.img}
+                            //             stock={"00"}
+                            //             deshabilitado={"true"}
+                            //         />
+                            //                 )
                             
-                               }
+                            //    }
                         }
                         
                     )}

@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import { Card, CardMedia, CardContent } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
-import styles from "./css/ProductCard.module.css";
-import { connect } from "react-redux";
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import {addToShoppingCart, removeFromCart} from "../Redux/Actions/Shopcart";
+import styles from "./css/ProductCard.module.css";
 
 function ProductCard({
   id,
@@ -29,7 +30,7 @@ function ProductCard({
       stock,
     });
   };
-  if (deshabilitado == "true") {
+  if (stock < 1) {
     return (
       <Card className={classes.item}>
         <CardMedia className={classes.media} image={image} />
@@ -46,10 +47,6 @@ function ProductCard({
                   <i class="fas fa-bars"></i>
                 </button>
               </Link>
-
-              <button onClick={handleCartAddClick}>
-                <i class="fas fa-heart"></i>
-              </button>
             </div>
           </div>
         </CardContent>
@@ -72,13 +69,8 @@ function ProductCard({
                 <i class="fas fa-bars"></i>
               </button>
             </Link>
-            <Link to={"/products/" + id}>
-              <button>
-                <i class="fas fa-shopping-cart"></i>
-              </button>{" "}
-            </Link>
             <button onClick={handleCartAddClick}>
-              <i class="fas fa-heart"></i>
+              <AddShoppingCartIcon/>
             </button>
           </div>
         </div>
