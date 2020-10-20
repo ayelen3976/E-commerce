@@ -67,7 +67,7 @@ server.get('/search', async(req, res, next) => {
         }
     })
         .then(productList => {
-            res.json(productList)
+            res.status(200).json(productList)
         })
         .catch(err => {
             res.status(404).json({message: "No se encontraron Productos con esa palabra" , error: err})
@@ -233,11 +233,12 @@ server.put('/:id', async(req, res, next) => {
     });
 });
 
+// Actualizamos una review con los parametros pasados por el body
 server.put('/:id/review/:idReview' , async(req,res,next) => {
     const {idReview} = req.params;
     const {description,stars} = req.body;
 
-    Review.update({description ,stars},{where : {id : idReview}})
+    await Review.update({description ,stars},{where : {id : idReview}})
         .then(()=>{
             res.status(200).json('Actualizada con exito')
         })
@@ -247,3 +248,4 @@ server.put('/:id/review/:idReview' , async(req,res,next) => {
 });
 
 module.exports = server;
+

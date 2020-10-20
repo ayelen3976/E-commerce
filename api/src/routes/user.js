@@ -1,6 +1,9 @@
 const server = require('express').Router();
 const { response } = require('express');
 const { User, Order, Product , Orderline } = require('../db.js');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const authConfig = require('../../auth');
 // const { Sequelize } = require('sequelize');
 
 
@@ -90,15 +93,32 @@ server.get('/:id', async (req, res, next) => {
 
 ////////////////////// CREATE ///////////////////
 //Creamos un usuario con los parametros recibidos por el body
-server.post('/', async (req, res,next) => {
-    const { userName, firstName, lastName, profilePic, description, email ,edad} = req.body;
+server.post('/', async (req, res, next) => {
+
+    const { userName, firstName, lastName, profilePic, description, email, edad } = req.body;
     // console.log(req.body);
-    return await User.create({userName,firstName,lastName,profilePic,description,email,edad})
+
+    //Encriptado del password con bcypt 
+    let password = bcrypt.hashSync(req.body.password, +authConfig.rounds);
+
+    return await User.create({ userName, firstName, lastName, profilePic, description, email, edad, password })
         .then(user => {
-            res.status(201).json(user)
+            //tenemos que hacer el signIn osea crear el token
+            //jwt tiene un metodo sign que recibe por un lado un payload
+            //luego el secret y luego un expireIn que es el tiempo que durara el token es decir
+            //el tiempo que estamos autorizados en la app
+            let token = jwt.sign({user: user}, authConfig.secret ,{
+                expiresIn : authConfig.expires
+            })
+
+            res.status(201).json({
+                user:user,
+                token:token
+            })
+
         })
         .catch(err => {
-            res.status(res.status(400).json({message: "Estas ingresando valores invalidos" ,error : err}))
+            res.status(res.status(400).json({ message: "Estas ingresando valores invalidos", error: err }))
         });
 })
 
@@ -150,14 +170,36 @@ server.post('/:idUser/cart',async (req,res,next) =>{
 //Ruta para editar las cantidades del carrito
 server.put('/:idUser/cart', async(req,res,next) => {
     const { idUser } = req.params;
-    const {cantidad} = req.body;
+    const {cantidad,productId} = req.body;
     let order = await Order.findOne({ where: { userId: idUser, estado: 'Carrito' } });
-    Orderline.update({cantidad: cantidad},{where: {orderId:order.id}})
+    Orderline.update({cantidad: cantidad},{where: {orderId:order.id , productId : productId}})
         .then(res.status(200).json({message: 'La cantidad fue modificada'}))
         .catch(err=>{
             res.status(400).json({message: 'No pudo ser modificado', error: err})
         });
 });
+
+//Ruta para modifciar el password de un usuario
+server.put('/:id/passwordReset', async (req, res, next) => {
+    const { id } = req.params;
+    let user = await User.findByPk(id).catch(err => res.status(401).json({ message: "No se encontro el usuario", error: err }))
+    // console.log(user.dataValues)
+    //Encriptado del nuevo password pasado como parametro
+    let password = bcrypt.hashSync(req.body.password, +authConfig.rounds);
+
+    await User.update({
+        userName: user.dataValues.userName,
+        firstName: user.dataValues.firstName,
+        lastName: user.dataValues.lastName,
+        profilePic: user.dataValues.profilePic,
+        description: user.dataValues.description,
+        email: user.dataValues.email,
+        edad: user.dataValues.edad,
+        password
+    }, { where: { id: user.dataValues.id } })
+        .then(()=> res.status(200).json('Actualizado con exito'))
+        .catch(err => res.status(401).json({messga:'Fallo en la actualizacion' , error: err}))
+})
 
 //Ruta para modificar los datos de un usuario.
 server.put('/:id', async(req, res, next) => {
