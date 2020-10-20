@@ -1,5 +1,5 @@
 const server = require('express').Router();
-const { Product, Category } = require('../db.js');
+const { Product, Category ,Review } = require('../db.js');
 const { Sequelize } = require('sequelize');
 
 /////////// READ ///////////
@@ -73,6 +73,18 @@ server.get('/search', async(req, res, next) => {
             res.status(404).json({message: "No se encontraron Productos con esa palabra" , error: err})
         });
 });
+
+//Obtener todas las reviews de un producto
+server.get('/:id/review' ,async(req ,res, next) => {
+    const {id} = req.params;
+    await Review.findAll({where: {productId : id}})
+        .then(reviews => {
+            res.status(200).json(reviews);
+        })
+        .catch(err => {
+            res.status(400).json({message: 'No se encontraron reviews para ese producto' , error: err});
+        });
+})
 
 //Buscamos un producto por ID
 server.get('/:id', async(req, res, next) => {
@@ -155,12 +167,29 @@ server.delete('/:id/category/:categoryId',async (req, res, next) => {
             producto.removeCategories(category)
         })
         .then(()=>{
-            res.send("Eliminada con exito con exito")
+            res.send("Eliminada con exito")
         })
         .catch(err => {
             res.status(404).json({message: "No se pudo eliminar la categoria del producto" , error: err})
         })
 });
+
+//Borrar una review de un producto en particular
+server.delete('/:id/review/:idReview' , async(req,res,next)=> {
+    const {idReview} = req.params;
+    await Review.destroy({
+        where : {
+            id : idReview
+        }
+    })
+    .then(()=>{
+        res.status(200).json('Eliminada con exito')
+    })
+    .catch(err=> {
+        res.status(401).json({message:'No se pudo borrar la review' , error : err});
+    });
+})
+
 
 //Borramos un producto de la lista en base al id pasado en la URL como parametro --> req.params
 server.delete('/:id', async(req, res, next) => {
@@ -195,7 +224,7 @@ server.put('/:id', async(req, res, next) => {
             id: req.params.id
         }
     })
-    .then(res => {
+    .then(() => {
         //el update devuelve un array con la cantidad de filas afectadas.
         res.status(200).json("done");
     })
@@ -204,6 +233,17 @@ server.put('/:id', async(req, res, next) => {
     });
 });
 
+server.put('/:id/review/:idReview' , async(req,res,next) => {
+    const {idReview} = req.params;
+    const {description,stars} = req.body;
 
+    Review.update({description ,stars},{where : {id : idReview}})
+        .then(()=>{
+            res.status(200).json('Actualizada con exito')
+        })
+        .catch(err =>{
+            res.status(401).json({message:'No se pudo actualizar la Review' , error : err});
+        });
+});
 
 module.exports = server;
