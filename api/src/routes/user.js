@@ -126,13 +126,13 @@ server.post('/:idUser/cart',async (req,res,next) =>{
                 email: user.dataValues.email
             }
         })
-     console.log(order[0].dataValues.id)
+    //  console.log(order[0].dataValues.id)
     let orderId = order[0].dataValues.id
-    console.log(orderId)
+    // console.log(orderId)
     await Orderline.create(
         {
             orderId : orderId,
-            productId: id,
+            productId: product.dataValues.id,
             cantidad: cantidad, 
             precio: product.dataValues.price
         })

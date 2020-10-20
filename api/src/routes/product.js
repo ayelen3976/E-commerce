@@ -119,6 +119,27 @@ server.post('/:id/category/:categoryId', async(req, res, next) => {
         })
 });
 
+//Agrega una review a un producto en particular pasado por parametro id
+server.post('/:id/review', async(req, res, next) => {
+    const {id} = req.params;
+    const {userId, description, stars} = req.body;
+    Review.create({
+        userId,
+        description,
+        stars,
+        productId: id,
+    })
+    .then(review => {
+        res.status(200).json(review)
+    })
+    .catch(err => {
+        res.status(400).json({
+            message: "No se pudo crear la review",
+            error: err
+        })
+    })
+})
+
 /////////// DELETE ///////////
 
 //Borramos la categoria de un producto en particular, ambos pasado como parametros en la URL

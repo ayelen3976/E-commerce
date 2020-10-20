@@ -12,7 +12,6 @@ const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
 const basename = path.basename(__filename);
-
 const modelDefiners = [];
 
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
@@ -36,16 +35,20 @@ const { Product, Category, User, Order ,Orderline} = sequelize.models;
 console.log(sequelize.models)
 
 
-
+// N to N
 Order.belongsToMany(Product, { through: Orderline}); //tiene muchos productos N a N con productos
 Product.belongsToMany(Order, { through: Orderline }) //Puede estar en varias ordenes
-
+// N to N
 Product.belongsToMany(Category, { through: 'productcategories' });//Pertenece a muchas categorias
 Category.belongsToMany(Product, { through: 'productcategories' }); //Tiene muchos productos
 
 Category.belongsToMany(Product, { through: 'productcategories' }); 
  
+User.hasMany(Review);
+Review.belongsTo(User);
 
+Product.hasMany(Review);
+Review.belongsTo(Product);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

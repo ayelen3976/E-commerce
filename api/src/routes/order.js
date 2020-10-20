@@ -1,4 +1,4 @@
-    const server = require('express').Router();
+const server = require('express').Router();
 const { response } = require('express');
 const { Order,Product } = require('../db.js');
 
