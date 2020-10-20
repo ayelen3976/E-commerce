@@ -1,0 +1,38 @@
+.shop-cart{
+    border-bottom: 1px solid #d3d3d3;
+    text-align: center;
+
+}
+.Card{
+    margin: 8px;
+}
+.body{
+    display: flex;
+}
+.contador{
+    border: 1px solid black;
+    inline-size: max-content;
+
+  
+}
+.card-body-img{
+    width: 50%;
+}
+
+.right{
+  
+    width: 45%;
+
+    float: right;
+}
+
+.summary{
+    text-decoration: underline;
+}
+.shipping{
+    border-bottom: 1px solid #d3d3d3;
+}
+.confirm{
+    max-width: fit-content;
+    margin: auto;
+}

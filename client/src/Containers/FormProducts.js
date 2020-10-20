@@ -1,28 +1,47 @@
 import React, { useEffect, useState } from "react";
+
 // import shortid from "shortid";
-import "bootstrap/dist/css/bootstrap.min.css";
-import {Table, Modal, Button} from "react-bootstrap";
+
+
+import {Table, Modal, Button, Form} from "react-bootstrap";
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+import { BsFillTrashFill } from "react-icons/bs";
 
 function FormProducts() {
-  const [lgShow, setLgShow] = useState(false);
-  const [show, setShow] = useState(false);
+  
+  const animatedComponents = makeAnimated();
+ 
 
-  const [product, setProduct] = useState({ name: "", price: "" , description:"",category:[]});
+
+  const [product, setProduct] = useState({ name: "", price: "" , description:"", stock:"",img:"",category:[]});
   const [products, setProducts] = useState([]);
   const [id, setId] = useState("");
 
   const [category, setCategory] = useState([])
   const [categoryID, setCategoryID] = useState()
-  const [productID, setProductID] = useState()
+  const [optionSelect, setOptionSelect]=useState()
+  const [idDeleteCategoryP, setIdDeleteCategoryP]= useState()
+  // const [productID, setProductID] = useState()
 
+
+  // ------------controladores de modal----------------------
+  const [show, setShow] = useState(false);
+  const [lgShow, setLgShow] = useState(false);
+  const [categoryShow, setCategoryShow]= useState(false);
+  const [modalId,setModalId]=useState();
+  const [deleteCategoryShow, setDeleteCategoryShow]= useState(false);
   const handleClose = () => setShow(false);
   const AddClose = () => setLgShow(false);
+  const handlerCloseCategory =() =>setCategoryShow(false);
+  const handlerCloseDeleteCategoryShow= () =>setDeleteCategoryShow(false);
+
   // const AddShow = () => setLgShow(true);//Por que no se usa?
 
   useEffect(()=> {
+    
         axios.get('/products/include/category')
         .then(res => {
            console.log(res.data)
@@ -43,7 +62,24 @@ function FormProducts() {
 
 //  ------------------Functions---------------------------
 
-  
+  function megaFuncionDeAyeOne(categorias,prod){
+    //agarrar el itemCategories , iterar y traducir a al select
+    setIdDeleteCategoryP(prod)
+    let nombreCategorias=[]
+    categorias.map(cat=>{
+      nombreCategorias.push({
+        value:cat.categoryID,
+        label: cat.name
+      })
+    })
+
+    setOptionSelect(nombreCategorias)
+    
+    //pasar categorias al select
+    //Pasarle esas opciones al modal
+    //mostrar el modal
+    setDeleteCategoryShow(true)
+  }
 
 
 
@@ -54,6 +90,24 @@ function FormProducts() {
       [e.target.name]: val
     });
   }
+
+
+  function Handleimage(e){
+    var file = e.target.files[0]
+    // const previmg = document.querySelector(".anyimg")// 
+    if(file) {
+      const reader = new FileReader()
+      reader.addEventListener("load", function() {
+        setProduct({ 
+          ...product,
+         img: this.result
+       })
+        // previmg.setAttribute("src", this.result)
+      })
+      reader.readAsDataURL(file)
+    }
+
+   }
 
   
   function translate(arr){
@@ -87,14 +141,16 @@ function FormProducts() {
       data: {
         name: product.name,
         price: product.price,
-        description: product.description
+        description: product.description,
+        stock: product.stock,
+        img:product.img
         
       }
     })
       .then(res => {
         
         setProducts(pro);
-        setProduct({ name: "", price: "", description: "" });
+        setProduct({ name: "", price: "", description: "", stock:"",category:"" , img:""});
         setLgShow(false)
        agregarCat(res.data.id)
       })
@@ -111,7 +167,8 @@ function FormProducts() {
     let idProducto = id
     let idCategoria = categoryID
     console.log(idProducto + ' '+ idCategoria)
-    axios.post(`http://localhost:4000/products/${idProducto}/category/${idCategoria}`)
+    axios.post(`http://localhost:4000/products/${idProducto}/category/${idCategoria}`);
+    
   }
 
   //  ------------------DELETE---------------------------
@@ -125,10 +182,16 @@ function FormProducts() {
       .catch(console.log)
   };
 
+  const deleteCategories= (id,categoryID) =>{
+    const url=`/products/${id}/category/${categoryID}`
+    axios.delete(url)
+   
+  }
+
 
   //  ------------------EDIT---------------------------
   const editar = (item) => {
-    setProduct({ name: item.name, price: item.price, description: item.description });
+    setProduct({ name: item.name, price: item.price, description: item.description, stock:item.stock, category:item.category,img:item.img });
     setId(item.id);
     setShow(true);
   };
@@ -139,7 +202,10 @@ function FormProducts() {
       id: id,
       name: product.name,
       price: product.price,
-      description: product.description
+      description: product.description,
+      stock:product.stock,
+      category: product.category,
+      img:product.img
     };
     var pro = products;
     const url = `/products/${id}`
@@ -149,10 +215,13 @@ function FormProducts() {
         axios.put(url, {
           name: product.name,
           price: product.price,
-          description: product.description
+          description: product.description,
+          stock: product.stock,
+          category:product.category,
+          img:product.img
         }).then(() => {
           setId("");
-          setProduct({ name: "", price: "", description: "" });
+          setProduct({ name: "", price: "", description: "" ,stock:"", category:"",img:""});
           setShow(false);
         }).catch(console.log)
       }
@@ -180,34 +249,52 @@ function FormProducts() {
         <Modal.Body>
           
       
-          <form>
-            <input
+          <Form>
+            <Form.Control
               type="text"
               placeholder="Ingrese producto"
               name="name"
               onChange={onChange}
               value={product.name}
             />
-            <input
+            <br/>
+            <Form.Control
               type="text"
               placeholder="Ingrese precio"
               name="price"
               onChange={onChange}
               value={product.price}
             />
-           <input
+            <br/>
+           <Form.Control
               type="text"
               placeholder="Ingrese description"
               name="description"
               onChange={onChange}
               value={product.description}
             />
-             <Select  options={translate(category)} onChange={handleChangeCategory} />
-            {console.log ('productCategory',)}
-            <Button variant="primary" onClick={addProduct}>
+            <br/>
+
+            <Form.Control
+              type="text"
+              placeholder="Ingrese stock"
+              name="stock"
+              onChange={onChange}
+              value={product.stock}
+            />
+            <br/>
+            <input
+              type="file"
+              name="img"
+              onChange={Handleimage}
+            />
+            <br/>
+             <Select value={product.category} options={translate(category)} onChange={handleChangeCategory} />
+            <br/>
+            <Button variant="warning" onClick={addProduct}>
               Añadir
             </Button>
-          </form>
+          </Form>
         </Modal.Body>
       </Modal>
     {/* ---------------------Modal FORM EDITAR---------------------- */}
@@ -216,51 +303,124 @@ function FormProducts() {
           <Modal.Title>Modifique su Producto</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <input
+          <Form.Control
             type="text"
             placeholder="Ingrese modificacion name"
             name="name"
             onChange={onChange}
             value={product.name}
           />
-          <input
+          <br/>
+          <Form.Control
             type="text"
             placeholder="Ingrese modificacion price"
             name="price"
             onChange={onChange}
             value={product.price}
-          />
-             <input
+          /> <br/>
+             <Form.Control
             type="text"
             placeholder="Ingrese modificacion description"
             name="description"
             onChange={onChange}
             value={product.description}
           />
+          <br/>
+
+            <Form.Control
+              type="text"
+              placeholder="Ingrese modificacion stock"
+              name="stock"
+              onChange={onChange}
+              value={product.stock}
+            />
+            <br/>
+            <Form.Control
+              type="file"
+              name="img"
+              onChange={Handleimage}
+            />
+            <br/>
+          <Select 
+          closeMenuOnSelect={false} 
+          components={animatedComponents}
+           isMulti 
+            options={translate(category)} onChange={handleChangeCategory} />
+          <br/>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Cerrar
           </Button>
-          <Button variant="primary" onClick={editProduct}>
-            Save Changes
+          <Button variant="warning" onClick={editProduct}>
+           Guardar cambios
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      {/* ------------------Modal Category-------------------------  */}
+
+      <Modal show={categoryShow} onHide={handlerCloseCategory}>
+        <Modal.Header closeButton>
+          <Modal.Title>Agregar Categoria</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+          <Select  options={translate(category)} onChange={handleChangeCategory} />
+          
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handlerCloseCategory}>
+            Cerrar
+          </Button>
+          <Button variant="warning" onClick={agregarCat(modalId)} onClick={()=>{setCategoryShow(false)}}>
+            Agregar
           </Button>
         </Modal.Footer>
       </Modal>
 
+     {/* ------------------Modal Eliminar Categoria deproducto-------------------------  */}
+
+     <Modal show={deleteCategoryShow} onHide={handlerCloseDeleteCategoryShow}>
+        <Modal.Header closeButton>
+          <Modal.Title>Elimina una Categoria de tu producto</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+          <Select 
+          closeMenuOnSelect={false} 
+          components={animatedComponents}
+           options={optionSelect} 
+           isMulti 
+           onChange={handleChangeCategory}/>
+          
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handlerCloseDeleteCategoryShow}>
+            Close
+          </Button>
+          <Button variant="danger" onClick={deleteCategories(idDeleteCategoryP,categoryID)} onClick={()=>{setDeleteCategoryShow(false)}} >
+            Eliminar 
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
   
       {/* ------------------Button ADD-------------------------  */}
       
-      <Button onClick={() => setLgShow(true)}>Añadir producto</Button>
-      <Link to = '/products'><Button>Volver</Button></Link>
+      <Button  variant="warning" onClick={() => setLgShow(true)}>Añadir producto</Button>
+      <Link to = '/products'><Button variant="secondary">Volver</Button></Link>
 
       {/* ----------------Table--------------------------    */}
-      <Table striped bordered hover>
+      <Table responsive="sm">
         <thead style={{ textAlign: "center" }}>
           <tr>
+            <th style={{width: "10%"}}>Img</th>
             <th>Producto</th>
             <th>Precio</th>
             <th>Description</th>
+            <th>Stock</th>
+            <th>Categorias</th> 
             <th>Editar</th>
             <th>Eliminar</th>
           {/* <th> <Select options={options} /></th> */}
@@ -276,17 +436,21 @@ function FormProducts() {
           ) : (
             products.map((item) => (
               <tr key={item.id}>
+              <td><img alt="pic" src={item.img} style={{width: "100%"}} /></td> 
                 <td>{item.name}</td>
                 <td>{item.price}</td>
                 <td>{item.description}</td>
+                <td>{item.stock}</td>
+            <td> <Button className="BsPlusSquareFill" variant="warning" onClick={() =>{setCategoryShow(true) 
+              setModalId(item.id)}}> + </Button>  <Button  variant="danger"> <BsFillTrashFill onClick={()=> megaFuncionDeAyeOne(item.categories,item.id)} />  </Button>   </td>
                 {/* <td>{console.log(item.categories[0].name)}</td> */}
                 <td>
-                  <Button variant="primary" onClick={() => editar(item)}>
+                  <Button variant="warning" onClick={() => editar(item)}>
                     Editar
                   </Button>
                 </td>
                 <td>
-                  <Button onClick={() => deleteProduct(item.id)}>
+                  <Button variant="danger" onClick={() => deleteProduct(item.id)}  >
                     Eliminar
                   </Button>
                 </td>

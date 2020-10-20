@@ -31,6 +31,7 @@ class CategoryInfoContainer extends Component {
 
                 const categoryData = res.data;
                 // console.log(categoryData[0].products)
+                // console.log(categoryData)
 
                 this.setState({
                     prodctsByCategory: categoryData[0].products

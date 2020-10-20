@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import shortid from "shortid";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {Table, Modal, Button} from "react-bootstrap";
+import {Table, Modal, Button, Form} from "react-bootstrap";
 import axios from 'axios';
 import { Link } from "react-router-dom";
 
@@ -9,7 +9,7 @@ function CategoryForm() {
   const [lgShow, setLgShow] = useState(false);
   const [show, setShow] = useState(false);
 
-  const [product, setProduct] = useState({ name: "", description:""});
+  const [product, setProduct] = useState({ name: "", description:"" ,img:""});
   const [products, setProducts] = useState([]);
   const [id, setId] = useState("");
 
@@ -34,6 +34,24 @@ function CategoryForm() {
     });
   }
 
+
+  function Handleimage(e){
+    var file = e.target.files[0]
+    // const previmg = document.querySelector(".anyimg")// 
+    if(file) {
+      const reader = new FileReader()
+      reader.addEventListener("load", function() {
+        setProduct({ 
+          ...product,
+         img: this.result
+       })
+        // previmg.setAttribute("src", this.result)
+      })
+      reader.readAsDataURL(file)
+    }
+
+   }
+
   //  ------------------AGREGAR---------------------------
   const addProduct = (e) => {
     e.preventDefault();
@@ -50,7 +68,8 @@ function CategoryForm() {
       url: '/products/category',
       data: {
         name: product.name,
-        description: product.description
+        description: product.description,
+        img: product.img
       }
     })
       .then(() => {
@@ -119,29 +138,38 @@ function CategoryForm() {
         aria-labelledby="example-modal-sizes-title-lg"
       >
         <Modal.Header closeButton>
-          <Modal.Title id="example-modal-sizes-title-lg">ADD</Modal.Title>
+          <Modal.Title id="example-modal-sizes-title-lg">Agregar</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h1>Agregue su categoria</h1>
-          <form>
-            <input
+          
+          <Form>
+            <Form.Control
               type="text"
-              placeholder="Ingrese producto"
+              placeholder="Ingrese categoría"
               name="name"
               onChange={onChange}
               value={product.name}
             />
-           <input
+            <br/>
+
+              <Form.Control
+              type="file"
+              name="img"
+              onChange={Handleimage}
+            />  
+          <br/>
+           <Form.Control
               type="text"
               placeholder="Ingrese description"
               name="description"
               onChange={onChange}
               value={product.description}
             />
-            <Button variant="primary" onClick={addProduct}>
-              Add
+            <br/>
+            <Button variant="warning" onClick={addProduct}>
+              Añadir
             </Button>
-          </form>
+          </Form>
         </Modal.Body>
       </Modal>
     {/* ---------------------Modal FORM EDITAR---------------------- */}
@@ -150,26 +178,28 @@ function CategoryForm() {
           <Modal.Title>Modifique su Producto</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <input
+          <Form.Control
             type="text"
             placeholder="Ingrese modificacion name"
             name="name"
             onChange={onChange}
             value={product.name}
           />
-             <input
+          <br/>
+             <Form.Control
             type="text"
             placeholder="Ingrese modificacion description"
             name="description"
             onChange={onChange}
             value={product.description}
           />
+          <br/>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={editProduct}>
+          <Button variant="warning" onClick={editProduct}>
             Save Changes
           </Button>
         </Modal.Footer>
@@ -178,13 +208,14 @@ function CategoryForm() {
   
       {/* ------------------Button ADD-------------------------  */}
       <h1>Agregue su categoria</h1>
-      <Button onClick={() => setLgShow(true)}>AÑADIR</Button>
-      <Link to = '/products'><Button>VOLVER</Button></Link>
+      <Button variant="warning"onClick={() => setLgShow(true)}>Añadir</Button>
+      <Link to = '/products'><Button variant="secondary" >Volver</Button></Link>
 
       {/* ----------------Table--------------------------    */}
-      <Table striped bordered hover>
+      <Table responsive="sm">
         <thead style={{ textAlign: "center" }}>
           <tr>
+            <th>Imagen</th>
             <th>Categoria</th>
             <th>Description</th>
             <th>Editar</th>
@@ -201,15 +232,16 @@ function CategoryForm() {
           ) : (
             products.map((item) => (
               <tr key={item.categoryID}>
+                <td><img alt="pic" src={item.img} style={{width: "10%"}} /></td>
                 <td>{item.name}</td>
                 <td>{item.description}</td>
                 <td>
-                  <Button variant="primary" onClick={() => editar(item)}>
+                  <Button variant="warning" onClick={() => editar(item)}>
                     Editar
                   </Button>
                 </td>
                 <td>
-                  <Button onClick={() => deleteProduct(item.categoryID)}>
+                  <Button  variant="danger" onClick={() => deleteProduct(item.categoryID)} >
                     Eliminar
                   </Button>
                 </td>

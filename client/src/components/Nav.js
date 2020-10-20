@@ -1,51 +1,68 @@
 import React from 'react';
-// import { AppBar, Typography, Toolbar, IconButton, Button } from '@material-ui/core';
-// import { withStyles } from '@material-ui/core/styles';
-import SearchBar from './SearchBar';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import styles from './css/Nav.module.css';
 
+import SearchBar from './SearchBar';
 
-function Nav(props) {
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import PeopleAltIcon from '@material-ui/icons/PeopleAlt'
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
+function Nav({ totalItemsInCart }) {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
     //variable de estilo
     // const { classes } = props;
 
     return (
-        // <AppBar className={classes.NavColor} position='static'>
-        //     <Toolbar className= {classes.SearchBar} variant='dense'>
-        //         <Typography variant='h6' component='p'>Green Shop</Typography>
-        //         <Link to='/products'>Ver Productos</Link>
-        //         <Link to='/category'>Ver Categorias</Link>
-        //         <Link to='/ProductForm'>Crud Productos</Link>
-        //         <Link to='/CategoryForm'>Crud Categorias</Link>
-        //         <SearchBar/>
-        //     </Toolbar>
-        // </AppBar>
 
-        
-        <nav class="navbar navbar-expand-lg navbar-light bg-verde" >
-            
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="fontWhite"><i class="fas fa-bars"></i></span>
+        <nav className="navbar navbar-expand-lg navbar navbar-dark bg-warning" >
+
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="fontWhite"><i className="fas fa-bars"></i></span>
             </button>
-            <img src="/images/logo_size.jpg" alt="" />
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <Link to='/products'>Ver Productos</Link>
-                </li>
-                <li class="nav-item">
-                    <Link to='/category'>Ver Categorias</Link>
-                </li>
-                <li class="nav-item">
-                    <Link to='/ProductForm'>+ Productos</Link>
-                </li>
-                <li class="nav-item">
-                    <Link to='/CategoryForm'>+ Categorias</Link>
-                </li>
+            <div className="collapse navbar-collapse" id="navbarNav">
+                <ul className="navbar-nav">
+                    <li className="nav-item active" handle>
+                        <Link to='/products'>Ver Productos</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to='/category'>Ver Categorias</Link>
+                    </li>
+                    {/* <li className="nav-item">
+                        <Link to='/ProductForm'>+ Productos</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to='/CategoryForm'>+ Categorias</Link>
+                    </li> */}
                 </ul>
-                <SearchBar/>
+                <SearchBar/><div>
+                    <PeopleAltIcon onClick={handleClick} style={{ color: "white", fontSize: 30, marginLeft: "550px" }} />
+                    <Menu
+                        id="simple-menu"
+                        anchorEl={anchorEl}
+                        keepMounted
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}
+                    >
+                        <MenuItem onClick={handleClose}><Link style={{color: "black",textDecoration:"none"}}>Ingresar</Link></MenuItem>
+                        <MenuItem onClick={handleClose}><Link to='/register' style={{color: "black",textDecoration:"none"}}>Registrarse</Link></MenuItem>
+                        <MenuItem onClick={handleClose}><Link to='/ProductForm' style={{color: "black",textDecoration:"none"}}>Crud Productos</Link></MenuItem>
+                        <MenuItem onClick={handleClose}><Link to='/CategoryForm' style={{color: "black",textDecoration:"none"}}>Crud Categorias</Link></MenuItem>
+                        <MenuItem onClick={handleClose}><Link to='/admin/orders' style={{color: "black",textDecoration:"none"}}>Orders</Link></MenuItem>
+                    </Menu>
+                </div>
+                <Link to='/Checkout'>
+                    <ShoppingCartIcon style={{ color: "white", fontSize: 26, marginRight: "40px" }}><button><span>{totalItemsInCart}</span></button></ShoppingCartIcon>
+                </Link>
             </div>
         </nav>
 
@@ -53,46 +70,50 @@ function Nav(props) {
     )
 }
 
-// export default withStyles({
-//     NavColor: {
-//         backgroundColor: '#82ae46'
-//     }
-// })(Nav);
-export default Nav;
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const mapStateToProps = (state) => ({
+    totalItemsInCart: Object.keys(state.shopP.cart).lenght
+})
+
+
+export default connect(mapStateToProps)(Nav);
+
+// ////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 // import React from 'react';
-// import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
-// import { Link } from 'react-router-dom';
-// import logo from '../images/logo_size.jpg'
-// import SearchBar from './SearchBar';
+// import { AppBar, Typography, Toolbar } from '@material-ui/core';
+// import { withStyles } from '@material-ui/core/styles';
+// import Grid from '@material-ui/core/Grid';
+// function Nav(props) {
 
-// export default function Navvbar() {
+//     //variable de estilo
+//     const { classes } = props;
+    
 //     return (
-//         <Navbar bg="light" expand="lg">
-//             <Navbar.Brand >  <Link to="/products"> <img src={logo} alt="" width="100px" height='100px' /> </Link></Navbar.Brand>
-//             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-//             <Navbar.Collapse id="basic-navbar-nav">
-//                 <Nav className="mr-auto">
-//                     <Nav.Link >Inicio </Nav.Link>
-//                     <Nav.Link >Compra mayorista</Nav.Link>
-//                     <NavDropdown title="Productos" id="basic-nav-dropdown">
-//                         <NavDropdown.Item >Frutos secos</NavDropdown.Item>
-//                         <NavDropdown.Item >Especias</NavDropdown.Item>
-//                         <NavDropdown.Item >Vegetales</NavDropdown.Item>
-//                         <NavDropdown.Item >Lacteos</NavDropdown.Item>
-//                         <NavDropdown.Item >Leches vegetales</NavDropdown.Item>
-//                         <NavDropdown.Item >Sin T.A.C.</NavDropdown.Item>
-//                         <NavDropdown.Item >Legumbres</NavDropdown.Item>
-//                         <NavDropdown.Divider />
-//                         <Nav.Link><Link to="/ProductForm">Formulario Producto</Link></Nav.Link>
-//                         <Nav.Link><Link to="/CategoryForm">Formulario Categorias</Link></Nav.Link>
-//                     </NavDropdown>
-//                 </Nav>
-//                 <SearchBar />
-//             </Navbar.Collapse>
-//         </Navbar>
+//         <AppBar className={classes.NavColor} position='fiexed'>
+//                 <Toolbar variant='dense'>
+//                     <Typography variant='h6' component='p'>Green Shop</Typography>
+//                 </Toolbar>
+//                 <div>
+//                 <Typography variant='h6' component='p'>Categorias</Typography>
+//                 <Typography variant='h6' component='p'>Productos</Typography>
+//                 </div>
+//                 <ShoppingCartIcon/>
+//         </AppBar>
 //     )
 // }
+
+// export default withStyles({
+//     NavColor: {
+//         backgroundColor: '#f7ad36',
+//         height: '90px'
+//     },
+//     NavDiv : {
+
+//     }
+// })(Nav);
+
