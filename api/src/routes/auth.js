@@ -1,6 +1,6 @@
 const server = require('express').Router();
 const { response } = require('express');
-const { User } = require('../db.js');
+const { User , Role} = require('../db.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const authConfig = require('../../auth');
@@ -35,6 +35,23 @@ server.post('/login' , async(req,res,next)=> {
     .catch(err => {
         res.status(401).json({message: 'El usuario no se encontro' , error : err})
     })
+})
+
+server.post('/logout' , (req,res,next) => {
+    req.headers.authorization = ''
+})
+
+server.post('/promote/:id' , async(req,res,next) =>{
+    await User.findByPk(req.params.id )
+        .then(user => {
+            return User.update({rol: 'Admin' },{where: {id: user.id}})
+        })
+        .then(()=> {
+            res.status(200).json('Actualizado con exito')
+        })
+        .catch(err => {
+            res.status(401).json({message: 'No se encontro el usuario o no se pudo actualizar el rol' , error : err})
+        })
 })
 
 module.exports = server;

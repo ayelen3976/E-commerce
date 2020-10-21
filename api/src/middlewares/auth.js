@@ -19,12 +19,12 @@ module.exports = (req, res, next) => {
                 res.status(500).json({ msg: "Ha ocurrido un problema al decodificar el token", err });
             } else {
                 //Cuando pasamos el token y decodificamos el token buscamos el usuario por id
-                //que esta dentro del payload de este token y sacamos el usuario junto con los roles que tiene
+                //que esta dentro del payload de este token y sacamos el usuario 
 
-                User.findByPk(decoded.user.id, { include: "roles" }).then(user => {
+                User.findByPk(decoded.user.id).then(user => {
 
-                    //console.log(user.roles);
-                    //dentro de este objeto user esta el usuario y los roles
+                    //console.log(user.role);
+                    //dentro de este objeto user esta el usuario 
                     req.user = user;
                     next();
                 });
