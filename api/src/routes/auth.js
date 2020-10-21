@@ -22,6 +22,13 @@ server.post('/login' , async(req,res,next)=> {
             let token = jwt.sign({user: user}, authConfig.secret ,{
                 expiresIn : authConfig.expires
             })
+            //Aca podria crear en el req un objeto login {estado= true, user , token}
+
+            req.login = {
+                estado : true,
+                user,
+                token
+            }
 
             res.json({
                 user:user,
@@ -36,11 +43,21 @@ server.post('/login' , async(req,res,next)=> {
         res.status(401).json({message: 'El usuario no se encontro' , error : err})
     })
 })
-
+//Ruta de logout chekear si esto no es un invento
 server.post('/logout' , (req,res,next) => {
-    req.headers.authorization = ''
+    if(req.login){
+        req.headers.authorization = ""
+        req.login.estado = false
+        req.login.user = ""
+        req.login.token = ""
+        req.user = ""
+        res.status(200).json('Se ha desconectado');
+    }else {
+        res.status(400).json('no hay usuario logeado');
+    }
 })
 
+//Ruta para promover un usuario Client a Admin
 server.post('/promote/:id' , async(req,res,next) =>{
     await User.findByPk(req.params.id )
         .then(user => {
