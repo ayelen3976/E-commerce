@@ -23,10 +23,11 @@ function ReviewContainer({reviewData ,getReviews}) {
     useEffect(()=> {
         getReviews()
     },[])
-
+    
     return (
         <List className={classes.root}>
-            <ReviewList />
+        {/* {console.log("REVIEW", reviewData.reviews)} */}
+            <ReviewList reviewData={reviewData.reviews} />
         </List>
     );
 }
