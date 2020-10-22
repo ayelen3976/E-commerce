@@ -1,11 +1,8 @@
 import { GET_ORDERS ,GET_ORDERS_LINE ,EDIT_ORDER_STATE,FIND_ORDER_BY_PK} from '../Actions/actiontypes';
-const initialState = [{
-    orders: "",
-    orderLine:""
-}];
+const initialState = [];
 
 
-function reducer(state = initialState, {type , payload}) {
+function orderReducer(state = initialState, {type , payload}) {
     switch (type) {
         case GET_ORDERS: return {
             ...state,
@@ -33,4 +30,4 @@ function reducer(state = initialState, {type , payload}) {
 
 }
 
-export default reducer;
+export default orderReducer;

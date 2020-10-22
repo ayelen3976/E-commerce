@@ -4,12 +4,13 @@ const { User, Order, Product , Orderline } = require('../db.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const authConfig = require('../../auth');
+const auth = require('../middlewares/auth')
 // const { Sequelize } = require('sequelize');
 
 
 ////////////////////// READ ///////////////////
 //Buscamos todos los usuarios
-server.get('/', async (req, res, next) => {
+server.get('/', auth , async (req, res, next) => {
     await User.findAll()
         .then(users => {
             res.json(users);

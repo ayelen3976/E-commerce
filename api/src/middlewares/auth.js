@@ -3,6 +3,7 @@ const authConfig = require('../../auth');
 const { User } = require('../db'); 
 
 module.exports = (req, res, next) => {
+    console.log(req)
 
     // Comprobar que existe el token -> Este mismo se encuentra en la authorization del header
     if(!req.headers.authorization) {

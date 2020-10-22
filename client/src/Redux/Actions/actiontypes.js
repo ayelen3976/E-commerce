@@ -6,3 +6,4 @@ export const GET_ORDERS = 'GET_ORDERS';
 export const GET_ORDERS_LINE = 'GET_ORDERS_LINE';
 export const EDIT_ORDER_STATE = 'EDIT_ORDER_STATE';
 export const FIND_ORDER_BY_PK = 'FIND_ORDER_BY_PK';
+export const FIND_REVIEWS = 'FIND_REVIEWS';
