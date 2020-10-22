@@ -67,6 +67,7 @@ server.get('/search', async(req, res, next) => {
         }
     })
         .then(productList => {
+            console.log(productList)
             res.json(productList)
         })
         .catch(err => {
