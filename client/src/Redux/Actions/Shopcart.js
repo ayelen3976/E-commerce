@@ -1,43 +1,49 @@
-import { SHOP_CART } from './actiontypes'
-import { DELETE_SHOP_CART} from './actiontypes'
+import { SHOP_CART, DELETE_SHOP_CART, POST_ORDER, PUT_ORDER} from './actiontypes'
 import axios from 'axios';
 
-const URL = "http://localhost:4000"
+const URL = "http://localhost:4000/"
 
 
 
-/* 
-[{idProducto : id,cantidad :123},{prod2,candidad399}], idUser map(producto => {   producto.idProducto   producto.cantidad })  
- export const addToShoppingCart  = (userId, newItemToAdd) => dispatch => { 
-     console.log(newItemToAdd.id)   console.log(USER ID${userId})  
-  axios({    
-     method: 'post',   
-      url: /user/${2}/cart,     
-      data: {       id: newItemToAdd.id,     
-      cantidad: 150,      
-      direccion: "avenida 2",      
-      telefono: 12312321,     
-       email: "asdsad@ahdasd.com"     }   })};
-  */
- export function createOrder(userId =1 , idProducto , cantidad) {
-     const url = `user/${1}/cart`
-     axios({
-          method: 'post',
-          url: url,
-          data: {
-            id : idProducto,
-            cantidad : cantidad
-          }
-        })
-        .then(res => {
-             console.log("done")
-        })
- }
+export function postCart(totalData,userId){
+  return (dispatch)=> {
+       totalData.forEach((p)=>{
+        return axios({method:"post",url:`/user/${userId}/cart`,
+
+        data:{cantidad:p.count, id:p.product.id, telefono:123123, direccion:"mirave2"}})
+        .then((res)=>{
+          console.log("Finished");
+          dispatch({type:POST_ORDER})})
+        .catch((err)=>{console.log(err)}) 
+      })
+
+
+
+  }
+}
+
+export function putCart(datatotal, userId){
+  return (dispatch) => {
+    datatotal.forEach((a)=>{
+      return axios.put( `/user/${userId}/cart`,{
+      cantidad:a.count, 
+      productId:a.product.id}
+     ).then((res)=>{
+        console.log("neeaaar");
+        dispatch({type:PUT_ORDER})})
+      .catch((err)=>{console.log(err)}) 
+      })
+   }
+}
+
+
 
    export  const addToShoppingCart = (newItemToAdd) => ({
         type: SHOP_CART,
         item: newItemToAdd
    }) 
+
+
 
    export  const removeFromCart = (newItemToAdd) => ({
     type: DELETE_SHOP_CART,
