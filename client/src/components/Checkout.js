@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { connect } from 'react-redux';
-import {addToShoppingCart, removeFromCart} from "../Redux/Actions/Shopcart";
+import {addToShoppingCart, removeFromCart,postCart, putCart} from "../Redux/Actions/Shopcart";
 import './css/Checkout.css'
 import {Card, Button, Table} from 'react-bootstrap'
 import { makeStyles } from '@material-ui/core/styles';
 import {Paper, Grid  } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import Nav from './Nav'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,23 +19,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
- function Checkout({ products, subTotal,  addNewItemToCart, removeItemFromCart}) {
+ function Checkout({ products, subTotal,  addNewItemToCart, removeItemFromCart,postToMyOrder,   putToMyOrder}) {
   const classes = useStyles();
 
-  console.log(products);
+  // yeah no problem , i fix other problem for the moment
+
+  const handleCheckout = ()=>{
+    postToMyOrder(products, '1')
+    putToMyOrder(products, '1')
+   console.log(products, 'nowput')
+  }
    
-  const sumarCantidad = (product) =>{
-      addNewItemToCart( product) 
+  const sumarCantidad = (a) =>{
+    
+      addNewItemToCart(a) 
+  
+
   }
-  const restarCantidad = (product) =>{
-      removeItemFromCart(product)
+  const restarCantidad = (a) =>{
+      removeItemFromCart(a)
   }
-  // const createOrderOnline = (userId,idProducto,cantidad) => {
-  //   createOrderOnline(userId = 1,idProducto, cantidad=subTotal)
-  // }
+
   return (
 <div >
-
+<Nav/>
  <div className='right'>
    
     <Paper className={classes.paper}> 
@@ -60,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     <h1>TOTAL:  ${subTotal}</h1>
 </Paper>
 <div className='confirm'>
-  <Button  size="lg" variant="outline-warning" >NEXT </Button>
+  <Button  size="lg" variant="outline-warning"onClick={handleCheckout} >NEXT </Button>
   <Button size="lg"  variant="outline-warning" style={{marginLeft:'10px'}}><Link to='/products' style={{color: "#ffc107",textDecoration: 'none'}}>CANCEL</Link></Button>
   </div>
   </div>
@@ -68,11 +76,13 @@ const useStyles = makeStyles((theme) => ({
 <div>
 <h1 className='shop-cart'>Shopping Cart</h1>
   <Grid item xs={6}>
-{ products.map(({product, count})=>(   
-    <div className='Card'>
-     <Card key={product.id}>
-     {/* <Card.Header>{product.name}</Card.Header> */}
-    <Card.Body>
+{ products.map(({product, count})=>(  
+
+    <div className='Card'>  
+     <Paper className={classes.paper} key={product.id}>
+
+   
+     <Paper className={classes.paper}> 
     <Table >
     <tbody>
         <tr>
@@ -83,6 +93,7 @@ const useStyles = makeStyles((theme) => ({
     </th>
     <th>
      <h4>{product.name}</h4>
+     <p>stock:{product.stock}</p>
      <h5>{product.description}</h5>
      <h4>${product.price}</h4>
      </th>
@@ -90,17 +101,16 @@ const useStyles = makeStyles((theme) => ({
      <div className="contador">
     <span>{count}</span>
     <Button  size="sm" style={{height: '10%'}}  variant="warning"  disabled={count <= 0} onClick={(e) => restarCantidad(product)}>-</Button>
-    <Button size="sm" style={{height: '10%'}}  variant="warning" onClick={(e) => sumarCantidad(product)}>+</Button>
+<Button size="sm" style={{height: '10%'}}  variant="warning" onClick={(e) => sumarCantidad(product)} disabled={count===product.stock}>+</Button> 
     </div>
     </th>
     </tr>
     </tbody>
     </Table>
-    </Card.Body>
-    </Card>
+    </Paper>
+    </Paper>
     </div>)
 )}
-
 
   </Grid>
   </div>
@@ -122,17 +132,18 @@ const mapStateToProps = (state) => {
 
             return {
                 product,
-                count,
+                count, 
             };
         });
-
+console.log(products)
     return { products, subTotal };
 };
 const mapDispatchToProps = (dispatch) => ({
     
     addNewItemToCart: (itemToAdd) => dispatch(addToShoppingCart( itemToAdd)),
     removeItemFromCart: ( item) => dispatch(removeFromCart(item)),
-    // createOrderOnline: (userId,idProducto,cantidad) =>dispatchEvent(createOrder(userId,idProducto,cantidad))
+    postToMyOrder:(items,id)=> dispatch(postCart(items,id)),
+    putToMyOrder:(items, id)=> dispatch(putCart(items,id))
   });
   
 

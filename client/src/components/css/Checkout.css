@@ -13,14 +13,14 @@
     border: 1px solid black;
     inline-size: max-content;
 
-  
+
 }
 .card-body-img{
     width: 50%;
 }
 
 .right{
-  
+
     width: 45%;
 
     float: right;
