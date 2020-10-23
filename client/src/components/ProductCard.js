@@ -1,26 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css' 
 import { Card, CardMedia, CardContent } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import {addToShoppingCart, removeFromCart} from "../Redux/Actions/Shopcart";
 import styles from "./css/ProductCard.module.css";
 
-function ProductCard({
-  id,
-  name,
-  description,
-  price,
-  classes,
-  image,
-  stock,
-  deshabilitado,
-  addNewItemToCart,
-  
-}) {
+function ProductCard({id,name,description,price, classes,image,stock,addNewItemToCart}) { 
+
+   const [sub_stock, setStock] = useState(stock)
+   const [message, setmessage] = useState('not more stock')
+
+   toast.configure()
+   const notify=()=>{
+    toast.warn('Product Add in the Cart Successfully!!', {position:toast.POSITION.BOTTOM_RIGHT, autoClose:2000})
+}
   const handleCartAddClick = () => {
+    if(sub_stock !== 0) {
+      setStock(sub_stock - 1)
+    }
+    console.log(sub_stock)
+
     addNewItemToCart({
       id,
       name,
@@ -28,31 +31,12 @@ function ProductCard({
       price,
       image,
       stock,
-    });
-  };
-  if (stock < 1) {
-    return (
-      <Card className={classes.item}>
-        <CardMedia className={classes.media} image={image} />
-        <CardContent>
-          <div className={classes.info} className={styles.productCard}>
-            <h6>{name}</h6>
-            <p>{description}</p>
-            <p className={styles.price}>${price}</p>
-            <p>Sin stock</p>
 
-            <div>
-              <Link to={"/products/" + id}>
-                <button>
-                  <i class="fas fa-bars"></i>
-                </button>
-              </Link>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    );
-  }
+    });
+
+    notify()
+  };
+  
   return (
     <Card className={classes.item}>
       <CardMedia className={classes.media} image={image} />
@@ -61,15 +45,14 @@ function ProductCard({
           <h6>{name}</h6>
           <p>{description}</p>
           <p className={styles.price}>${price}</p>
-          <p>Stock: {stock}</p>
-
-          <div>
+          <p  className="text-danger">stock: {sub_stock===0? message: sub_stock} </p>
+           <div>
             <Link to={"/products/" + id}>
               <button>
-                <i class="fas fa-bars"></i>
+                <i className="fas fa-bars"></i>
               </button>
             </Link>
-            <button onClick={handleCartAddClick}>
+            <button onClick={handleCartAddClick} disabled={sub_stock===0 }>
               <AddShoppingCartIcon/>
             </button>
           </div>
@@ -78,7 +61,6 @@ function ProductCard({
     </Card>
   );
 }
-
 
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,6 +1,7 @@
 import React from 'react';
 import Register from '../Containers/register';
-import Nav from './Nav'
+import Nav from './Nav';
+
 
 
 class PageRegister extends React.Component {
@@ -8,6 +9,7 @@ class PageRegister extends React.Component {
         return (
 
             <div  > 
+                <Nav/>
                     
                 <div className="col-md-6 ">
                     

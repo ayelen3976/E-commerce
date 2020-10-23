@@ -1,6 +1,5 @@
 import React from 'react';
-import bootstrap, {Form, Modal,Button, Col} from 'react-bootstrap';
-import InputGroup from 'react-bootstrap/InputGroup'
+import  {Form, Modal,Button, Col} from 'react-bootstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
  
@@ -180,7 +179,7 @@ openModalError(){
     <Form.File id="exampleFormControlFile1" value={this.state.profilePic} label="Foto de perfil" />
   </Form.Group>
 
-          <Button variant="outline-warning" style={{marginRight:'10px'}}><Link to='/products' style={{color:'#ffc107',textDecoration:'none'}}>Volver a Orders</Link></Button>
+          <Button variant="outline-warning" style={{marginRight:'10px'}}><Link to='/products' style={{color:'#ffc107',textDecoration:'none'}}>Volver</Link></Button>
 
           <Button variant="outline-warning" onClick={(e)=>this.onSubmitear(e)}  >
             Registrarse

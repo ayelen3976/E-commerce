@@ -1,13 +1,42 @@
-import React from 'react';
-import { Form, FormControl, Button} from 'react-bootstrap';
+import React, {useState} from 'react';
+import './css/Nav.css';
+import SearchIcon from '@material-ui/icons/Search';
+import { connect } from 'react-redux';
+import { Form, Button} from 'react-bootstrap';
+import buscarProducto from '../Redux/Actions/buscarProducto'
 
-function SearchBar () {
+
+
+function SearchBar (props) {
+    const [searchBar, setSearchBar]= useState('');
+    const { buscarProducto} = props
+
+
+    function alHacerClick (texto){
+        buscarProducto(texto)
+    }
+
+
     return (
         <Form inline>
-                    <FormControl type="text" placeholder="¿Que estas buscando?" className="mr-sm-2" />
-                    <Button variant="outline-success"><i class="fas fa-search"></i></Button>
-        </Form>
-    )
+        <input placeholder ='Search...' className='InputSearch' onChange={e => setSearchBar(e.target.value)}/> 
+         <Button variant="warning"  onClick={()=>{alHacerClick(searchBar)}}>
+             <SearchIcon /> 
+             </Button> 
+         </Form>
+        )
+
 }
 
-export default SearchBar;
+
+
+
+const mapDispatchToProps={
+    buscarProducto
+    
+}
+
+
+
+
+export default connect(null, mapDispatchToProps)(SearchBar);

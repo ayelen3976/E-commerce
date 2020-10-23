@@ -4,6 +4,7 @@ import categoryReducer from './Reducers/Listcategory'
 import shopcartReducer from './Reducers/ShopCart'
 import orderReducer from './Reducers/orderReducer'
 import reviewReducer from './Reducers/reviewReducer';
+import buscarProducto from './Reducers/buscarProducto'
 
 
 const rootReducer = combineReducers({
@@ -11,6 +12,9 @@ const rootReducer = combineReducers({
     categoryP: categoryReducer,
     shopP:shopcartReducer ,
     ordersP: orderReducer,
-    reviewsP: reviewReducer
+    reviewsP: reviewReducer,
+    busquedaP:buscarProducto
+
+    
   });
  export default rootReducer;

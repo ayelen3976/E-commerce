@@ -1,119 +1,205 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './css/Nav.css';
+import {Button,  MenuItem, ClickAwayListener,Grow, Paper , Popper,  MenuList  }from '@material-ui/core';
+import {Navbar} from 'react-bootstrap'
+import PersonIcon from '@material-ui/icons/Person';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import SearchBar from './SearchBar';
 
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import PeopleAltIcon from '@material-ui/icons/PeopleAlt'
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-
-function Nav({ totalItemsInCart }) {
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
+ function Nav({ items }){
+  
+    const [open, setOpen] = React.useState(false);
+    const anchorRef = React.useRef(null);
+  
+    const handleToggle = () => {
+      setOpen((prevOpen) => !prevOpen);
     };
-
-    const handleClose = () => {
-        setAnchorEl(null);
+  
+    const handleClose = (event) => {
+      if (anchorRef.current && anchorRef.current.contains(event.target)) {
+        return;
+      }
+  
+      setOpen(false);
     };
-    //variable de estilo
-    // const { classes } = props;
+  
+    function handleListKeyDown(event) {
+      if (event.key === 'Tab') {
+        event.preventDefault();
+        setOpen(false);
+      }
+    }
 
-    return (
-
-        <nav className="navbar navbar-expand-lg navbar navbar-dark bg-warning" >
-
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="fontWhite"><i className="fas fa-bars"></i></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
-                <ul className="navbar-nav">
-                    <li className="nav-item active" handle>
-                        <Link to='/products'>Ver Productos</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to='/category'>Ver Categorias</Link>
-                    </li>
-                    {/* <li className="nav-item">
-                        <Link to='/ProductForm'>+ Productos</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to='/CategoryForm'>+ Categorias</Link>
-                    </li> */}
-                </ul>
-                <SearchBar/><div>
-                    <PeopleAltIcon onClick={handleClick} style={{ color: "white", fontSize: 30, marginLeft: "550px" }} />
-                    <Menu
-                        id="simple-menu"
-                        anchorEl={anchorEl}
-                        keepMounted
-                        open={Boolean(anchorEl)}
-                        onClose={handleClose}
-                    >
-                        <MenuItem onClick={handleClose}><Link style={{color: "black",textDecoration:"none"}}>Ingresar</Link></MenuItem>
-                        <MenuItem onClick={handleClose}><Link to='/register' style={{color: "black",textDecoration:"none"}}>Registrarse</Link></MenuItem>
-                        <MenuItem onClick={handleClose}><Link to='/ProductForm' style={{color: "black",textDecoration:"none"}}>Crud Productos</Link></MenuItem>
-                        <MenuItem onClick={handleClose}><Link to='/CategoryForm' style={{color: "black",textDecoration:"none"}}>Crud Categorias</Link></MenuItem>
-                        <MenuItem onClick={handleClose}><Link to='/admin/orders' style={{color: "black",textDecoration:"none"}}>Orders</Link></MenuItem>
-                    </Menu>
-                </div>
-                <Link to='/Checkout'>
-                    <ShoppingCartIcon style={{ color: "white", fontSize: 26, marginRight: "40px" }}><button><span>{totalItemsInCart}</span></button></ShoppingCartIcon>
-                </Link>
-            </div>
-        </nav>
+    const [opened, setOpened] = React.useState(false);
+    const anchorRefe = React.useRef(null);
+  
+    const handleTogglee = () => {
+      setOpened((prevOpened) => !prevOpened);
+    };
+  
+    const handleClosee = (event) => {
+      if (anchorRefe.current && anchorRefe.current.contains(event.target)) {
+        return;
+      }
+  
+      setOpened(false);
+    };
+  
+    function handleListKeyDownn(event) {
+      if (event.key === 'Tab') {
+        event.preventDefault();
+        setOpened(false);
+      }
+    }
+  
+    // return focus to the button when we transitioned from !open -> open
+    const prevOpened = React.useRef(opened);
+    React.useEffect(() => {
+      if (prevOpened.current === true && opened === false) {
+        anchorRefe.current.focus();
+      }
+  
+      prevOpened.current = opened;
+    }, [opened]);
+  
+ 
 
 
-    )
-}
+  var total = 0
+  Object.keys(items).map(i => total = items[i] + total) 
+
+   return (
+     <div > 
+         <div>
+    <Navbar   className='Nav' >
+    <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+    <SearchBar/>
+     <div className='Icons'>
+     <Button
+          ref={anchorRef}
+          aria-controls={open ? 'menu-list-grow' : undefined}
+          aria-haspopup="true"
+          onClick={handleToggle}
+        >
+        <PersonIcon/>
+        </Button>
+   
+        <Button
+          ref={anchorRefe}
+          aria-controls={opened ? 'menu-list-grow' : undefined}
+          aria-haspopup="true"
+          onClick={handleTogglee}
+        >
+      <SupervisorAccountIcon/> 
+        </Button>
 
 
-const mapStateToProps = (state) => ({
-    totalItemsInCart: Object.keys(state.shopP.cart).lenght
-})
+    <Link to="/Checkout" style={{ color: "black", textDecoration: "none" }}>
+   <ShoppingCartIcon/>
+   {total}
+   </Link>
+   </div>
+  </Navbar>
+  
+  </div>
+
+ 
+<br></br>
+  <div>
+       
+     
+  <div>
+       
+        <Popper open={opened} anchorEl={anchorRefe.current} role={undefined} transition disablePortal>
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+            >
+              <Paper>
+                <ClickAwayListener onClickAway={handleClosee}>
+                  <MenuList autoFocusItem={opened} id="menu-list-grow" onKeyDown={handleListKeyDownn}>
+                    <MenuItem onClick={handleClosee}>
+                    <Link
+                to="/ProductForm"
+                style={{ color: "black", textDecoration: "none" }}
+              >Product Add</Link>
+              </MenuItem>
+
+                    <MenuItem onClick={handleClosee}>
+                    <Link
+                to="/CategoryForm"
+                style={{ color: "black", textDecoration: "none" }}
+              >Category Add</Link>
+              </MenuItem>
+                    <MenuItem onClick={handleClosee}> <Link
+                to="/admin/orders"
+                style={{ color: "black", textDecoration: "none" }}
+              >Orders </Link>
+              </MenuItem>
+            <MenuItem onClick={handleClosee}>Logout</MenuItem>
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
+      </div>
 
 
+      
+
+
+
+
+
+
+
+
+    </div>
+
+        <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+            >
+              <Paper>
+                <ClickAwayListener onClickAway={handleClose}>
+                  <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+
+                    <MenuItem onClick={handleClose}>  <Link to="/register" style={{ color: "black", textDecoration: "none" }}>Profile </Link></MenuItem>
+                    <MenuItem onClick={handleClose}>
+                        My account</MenuItem>
+                    <MenuItem onClick={handleClose}>Logout</MenuItem>
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
+   <div  className='divoptions'>
+       <ul>
+        <li>Inicio</li>
+       <li> <Link to="/products" style={{ color: "black", textDecoration: "none" }}> Productos </Link> </li>
+      <li> <Link to="/category" style={{ color: "black", textDecoration: "none" }}>Categorias </Link> </li>
+        <li>Productos Sin Gluten</li>
+        <li>Como Comprar</li>
+        <li>Quines Somos</li>
+        <li>Sucursales</li>
+        </ul>
+     </div>
+  </div>
+  
+
+   )
+   
+ }
+ const mapStateToProps = (state) => ({
+    items: state.shopP.cart
+  });
 export default connect(mapStateToProps)(Nav);
-
-// ////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-// import React from 'react';
-// import { AppBar, Typography, Toolbar } from '@material-ui/core';
-// import { withStyles } from '@material-ui/core/styles';
-// import Grid from '@material-ui/core/Grid';
-// function Nav(props) {
-
-//     //variable de estilo
-//     const { classes } = props;
-    
-//     return (
-//         <AppBar className={classes.NavColor} position='fiexed'>
-//                 <Toolbar variant='dense'>
-//                     <Typography variant='h6' component='p'>Green Shop</Typography>
-//                 </Toolbar>
-//                 <div>
-//                 <Typography variant='h6' component='p'>Categorias</Typography>
-//                 <Typography variant='h6' component='p'>Productos</Typography>
-//                 </div>
-//                 <ShoppingCartIcon/>
-//         </AppBar>
-//     )
-// }
-
-// export default withStyles({
-//     NavColor: {
-//         backgroundColor: '#f7ad36',
-//         height: '90px'
-//     },
-//     NavDiv : {
-
-//     }
-// })(Nav);
-

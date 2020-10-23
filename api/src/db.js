@@ -41,18 +41,15 @@ Product.belongsToMany(Order, { through: Orderline }) //Puede estar en varias ord
 // N to N
 Product.belongsToMany(Category, { through: 'productcategories' });//Pertenece a muchas categorias
 Category.belongsToMany(Product, { through: 'productcategories' }); //Tiene muchos productos
-
-// //N to N
-// User.belongsToMany(Role , {through : 'user_role'});//Un usuario puede tener muchos roles
-// Role.belongsToMany(User , {through : 'user_role'});//Un rol puede tener muchos usuarios
 //1 to N
 User.hasMany(Review);//Un usuario puede tener muchas reviews
 Review.belongsTo(User);//Una review pertenece a un usuario en particular
-
 //1 to N
 Product.hasMany(Review); // Un producto puede tener muchas reviews
 Review.belongsTo(Product); //Una review pertecene a un producto en particular
 
+Category.belongsToMany(Product, { through: 'productcategories' }); 
+ 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');

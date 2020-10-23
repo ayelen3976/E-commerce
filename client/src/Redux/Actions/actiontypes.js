@@ -2,9 +2,14 @@ export const GET_PRODUCTS = 'GET_PRODUCT'
 export const GET_CATEGORY = 'GET_CATEGORY'
 export const SHOP_CART = 'SHOP_CART'
 export const DELETE_SHOP_CART = 'DELETE_SHOP_CART'
+export const POST_ORDER='POST_ORDER'
+export const PUT_ORDER='PUT_ORDER'
 export const GET_ORDERS = 'GET_ORDERS';
 export const GET_ORDERS_LINE = 'GET_ORDERS_LINE';
 export const EDIT_ORDER_STATE = 'EDIT_ORDER_STATE';
 export const FIND_ORDER_BY_PK = 'FIND_ORDER_BY_PK';
 export const FIND_REVIEWS = 'FIND_REVIEWS';
 export const GET_PRODUCTS_BY_ID = 'GET_PRODUCTS_BY_ID';
+export const BUSCAR_PRODUCTO= 'BUSCAR_PRODUCTO';
+
+
