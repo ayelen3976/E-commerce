@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { BsFillTrashFill } from "react-icons/bs";
+import Nav from '../Components/Nav';
 
 function FormProducts() {
   
@@ -234,7 +235,9 @@ function FormProducts() {
 
 //  ----------------Render-------------------------
   return (
+    <div>  <Nav/>
     <div className="container">
+     
       {console.log(categoryID)}
         {/* ---------------------Modal from AGREGAR---------------------- */}
       <Modal
@@ -407,9 +410,10 @@ function FormProducts() {
 
   
       {/* ------------------Button ADD-------------------------  */}
+      <h1> Formulario de productos</h1>
       
       <Button  variant="warning" onClick={() => setLgShow(true)}>Añadir producto</Button>
-      <Link to = '/products'><Button variant="secondary">Volver</Button></Link>
+      
 
       {/* ----------------Table--------------------------    */}
       <Table responsive="sm">
@@ -461,6 +465,6 @@ function FormProducts() {
       </Table>
 
     </div>
-  );
+ </div> );
 }
 export default FormProducts;

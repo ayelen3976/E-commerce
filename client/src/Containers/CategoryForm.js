@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import {Table, Modal, Button, Form} from "react-bootstrap";
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import Nav from '../Components/Nav';
 
 function CategoryForm() {
   const [lgShow, setLgShow] = useState(false);
@@ -129,6 +130,7 @@ function CategoryForm() {
 
 //  ----------------Render-------------------------
   return (
+    <div> <Nav/>
     <div className="container">
         {/* ---------------------Modal from AGREGAR---------------------- */}
       <Modal
@@ -207,9 +209,9 @@ function CategoryForm() {
 
   
       {/* ------------------Button ADD-------------------------  */}
-      <h1>Agregue su categoria</h1>
+      <h1>Formulario de categoria</h1>
       <Button variant="warning"onClick={() => setLgShow(true)}>Añadir</Button>
-      <Link to = '/products'><Button variant="secondary" >Volver</Button></Link>
+      
 
       {/* ----------------Table--------------------------    */}
       <Table responsive="sm">
@@ -251,6 +253,7 @@ function CategoryForm() {
         </tbody>
       </Table>
 
+    </div>
     </div>
   );
 }
