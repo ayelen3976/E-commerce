@@ -9,8 +9,7 @@ import buscarProducto from '../Redux/Actions/buscarProducto'
 
 function SearchBar (props) {
     const [searchBar, setSearchBar]= useState('');
-    const [prod,setProd] = useState()
-    const {prods, buscarProducto,products} = props
+    const { buscarProducto} = props
 
 
     function alHacerClick (texto){

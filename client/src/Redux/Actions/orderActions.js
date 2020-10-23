@@ -29,6 +29,7 @@ export function editOrderState(estado, orderId) {
         axios.put(url, { estado })
             .then(res => {
                 dispatch({ type: EDIT_ORDER_STATE, payload: { estado, orderId } })
+                console.log(estado,orderId)
             })
     }
 }

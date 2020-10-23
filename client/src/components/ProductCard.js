@@ -45,11 +45,11 @@ function ProductCard({id,name,description,price, classes,image,stock,addNewItemT
           <h6>{name}</h6>
           <p>{description}</p>
           <p className={styles.price}>${price}</p>
-          <p  class="text-danger">stock: {sub_stock===0? message: sub_stock} </p>
+          <p  className="text-danger">stock: {sub_stock===0? message: sub_stock} </p>
            <div>
             <Link to={"/products/" + id}>
               <button>
-                <i class="fas fa-bars"></i>
+                <i className="fas fa-bars"></i>
               </button>
             </Link>
             <button onClick={handleCartAddClick} disabled={sub_stock===0 }>

@@ -27,7 +27,7 @@ class ProductListContainer extends Component {
         const {productsData,producto} = this.props;
         console.log(producto)
 
-        if(producto.productes.length == 0 ){
+        if(producto.productes.length === 0 ){
             return(
                 <div>
                     <Nav />

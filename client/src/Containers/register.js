@@ -1,6 +1,5 @@
 import React from 'react';
-import bootstrap, {Form, Modal,Button, Col} from 'react-bootstrap';
-import InputGroup from 'react-bootstrap/InputGroup'
+import  {Form, Modal,Button, Col} from 'react-bootstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
  

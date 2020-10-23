@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
   </div>
 
 <div>
-<h1 className='shop-cart'>Shopping Cart</h1>
+
   <Grid item xs={6}>
 { products.map(({product, count})=>(  
 
