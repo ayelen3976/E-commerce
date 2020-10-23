@@ -21,7 +21,7 @@ class OrderContainer extends Component {
     render() {
         const { orderData } = this.props;
         // console.log(orderReducer)
-        console.log(this.props)
+        // console.log(this.props)
     
         return (
             <div>

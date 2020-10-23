@@ -13,13 +13,6 @@ const useStyles = makeStyles((theme) => ({
         display: 'inline',
     },
 }));
-// createdAt: "2020-10-22T16:50:54.661Z"
-// description: "muy bueno"
-// id: 1
-// productId: 1
-// stars: 3
-// updatedAt: "2020-10-22T16:50:54.661Z"
-// userId: 1
 
 export default function Review({review}) {
     console.log(review)

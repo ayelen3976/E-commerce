@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 
 //Componentes
 import Nav from '../Components/Nav'
+import ReviewList from '../Components/Review/ReviewList';
 
 //Externos
 import axios from 'axios';
 import Producto from '../Components/Producto';
-
 
 //ProductInfoContainer -> Toma la info del producto en particular y crea un detalle del mismo(Producto component)
 class ProductInfoContainer extends Component {
@@ -20,22 +20,18 @@ class ProductInfoContainer extends Component {
             name: "",
             description: "",
             image: "",
-            price: ""
+            price: "",
+            reviews : [],
         }
     }
 
-    componentDidMount() {
+    async obtenerProducto(){
         const { match } = this.props;
         const id = match.params.id;
-        //console.log(id)
-        //onsole.log(process.env.REACT_APP_URL_DATA_BASE)
         const url = `/products/${id}`
         axios.get(url)
             .then(res => {
-
                 const productsData = res.data;
-                //console.log(productsData)
-
                 this.setState({
                     id: productsData.id,
                     name: productsData.name,
@@ -44,16 +40,30 @@ class ProductInfoContainer extends Component {
                     image: productsData.img,
                     stock: productsData.stock
                 })
-
-                //console.log(this.state)
-
             }).catch(console.log)
+    }
+
+    obtenerReviews(){
+        const { match } = this.props;
+        const id = match.params.id;
+        const url = `/products/${id}/review`
+        axios.get(url)
+            .then(res => {
+                const reviews = res.data;
+                this.setState({
+                    reviews
+                })
+            }).catch(console.log)
+    }
+
+    componentDidMount() {
+        this.obtenerProducto()
+        this.obtenerReviews()
     }
 
     render() {
 
         const product = this.state;
-
         return (
             <div>
                 <Nav />
@@ -66,6 +76,7 @@ class ProductInfoContainer extends Component {
                     image={product.image}
                     stock={product.stock}
                 />
+                <ReviewList reviewData={product.reviews}/>
             </div>
         )
     }

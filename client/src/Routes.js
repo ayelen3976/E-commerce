@@ -15,8 +15,7 @@ import PageRegister from './Components/PageRegister';
 import Checkout from  './Components/Checkout';
 import OrderContainer from './Components/Orders/OrderContainer';
 import OrderInfo from './Components/Orders/OrderInfo';
-import ReviewContainer from './Components/Review/ReviewContainer';
-import Review from './Components/Review/Review';
+
 
 
 
@@ -40,8 +39,6 @@ const Routes = () => {
             <Route exact path='/Checkout' component = {Checkout}/>
             <Route exact path='/admin/orders' component={OrderContainer}/>
             <Route exact path='/admin/orders/:orderId' component={OrderInfo}/>
-            {/* Probando las reviews */}
-            <Route exact path='/probando' component= {ReviewContainer} />
         </Switch>
         </BrowserRouter>
     )
