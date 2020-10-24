@@ -432,7 +432,7 @@ function FormProducts() {
         <tbody>
           {products.length === 0 ? (
             <tr>
-              <td colSpan="5" style={{ textAlign: "center" }}>
+              <td colSpan="8" style={{ textAlign: "center" }}>
                 sin productos
               </td>
             </tr>
