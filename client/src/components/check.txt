@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
   const classes = useStyles();
 
 
-  
 
 
   const handleCheckout = ()=>{
@@ -45,38 +44,41 @@ const useStyles = makeStyles((theme) => ({
        updateStock(a, "increase")
   }
 
-  var total = 0
- products.map(i => total = products[i] + total) 
-
   return (
 <div >
 <Nav/>
-<div className="right">
-<div> <h1 className='name-right'>Your Cart</h1> </div>
+ <div className='right'>
+   
+    <Paper className={classes.paper}> 
+    <thbody >
+    <h1 className='summary'>SUMMARY</h1> 
+    <tr>
+    <td><h4>SUBTOTAL:</h4> </td>
+  
+     <td><h4>${subTotal}</h4></td>
+    </tr> 
+
+         <tr >
+         <td><h4>SHIPPING</h4></td>
+
+         <td><h4>FREE</h4></td>
+        </tr> 
+    <tr>
+  
+     </tr> 
+  
+    </thbody > 
+    <h1 className='shipping'></h1>
+    <h1>TOTAL:  ${subTotal}</h1>
+</Paper>
+<div className='confirm'>
+  <Button  size="lg" variant="outline-warning"onClick={handleCheckout} >NEXT </Button>
+  <Button size="lg"  variant="outline-warning" style={{marginLeft:'10px'}}><Link to='/products' style={{color: "#ffc107",textDecoration: 'none'}}>CANCEL</Link></Button>
+  </div>
+  </div>
+
 <div>
-
-{products.map(({product, count})=>(  
-<div className='items'>
-<h4 className='productName'>{product.name}<h4 className='productCount'>(items: {count})</h4> </h4>
-
-</div>
-)
-)}
-</div>
-
-<div className='itemsprice'>  
-  <h4 className='Subtotal'>Subtotal: </h4> 
-  <h4 className='subPrice'>${subTotal}</h4>
-</div>
-<div className='buttonNext'>
-<Button  size="lg"  variant="warning" onClick={handleCheckout} block >NEXT </Button>
-</div>
-<div className='Cancel'>
-<Button size="lg"  variant="warning" style={{marginLeft:'10px'}} block><Link to='/products' style={{color: "black",textDecoration: 'none'}}>CANCEL</Link></Button>
-</div>
-</div>
-
-<div>
+<h1 className='shop-cart'>Shopping Cart</h1>
   <Grid item xs={6}>
 { products.map(({product, count})=>(  
 
@@ -129,27 +131,21 @@ const useStyles = makeStyles((theme) => ({
   );
 }
 const mapStateToProps = (state) => {
-  
     let subTotal = 0;
-
-     
-    const products = Object.keys(state.shopP.cart).map((key) => {
+    const products = Object.keys(state.shopP.cart)
+        .map((key) => {
             const product = state.productsP.products.find((product) => parseInt(product.id) === parseInt(key));
             const count = state.shopP.cart[key];
-            subTotal += product.price * count; 
-             return {
+            subTotal += product.price * count;
+
+            return {
                 product,
-                count,
-
+                count, 
             };
-           
         });
-        
-      console.log(products, subTotal)
-    return { products, subTotal};
-    
+console.log(products)
+    return { products, subTotal };
 };
-
 const mapDispatchToProps = (dispatch) => ({
     
     addNewItemToCart: (itemToAdd) => dispatch(addToShoppingCart( itemToAdd)),
