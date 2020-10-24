@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_PRODUCTS ,GET_PRODUCTS_BY_ID } from './actiontypes';
+import { GET_PRODUCTS ,GET_PRODUCTS_BY_ID, STOCK } from './actiontypes';
 
 export default function GetProducts() {
    //  const URL= "http://localhost:4000"
@@ -29,6 +29,13 @@ export  function GetProductsById(productId) {
    }
 }
 
+export function updateStock(item, flag){
+   return {
+      type:STOCK,
+      payload: item, flag
+   }
+    
+}
 
 
  

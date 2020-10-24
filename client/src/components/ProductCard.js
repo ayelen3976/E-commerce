@@ -8,8 +8,10 @@ import { withStyles } from "@material-ui/core/styles";
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import {addToShoppingCart, removeFromCart} from "../Redux/Actions/Shopcart";
 import styles from "./css/ProductCard.module.css";
+import { updateStock} from '../Redux/Actions/Listproducts';
 
-function ProductCard({id,name,description,price, classes,image,stock,addNewItemToCart}) { 
+
+function ProductCard({id,name,description,price, classes,image,stock,addNewItemToCart, updateStock}) { 
 
    const [sub_stock, setStock] = useState(stock)
    const [message, setmessage] = useState('not more stock')
@@ -23,15 +25,23 @@ function ProductCard({id,name,description,price, classes,image,stock,addNewItemT
       setStock(sub_stock - 1)
     }
     console.log(sub_stock)
-
-    addNewItemToCart({
+    updateStock({
+      sub_stock, 
       id,
       name,
       description,
       price,
       image,
-      stock,
-
+      
+       },'reduce');
+    addNewItemToCart({
+    
+      id,
+      name,
+      description,
+      price,
+      image,
+      
     });
 
     notify()
@@ -65,7 +75,9 @@ function ProductCard({id,name,description,price, classes,image,stock,addNewItemT
 
 const mapDispatchToProps = (dispatch) => ({
   addNewItemToCart: (itemToAdd) => dispatch(addToShoppingCart(itemToAdd)),
-  removeFromCart: (item) => dispatch(removeFromCart(item))
+  removeFromCart: (item) => dispatch(removeFromCart(item)),
+  updateStock:(item, flag)=> dispatch(updateStock(item, flag))
+
 });
 
 

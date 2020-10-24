@@ -7,6 +7,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import {Paper, Grid  } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Nav from './Nav'
+import { updateStock} from '../Redux/Actions/Listproducts';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,10 +21,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
- function Checkout({ products, subTotal,  addNewItemToCart, removeItemFromCart,postToMyOrder,   putToMyOrder}) {
+ function Checkout({ products, subTotal,  addNewItemToCart, removeItemFromCart,postToMyOrder,   putToMyOrder, updateStock}) {
   const classes = useStyles();
 
-  // yeah no problem , i fix other problem for the moment
+
+
 
   const handleCheckout = ()=>{
     postToMyOrder(products, '1')
@@ -33,11 +36,12 @@ const useStyles = makeStyles((theme) => ({
   const sumarCantidad = (a) =>{
     
       addNewItemToCart(a) 
-  
+       updateStock(a,  "reduce")
 
   }
   const restarCantidad = (a) =>{
       removeItemFromCart(a)
+       updateStock(a, "increase")
   }
 
   return (
@@ -74,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
   </div>
 
 <div>
-
+<h1 className='shop-cart'>Shopping Cart</h1>
   <Grid item xs={6}>
 { products.map(({product, count})=>(  
 
@@ -101,7 +105,11 @@ const useStyles = makeStyles((theme) => ({
      <div className="contador">
     <span>{count}</span>
     <Button  size="sm" style={{height: '10%'}}  variant="warning"  disabled={count <= 0} onClick={(e) => restarCantidad(product)}>-</Button>
-<Button size="sm" style={{height: '10%'}}  variant="warning" onClick={(e) => sumarCantidad(product)} disabled={count===product.stock}>+</Button> 
+<Button size="sm" style={{height: '10%'}}  variant="warning" onClick={(e) => sumarCantidad(product)} disabled={product.stock <= 0}>+</Button> 
+{
+ console.log(product.stock, count)
+ 
+}
     </div>
     </th>
     </tr>
@@ -143,7 +151,9 @@ const mapDispatchToProps = (dispatch) => ({
     addNewItemToCart: (itemToAdd) => dispatch(addToShoppingCart( itemToAdd)),
     removeItemFromCart: ( item) => dispatch(removeFromCart(item)),
     postToMyOrder:(items,id)=> dispatch(postCart(items,id)),
-    putToMyOrder:(items, id)=> dispatch(putCart(items,id))
+    putToMyOrder:(items, id)=> dispatch(putCart(items,id)),
+    updateStock:(item, flag)=> dispatch(updateStock(item, flag))
+
   });
   
 
