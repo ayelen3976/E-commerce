@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 
 import {Table, Modal, Button, Form} from "react-bootstrap";
 import axios from 'axios';
-import { Link } from "react-router-dom";
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { BsFillTrashFill } from "react-icons/bs";

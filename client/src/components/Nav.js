@@ -9,8 +9,9 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import SearchBar from './SearchBar';
+import {logout} from '../Redux/Actions/auth'
 
- function Nav({ items }){
+ function Nav({ items ,logout }){
   
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
@@ -48,6 +49,10 @@ import SearchBar from './SearchBar';
   
       setOpened(false);
     };
+    const handleLogOut = (event) =>{
+      event.preventDefault()
+      logout()
+    }
   
     function handleListKeyDownn(event) {
       if (event.key === 'Tab') {
@@ -141,7 +146,7 @@ import SearchBar from './SearchBar';
                 style={{ color: "black", textDecoration: "none" }}
               >Orders </Link>
               </MenuItem>
-            <MenuItem onClick={handleClosee}>Logout</MenuItem>
+            <MenuItem onClick={logout}>Logout</MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
@@ -175,7 +180,7 @@ import SearchBar from './SearchBar';
                     <MenuItem onClick={handleClose}>  <Link to="/register" style={{ color: "black", textDecoration: "none" }}>Profile </Link></MenuItem>
                     <MenuItem onClick={handleClose}>
                         My account</MenuItem>
-                    <MenuItem onClick={handleClose}>Logout</MenuItem>
+                    <MenuItem onClick={handleLogOut}>Logout</MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
@@ -202,4 +207,8 @@ import SearchBar from './SearchBar';
  const mapStateToProps = (state) => ({
     items: state.shopP.cart
   });
-export default connect(mapStateToProps)(Nav);
+
+  const mapDispatchToProps = {
+    logout
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Nav);

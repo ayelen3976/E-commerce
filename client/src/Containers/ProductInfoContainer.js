@@ -43,11 +43,11 @@ class ProductInfoContainer extends Component {
             }).catch(console.log)
     }
 
-    obtenerReviews(){
-        const { match } = this.props;
+    async obtenerReviews(){
+        const { match } = this.props; // params de la pagina
         const id = match.params.id;
         const url = `/products/${id}/review`
-        axios.get(url)
+        await axios.get(url)
             .then(res => {
                 const reviews = res.data;
                 this.setState({
@@ -76,7 +76,9 @@ class ProductInfoContainer extends Component {
                     image={product.image}
                     stock={product.stock}
                 />
+                {/* Componente Promedio */}
                 <ReviewList reviewData={product.reviews}/>
+                {/* Componente Input Review */}
             </div>
         )
     }

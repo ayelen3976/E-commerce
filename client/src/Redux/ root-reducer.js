@@ -5,7 +5,7 @@ import shopcartReducer from './Reducers/ShopCart'
 import orderReducer from './Reducers/orderReducer'
 import reviewReducer from './Reducers/reviewReducer';
 import buscarProducto from './Reducers/buscarProducto'
-
+import auth from './Reducers/auth';
 
 const rootReducer = combineReducers({
     productsP: productReducer,
@@ -13,7 +13,8 @@ const rootReducer = combineReducers({
     shopP:shopcartReducer ,
     ordersP: orderReducer,
     reviewsP: reviewReducer,
-    busquedaP:buscarProducto
+    busquedaP:buscarProducto,
+    auth: auth
 
     
   });
