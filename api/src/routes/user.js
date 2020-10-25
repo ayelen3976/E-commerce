@@ -10,7 +10,7 @@ const auth = require('../middlewares/auth')
 
 ////////////////////// READ ///////////////////
 //Buscamos todos los usuarios
-server.get('/', auth , async (req, res, next) => {
+server.get('/' , async (req, res, next) => {
     await User.findAll()
         .then(users => {
             res.json(users);
@@ -100,7 +100,7 @@ server.post('/', async (req, res, next) => {
     // console.log(req.body);
 
     //Encriptado del password con bcypt 
-    let password = bcrypt.hashSync(req.body.password, +authConfig.rounds);
+    let password = bcrypt.hashSync(req.body.password, 5);//
 
     return await User.create({ userName, firstName, lastName, profilePic, description, email, edad, password })
         .then(user => {

@@ -5,6 +5,8 @@ import shopcartReducer from './Reducers/ShopCart'
 import orderReducer from './Reducers/orderReducer'
 import reviewReducer from './Reducers/reviewReducer';
 import buscarProducto from './Reducers/buscarProducto'
+import promedioEstrellas from './Reducers/promedioEstrellas'
+
 
 
 const rootReducer = combineReducers({
@@ -13,7 +15,8 @@ const rootReducer = combineReducers({
     shopP:shopcartReducer ,
     ordersP: orderReducer,
     reviewsP: reviewReducer,
-    busquedaP:buscarProducto
+    busquedaP:buscarProducto,
+    estrellasP:promedioEstrellas
 
     
   });

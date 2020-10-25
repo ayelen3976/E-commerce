@@ -15,6 +15,7 @@ import PageRegister from './Components/PageRegister';
 import Checkout from  './Components/Checkout';
 import OrderContainer from './Components/Orders/OrderContainer';
 import OrderInfo from './Components/Orders/OrderInfo';
+import Error from './Error';
 
 
 
@@ -39,6 +40,7 @@ const Routes = () => {
             <Route exact path='/Checkout' component = {Checkout}/>
             <Route exact path='/admin/orders' component={OrderContainer}/>
             <Route exact path='/admin/orders/:orderId' component={OrderInfo}/>
+            <Route component={Error}/>
         </Switch>
         </BrowserRouter>
     )

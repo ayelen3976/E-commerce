@@ -168,7 +168,7 @@ function CategoryForm() {
               value={product.description}
             />
             <br/>
-            <Button variant="warning" onClick={addProduct}>
+            <Button variant="warning" onClick={addProduct} >
               Añadir
             </Button>
           </Form>

@@ -108,7 +108,7 @@ import SearchBar from './SearchBar';
   </div>
 
  
-<br></br>
+
   <div>
        
      
@@ -148,20 +148,6 @@ import SearchBar from './SearchBar';
             </Grow>
           )}
         </Popper>
-      </div>
-
-
-      
-
-
-
-
-
-
-
-
-    </div>
-
         <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
           {({ TransitionProps, placement }) => (
             <Grow
@@ -182,7 +168,12 @@ import SearchBar from './SearchBar';
             </Grow>
           )}
         </Popper>
-   <div  className='divoptions'>
+      </div>
+
+
+    </div>
+
+   <div  className='divoptions' >
        <ul>
         <li>Inicio</li>
        <li> <Link to="/products" style={{ color: "black", textDecoration: "none" }}> Productos </Link> </li>

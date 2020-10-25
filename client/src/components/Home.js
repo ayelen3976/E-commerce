@@ -1,19 +1,30 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import styles from './css/Producto.module.css';
+import ReactPlayer from 'react-player';
+import Button from 'react-bootstrap/Button'
+
+
 
 //Un componente que no es funcional no puede tener ciclos de vida
 const Home = () => {
 
     return (
-        <div className={styles.app}>
-            <header className={styles.appHeader}>
-                <img src="/images/logo_size.jpg" alt="" />
-                <h1>Green Shop</h1>
-                <button><Link to = '/products'>Entrar</Link></button>
-                <button><Link to = '/register'>Register</Link></button>
-                <button><Link to = '/login'>Login</Link></button>
-            </header>
+        <div >
+            
+            <ReactPlayer
+            url={require('./videos/video.mp4')}
+            width='100%'
+            height='100%'
+            playing
+            muted
+            loop
+            />
+         
+                
+                
+         <Button variant="light" size="lg" ><Link to = '/products'>Entrar</Link></Button>
+           
+            
         </div>
     );
 
