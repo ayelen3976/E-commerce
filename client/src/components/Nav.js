@@ -164,7 +164,7 @@ function Nav({ items, logout, usuario }) {
       </div>
 
 
-      <br></br>
+
       <div>
         <div>
           <Popper open={opened} anchorEl={anchorRefe.current} role={undefined} transition disablePortal>
