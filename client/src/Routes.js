@@ -32,7 +32,7 @@ const Routes = () => {
                 <Route exact path='/Checkout' component={Checkout} />
                 <Route exact path='/admin/orders' component={OrderContainer} />
                 <Route exact path='/admin/orders/:orderId' component={OrderInfo} />
-                <Route exact path='/probando' component={Login} />
+                <Route exact path='/login' component={Login} />
             </Switch>
         </BrowserRouter>
     )
