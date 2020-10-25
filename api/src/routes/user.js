@@ -96,13 +96,13 @@ server.get('/:id', async (req, res, next) => {
 //Creamos un usuario con los parametros recibidos por el body
 server.post('/', async (req, res, next) => {
 
-    const { userName, firstName, lastName, profilePic, description, email, edad } = req.body;
+    const { userName, firstName, lastName, profilePic, description, email, edad ,rol} = req.body;
     // console.log(req.body);
 
     //Encriptado del password con bcypt 
     let password = bcrypt.hashSync(req.body.password, +authConfig.rounds);
 
-    return await User.create({ userName, firstName, lastName, profilePic, description, email, edad, password })
+    return await User.create({ userName,rol, firstName, lastName, profilePic, description, email, edad, password })
         .then(user => {
             //tenemos que hacer el signIn osea crear el token
             //jwt tiene un metodo sign que recibe por un lado un payload
