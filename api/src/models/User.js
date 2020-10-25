@@ -31,7 +31,6 @@ module.exports = (sequelize) => {
             type: DataTypes.ENUM({
                 values: ['Client','Admin']
             }),
-            allowNull: false,
             defaultValue: 'Client'
         },
         profilePic: {
@@ -40,7 +39,7 @@ module.exports = (sequelize) => {
         },
         description: {
             type: DataTypes.TEXT,
-            allowNull: false
+            allowNull: true
         },
         edad: {
             type: DataTypes.INTEGER,

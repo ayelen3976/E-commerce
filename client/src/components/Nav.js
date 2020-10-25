@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/Nav.css';
 import {Button,  MenuItem, ClickAwayListener,Grow, Paper , Popper,  MenuList  }from '@material-ui/core';
@@ -9,9 +9,12 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import SearchBar from './SearchBar';
+import {logout} from '../Redux/Actions/auth'
+import Login from './Login/index'
+ function Nav({ items ,logout }){
+  const [modalShow, setModalShow] = useState(false);
 
- function Nav({ items }){
-  
+
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
   
@@ -48,6 +51,10 @@ import SearchBar from './SearchBar';
   
       setOpened(false);
     };
+    const handleLogOut = (event) =>{
+      event.preventDefault()
+      logout()
+    }
   
     function handleListKeyDownn(event) {
       if (event.key === 'Tab') {
@@ -102,6 +109,8 @@ import SearchBar from './SearchBar';
    <ShoppingCartIcon/>
    {total}
    </Link>
+
+    
    </div>
   </Navbar>
   
@@ -110,7 +119,7 @@ import SearchBar from './SearchBar';
  
 <br></br>
   <div>
-       
+  <Login show={modalShow} onHide={() => setModalShow(false)} />   
      
   <div>
        
@@ -141,7 +150,7 @@ import SearchBar from './SearchBar';
                 style={{ color: "black", textDecoration: "none" }}
               >Orders </Link>
               </MenuItem>
-            <MenuItem onClick={handleClosee}>Logout</MenuItem>
+            <MenuItem onClick={logout}>Logout</MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
@@ -171,11 +180,10 @@ import SearchBar from './SearchBar';
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                  <MenuItem  onClick={() => setModalShow(true)}>  Sign In</MenuItem>
 
-                    <MenuItem onClick={handleClose}>  <Link to="/register" style={{ color: "black", textDecoration: "none" }}>Profile </Link></MenuItem>
-                    <MenuItem onClick={handleClose}>
-                        My account</MenuItem>
-                    <MenuItem onClick={handleClose}>Logout</MenuItem>
+                    <MenuItem onClick={handleClose}>  <Link to="/register" style={{ color: "black", textDecoration: "none" }}>Register</Link></MenuItem>
+                    <MenuItem onClick={handleLogOut}>Logout</MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
@@ -202,4 +210,8 @@ import SearchBar from './SearchBar';
  const mapStateToProps = (state) => ({
     items: state.shopP.cart
   });
-export default connect(mapStateToProps)(Nav);
+
+  const mapDispatchToProps = {
+    logout
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Nav);

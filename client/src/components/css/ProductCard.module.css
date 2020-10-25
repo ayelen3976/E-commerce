@@ -20,7 +20,7 @@
 }
 
 .productCard .price{
-    color: #82ae46;
+    color: #ffc107;
     font-size: 1.8em;
     font-weight: 700;
     margin-bottom: 0;
@@ -34,7 +34,7 @@
 }
 
 .productCard div button{
-    background-color: #b0ca1b;
+    background-color:#ffc107;
     border: solid 1px;
     padding: .5em;
     color: #ffffff;
@@ -44,5 +44,5 @@
 }
 
 .productCard div button:hover{
-    background-color: #cbe921;
+    background-color:  #FAE363;
 }

@@ -23,7 +23,7 @@ export default function ReviewList({reviewData}){
     }else {
         return(
             <div>
-                Hola
+                Error 404
             </div>
         )
     }

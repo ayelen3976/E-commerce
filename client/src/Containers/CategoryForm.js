@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Table, Modal, Button, Form} from "react-bootstrap";
 import axios from 'axios';
-import { Link } from "react-router-dom";
 import Nav from '../Components/Nav';
 
 function CategoryForm() {

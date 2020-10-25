@@ -10,7 +10,7 @@ const auth = require('../middlewares/auth')
 
 ////////////////////// READ ///////////////////
 //Buscamos todos los usuarios
-server.get('/', auth , async (req, res, next) => {
+server.get('/' ,auth, async (req, res, next) => {
     await User.findAll()
         .then(users => {
             res.json(users);

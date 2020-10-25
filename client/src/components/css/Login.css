@@ -1,0 +1,26 @@
+.inputmodal-one{
+    text-align: -webkit-center;
+}
+.inputmodal-two{
+    text-align: -webkit-center;
+}
+
+.inputmodal-one input{
+
+    height: 40px;
+    width: 65%;
+    border-color: #ffc107;
+    border-radius: 10px;
+
+}
+.inputmodal-two input {
+    height: 40px;
+    width: 65%;
+    border-color: #ffc107;
+    border-radius: 10px;
+margin-top: 10px;
+}
+.button-modal{
+    margin-right: 43%;
+}
+

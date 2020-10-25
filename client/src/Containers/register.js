@@ -117,8 +117,8 @@ openModalError(){
           </Form.Group>
            
           
-        <Form.Group controlId="formBasicText"> 
-    <Form.Label >Apellido</Form.Label>
+          <Form.Group controlId="formBasicText"> 
+          <Form.Label >Apellido</Form.Label>
           <Form.Control 
           value={this.state.lastname}
           onChange={this.onChange}
@@ -175,9 +175,9 @@ openModalError(){
           </Form.Group>
 
           <Form>
-  <Form.Group>
+
     <Form.File id="exampleFormControlFile1" value={this.state.profilePic} label="Foto de perfil" />
-  </Form.Group>
+
 
           <Button variant="outline-warning" style={{marginRight:'10px'}}><Link to='/products' style={{color:'#ffc107',textDecoration:'none'}}>Volver</Link></Button>
 
@@ -187,6 +187,9 @@ openModalError(){
           </Form>
         </div>
     
+
+
+
     <Modal show={this.state.openAction} onHide={this.onCloseAction}>
         <Modal.Header closeButton onClick={this.onCloseAction}>
           

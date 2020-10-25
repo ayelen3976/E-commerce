@@ -33,9 +33,11 @@ text-align:center
 
 .items{
     display: flow-root;
+    border-bottom: 1px solid lightgrey;
 }
 .itemsprice{
     display: flow-root;
+
 }
 .productName{
     margin-left: 15%;

@@ -1,8 +1,6 @@
 import React from 'react'
 //Externas
 import MaterialTable from 'material-table';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import Nav from '../Nav';
 // import Button from '@material-ui/core/Button';
 
