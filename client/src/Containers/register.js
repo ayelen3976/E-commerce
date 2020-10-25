@@ -14,6 +14,7 @@ class Register extends React.Component{
       username:"",
       email:"",
       edad:"",
+      password: "",
       profilePic:"",
       openAction:false,
       openActionError:false
@@ -48,8 +49,8 @@ class Register extends React.Component{
         userName: this.state.username,
         email: this.state.email,
         edad: this.state.edad,
+        password: this.state.password,
         profilePic: this.state.profilePic,
-        description: "queonda"
         
       }
     })
@@ -169,8 +170,9 @@ openModalError(){
             <Form.Control
             type="password"
             placeholder="ponga aqui su contraseña"
-            
-            
+            onChange={this.onChange}
+            value={this.state.password}
+            name='password'
             />
           </Form.Group>
 

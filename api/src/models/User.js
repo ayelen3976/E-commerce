@@ -31,6 +31,7 @@ module.exports = (sequelize) => {
             type: DataTypes.ENUM({
                 values: ['Client','Admin']
             }),
+            allowNull: true,
             defaultValue: 'Client'
         },
         profilePic: {
