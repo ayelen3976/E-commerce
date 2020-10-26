@@ -121,7 +121,7 @@ function Nav({ items, logout, usuario }) {
     <div >
       <div>
         <Navbar className='Nav' >
-          <Navbar.Brand href="#home">Green Shop</Navbar.Brand>
+          <Navbar.Brand href="#home"><h4>Green Shop</h4></Navbar.Brand>
           <SearchBar />
           <div className='Icons'>
             <Button
@@ -251,7 +251,7 @@ function Nav({ items, logout, usuario }) {
 
       <div className='divoptions'>
         <ul>
-          <li>Inicio</li>
+          <li><Link  to="/" style={{ color: "black", textDecoration: "none" }}>Inicio</Link></li>
           <li> <Link to="/products" style={{ color: "black", textDecoration: "none" }}> Productos </Link> </li>
           <li> <Link to="/category" style={{ color: "black", textDecoration: "none" }}>Categorias </Link> </li>
           <li>Productos Sin Gluten</li>

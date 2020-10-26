@@ -62,7 +62,8 @@ const useStyles = makeStyles((theme) => ({
 
 {products.map(({product, count})=>(  
 <div className='items'>
-<h4 className='productName'>{product.name}<h4 className='productCount'>(items: {count})</h4> </h4>
+<h5 className='productName'>{product.name}({count})<h5 className='productCount'>${product.price * count}</h5> </h5>
+
 
 </div>
 )
@@ -146,7 +147,7 @@ const mapStateToProps = (state) =>{
   product,
   count,
 };});
-console.log(usuario, 'este man')
+console.log(products, 'this')
   return { products, subTotal, usuario};
  
 }

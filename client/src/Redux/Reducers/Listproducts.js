@@ -14,7 +14,7 @@ function UpdatedStore(allProducts, actionpayload, flag){
     }
 }
 
-return allProducts.map(item => {
+return allProducts?.map(item => {
    if (item.id === actionpayload.id) {
           return {
                ...item,
