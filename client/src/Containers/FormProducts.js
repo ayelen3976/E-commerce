@@ -153,6 +153,7 @@ function FormProducts() {
         setProduct({ name: "", price: "", description: "", stock:"",category:"" , img:""});
         setLgShow(false)
        agregarCat(res.data.id)
+       window.location.href = '/ProductForm'
       })
       
       .catch(console.log)
