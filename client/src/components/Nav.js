@@ -180,21 +180,26 @@ function Nav({ items, logout, usuario }) {
                         <Link
                           to="/ProductForm"
                           style={{ color: "black", textDecoration: "none" }}
-                        >Product Add</Link>
+                        >Productos</Link>
                       </MenuItem>
 
                       <MenuItem onClick={handleClosee}>
                         <Link
                           to="/CategoryForm"
                           style={{ color: "black", textDecoration: "none" }}
-                        >Category Add</Link>
+                        >Categorias</Link>
                       </MenuItem>
                       <MenuItem onClick={handleClosee}> <Link
                         to="/admin/orders"
                         style={{ color: "black", textDecoration: "none" }}
                       >Orders </Link>
                       </MenuItem>
-                      <MenuItem onClick={logout}>Logout</MenuItem>
+                      <MenuItem onClick={handleClosee}> <Link
+                        to="/users"
+                        style={{ color: "black", textDecoration: "none" }}
+                      >Users </Link>
+                      </MenuItem>
+                      <MenuItem  onClick={logout}>Logout</MenuItem>
                     </MenuList>
                   </ClickAwayListener>
                 </Paper>

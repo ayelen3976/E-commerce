@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 //Componentes
 import Nav from '../Components/Nav'
 import ReviewList from '../Components/Review/ReviewList';
+import InputReview from '../Components/Review/inputReview'
 
 //Externos
 import axios from 'axios';
@@ -29,7 +30,7 @@ class ProductInfoContainer extends Component {
         const { match } = this.props;
         const id = match.params.id;
         const url = `/products/${id}`
-        axios.get(url)
+        await axios.get(url)
             .then(res => {
                 const productsData = res.data;
                 this.setState({
@@ -50,6 +51,7 @@ class ProductInfoContainer extends Component {
         await axios.get(url)
             .then(res => {
                 const reviews = res.data;
+                console.log(res.data)
                 this.setState({
                     reviews
                 })
@@ -75,10 +77,12 @@ class ProductInfoContainer extends Component {
                     price={product.price}
                     image={product.image}
                     stock={product.stock}
+                    reviews={product.reviews}
                 />
                 {/* Componente Promedio */}
                 <ReviewList reviewData={product.reviews}/>
-                {/* Componente Input Review */}
+                <InputReview productId={product.id}/>
+                
             </div>
         )
     }

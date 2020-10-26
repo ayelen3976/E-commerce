@@ -16,6 +16,8 @@ import Checkout from  './Components/Checkout';
 import OrderContainer from './Components/Orders/OrderContainer';
 import OrderInfo from './Components/Orders/OrderInfo';
 import Login from './Components/Login';
+import UserContainer from './Components/UserCrud/UserContainer'
+import Error from './Error'
 
 const Routes = () => {
     return (
@@ -33,6 +35,8 @@ const Routes = () => {
                 <Route exact path='/admin/orders' component={OrderContainer} />
                 <Route exact path='/admin/orders/:orderId' component={OrderInfo} />
                 <Route exact path='/login' component={Login} />
+                <Route exact path='/users' component={UserContainer} />
+                <Route component={Error}/>
             </Switch>
         </BrowserRouter>
     )

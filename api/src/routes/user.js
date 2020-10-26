@@ -5,12 +5,13 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const authConfig = require('../../auth');
 const auth = require('../middlewares/auth')
+const policies = require('../middlewares/policies')
 // const { Sequelize } = require('sequelize');
 
 
 ////////////////////// READ ///////////////////
 //Buscamos todos los usuarios
-server.get('/' ,auth, async (req, res, next) => {
+server.get('/' ,auth,policies, async (req, res, next) => {
     await User.findAll()
         .then(users => {
             res.json(users);
@@ -100,7 +101,7 @@ server.post('/', async (req, res, next) => {
     // console.log(req.body);
 
     //Encriptado del password con bcypt 
-    let password = bcrypt.hashSync(req.body.password, +authConfig.rounds);
+    let password = bcrypt.hashSync(req.body.password, 5);//
 
     return await User.create({ userName,rol, firstName, lastName, profilePic, description, email, edad, password })
         .then(user => {

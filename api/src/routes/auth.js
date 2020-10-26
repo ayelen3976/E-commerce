@@ -45,7 +45,7 @@ server.post('/login' , async(req,res,next)=> {
 })
 //Ruta de logout chekear si esto no es un invento
 server.post('/logout' , (req,res,next) => {
-    if(req.login){
+    if(req.headers.authorization){
         req.headers.authorization = ""
         req.login.estado = false
         req.login.user = ""
