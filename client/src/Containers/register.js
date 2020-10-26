@@ -49,7 +49,7 @@ class Register extends React.Component{
         email: this.state.email,
         edad: this.state.edad,
         profilePic: this.state.profilePic,
-        description: "queonda"
+        
         
       }
     })

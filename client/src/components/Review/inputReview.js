@@ -39,12 +39,12 @@ const [star, setStar]= useState()
         <div>
             <Form>
                 <Form.Group >
-                    <Form.Label>Deja tu comentario</Form.Label>
-                    <Form.Control  placeholder="tu comentario" onChange={guardarDescripcion} />
+                    <Rating onChange={guardarEstrellas}/>
+                    <Form.Control as="textarea" rows={3}  placeholder="¿Que te pareció este producto?" onChange={guardarDescripcion} />
                 </Form.Group>
-                <Rating onChange={guardarEstrellas}/>
-                <Button variant="primary" type="submit" onClick={e=>{enviar(e,productId)}}>
-                        Submit
+               
+                <Button variant="outline-warning" type="submit" onClick={e=>{enviar(e,productId)}}>
+                        Comentar
                 </Button>
             </Form>
         </div>

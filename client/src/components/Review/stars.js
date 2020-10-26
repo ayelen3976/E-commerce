@@ -30,7 +30,8 @@ export default function Stars({ stars }) {
                 <Rating
                     name="hover-feedback"
                     value={stars}
-                    precision={1}
+                    precision={1} 
+                    readOnly
                 />
                 {value !== null && <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>}
             </div>

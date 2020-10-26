@@ -10,7 +10,7 @@ const Home = () => {
 
     return (
         <div >
-            
+           <div>
             <ReactPlayer
             url={require('./videos/video.mp4')}
             width='100%'
@@ -18,11 +18,18 @@ const Home = () => {
             playing
             muted
             loop
-            />
+                    
+        
+            /> 
+            </div> 
+            <div style={{position:"absolute",
+        left:"47%",bottom:"47%"}}>
+         <Button variant="outline-light" size="lg" ><Link to = '/products'>Entrar</Link>
+         </Button>
+            </div>
          
                 
-                
-         <Button variant="light" size="lg" ><Link to = '/products'>Entrar</Link></Button>
+        
            
             
         </div>
