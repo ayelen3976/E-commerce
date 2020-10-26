@@ -11,7 +11,7 @@ class PageRegister extends React.Component {
             <div  > 
                 <Nav/>
                     
-                <div className="col-md-6 ">
+                <div >
                     
                     <Register/>
 

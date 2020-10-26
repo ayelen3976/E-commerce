@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
- function Checkout({ products, subTotal,  addNewItemToCart, removeItemFromCart,postToMyOrder,   putToMyOrder, updateStock}) {
+ function Checkout({ products, subTotal,  addNewItemToCart, removeItemFromCart,postToMyOrder,   putToMyOrder, updateStock, usuario}) {
   const classes = useStyles();
 
 
@@ -29,9 +29,14 @@ const useStyles = makeStyles((theme) => ({
 
 
   const handleCheckout = ()=>{
-    postToMyOrder(products, '1')
-    putToMyOrder(products, '1')
-   console.log(products, 'nowput')
+    if (!usuario){
+      alert('registrate campeon')
+    } else{
+      postToMyOrder(products, usuario.id)
+      putToMyOrder(products, usuario.id)
+     console.log(products, usuario.id ,'idUser ya estoy registrado jsjs')
+    }
+  
   }
    
   const sumarCantidad = (a) =>{
@@ -57,7 +62,8 @@ const useStyles = makeStyles((theme) => ({
 
 {products.map(({product, count})=>(  
 <div className='items'>
-<h4 className='productName'>{product.name}<h4 className='productCount'>(items: {count})</h4> </h4>
+<h5 className='productName'>{product.name}({count})<h5 className='productCount'>${product.price * count}</h5> </h5>
+
 
 </div>
 )
@@ -128,27 +134,23 @@ const useStyles = makeStyles((theme) => ({
 </div>
   );
 }
-const mapStateToProps = (state) => {
-  
-    let subTotal = 0;
+const mapStateToProps = (state) =>{
 
-     
-    const products = Object.keys(state.shopP.cart).map((key) => {
-            const product = state.productsP.products.find((product) => parseInt(product.id) === parseInt(key));
-            const count = state.shopP.cart[key];
-            subTotal += product.price * count; 
-             return {
-                product,
-                count,
+  const usuario= state.auth.user.user;
 
-            };
-           
-        });
-        
-      console.log(products, subTotal)
-    return { products, subTotal};
-    
-};
+  let subTotal = 0;
+  const products = Object.keys(state.shopP.cart).map((key) => {
+  const product = state.productsP.products.find((product) => parseInt(product.id) === parseInt(key));
+  const count = state.shopP.cart[key];
+  subTotal += product.price * count; 
+  return {
+  product,
+  count,
+};});
+console.log(products, 'this')
+  return { products, subTotal, usuario};
+ 
+}
 
 const mapDispatchToProps = (dispatch) => ({
     
