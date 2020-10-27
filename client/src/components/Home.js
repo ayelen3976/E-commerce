@@ -22,7 +22,12 @@ const Home = () => {
          
                 
                 
-         <Button variant="light" size="lg" ><Link to = '/products'>Entrar</Link></Button>
+         <div style={{position:"absolute",
+        left:"47%",bottom:"47%"}}>
+         <Button variant="outline-light" size="lg" ><Link to = '/products'>Entrar</Link>
+         </Button>
+            </div>
+         
            
             
         </div>

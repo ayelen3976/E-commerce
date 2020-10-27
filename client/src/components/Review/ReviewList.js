@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Divider from '@material-ui/core/Divider';
 import Review from './Review';
 import  './style.css'
@@ -23,7 +22,7 @@ export default function ReviewList({reviewData}){
     }else {
         return(
             <div>
-                Error 404
+                Aun no tenemos criticas sobre este producto. ¿Quieres dejar uno?
             </div>
         )
     }

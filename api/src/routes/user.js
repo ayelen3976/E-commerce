@@ -11,7 +11,7 @@ const policies = require('../middlewares/policies')
 
 ////////////////////// READ ///////////////////
 //Buscamos todos los usuarios
-server.get('/' ,auth,policies, async (req, res, next) => {
+server.get('/' , async (req, res, next) => {
     await User.findAll()
         .then(users => {
             res.json(users);

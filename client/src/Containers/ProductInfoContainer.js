@@ -44,11 +44,11 @@ class ProductInfoContainer extends Component {
             }).catch(console.log)
     }
 
-    async obtenerReviews(){
+    obtenerReviews(){
         const { match } = this.props; // params de la pagina
         const id = match.params.id;
         const url = `/products/${id}/review`
-        await axios.get(url)
+       axios.get(url)
             .then(res => {
                 const reviews = res.data;
                 console.log(res.data)

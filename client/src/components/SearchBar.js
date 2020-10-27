@@ -19,7 +19,7 @@ function SearchBar (props) {
 
     return (
         <Form inline>
-        <input placeholder ='Search...' className='InputSearch' onChange={e => setSearchBar(e.target.value)}/> 
+        <input placeholder ='¿Que estás buscando?' className='InputSearch' onChange={e => setSearchBar(e.target.value)}/> 
          <Button variant="warning"  onClick={()=>{alHacerClick(searchBar)}}>
              <SearchIcon /> 
              </Button> 
