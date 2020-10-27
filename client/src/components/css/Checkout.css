@@ -1,8 +1,4 @@
-.shop-cart{
-    border-bottom: 1px solid #d3d3d3;
-    text-align: center;
 
-}
 .Card{
     margin: 8px;
 }
@@ -13,26 +9,64 @@
     border: 1px solid black;
     inline-size: max-content;
 
-  
+
 }
 .card-body-img{
     width: 50%;
 }
 
 .right{
-  
+
     width: 45%;
+    background-color:#FAF3CA;
+    float: right;
+    border-radius: 10px;
+    margin: 40px;
+
+}
+.name-right{
+    border-radius: 10px;
+
+    background-color: #ffc107;
+text-align:center
+}
+
+.items{
+    display: flow-root;
+    border-bottom: 1px solid lightgrey;
+}
+.itemsprice{
+    display: flow-root;
+
+}
+.productName{
+    margin-left: 15%;
+}
+
+.productCount{
+    margin-right: 15%;
+
+    float: right;
+}
+.Subtotal{
+    margin-left: 15%;
+
+     float: left;
+}
+.subPrice{
+
+    margin-right: 15%;
 
     float: right;
 }
 
-.summary{
-    text-decoration: underline;
+.buttonNext{
+    margin-left: 20%;
+    width: 60%;
+
 }
-.shipping{
-    border-bottom: 1px solid #d3d3d3;
-}
-.confirm{
-    max-width: fit-content;
-    margin: auto;
+.Cancel{
+    margin-left: 18%;
+    width: 60%;
+    margin-top: 4%;
 }

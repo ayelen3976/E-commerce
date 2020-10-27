@@ -1,9 +1,8 @@
 import React from 'react';
-import bootstrap, {Form, Modal,Button, Col} from 'react-bootstrap';
-import InputGroup from 'react-bootstrap/InputGroup'
+import  {Form, Modal,Button, Col} from 'react-bootstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
- 
+import '.././Components/css/Register.css'
 
 
 class Register extends React.Component{
@@ -15,6 +14,7 @@ class Register extends React.Component{
       username:"",
       email:"",
       edad:"",
+      password: "",
       profilePic:"",
       openAction:false,
       openActionError:false
@@ -49,8 +49,8 @@ class Register extends React.Component{
         userName: this.state.username,
         email: this.state.email,
         edad: this.state.edad,
+        password: this.state.password,
         profilePic: this.state.profilePic,
-        description: "queonda"
         
       }
     })
@@ -96,98 +96,103 @@ openModalError(){
 
  render(){
     return (
-      <div>
-        <div>
+      <div className='component'>
+
+
+<div className='tituloregister'>  
+<h3>Crear Cuenta</h3>
+        <p>Comprá más rápido y llevá el control de tus pedidos, ¡en un solo lugar!</p>
+</div>
+
+        <div className='Form'>
            
-      <Form >
+
         
          
-        <div className="form-group">
-          <Form.Row> 
-          <Form.Group controlId="formBasicEmail" as={Col} md="7">
-          <Form.Label >Nombre</Form.Label>
+       
+          
+         <form>
+         <div className="form-group">
+          <h5 >Nombre</h5>
           
           <Form.Control 
           value={this.state.name}
           onChange={this.onChange}
           type="text"
           name="name"
-          placeholder="Ponga aqui su nombre"
+          placeholder="Nombre"
           />
           
-          </Form.Group>
+       
            
-          
-        <Form.Group controlId="formBasicText"> 
-    <Form.Label >Apellido</Form.Label>
+       
+          <h5 >Apellido</h5>
           <Form.Control 
           value={this.state.lastname}
           onChange={this.onChange}
           type="text"
           name="lastname"
-          placeholder="Ponga aqui su apellido"
+          placeholder="Apellido"
           />
           
-          </Form.Group>
-          </Form.Row>
-          <Form.Row> 
-          <Form.Group as={Col} md="7"> 
-          <Form.Label>Username</Form.Label>
+  
+       
+        
+          <h5>Username</h5>
           <Form.Control 
           value={this.state.username}
           onChange={this.onChange}
           type="text"
           name="username"
-          placeholder="Ponga aqui su nombre de usuario"
+          placeholder="nombre de usuario"
           />
-          </Form.Group>
 
-          <Form.Group>
+
+
         
-          <Form.Label>Edad</Form.Label>
+          <h5>Edad</h5>
           <Form.Control 
           value={this.state.edad}
           onChange={this.onChange}
           type="text"
           name="edad"
-          placeholder="introduzca su edad"
+          placeholder="edad"
           />
-          </Form.Group>
-          </Form.Row>
-        <Form.Group controlID="formBasicEmail" md="3"> 
-          <Form.Label>Email</Form.Label>
+
+        
+
+          <h5>Email</h5>
           <Form.Control 
           value={this.state.email}
           onChange={this.onChange}
           type="text"
           name="email"
-          placeholder="ponga aqui su email personal"
+          placeholder="email personal"
           />
-          </Form.Group>
+    
 
-          <Form.Group controlID="formBasicPassword">
-            <Form.Label>Contraseña</Form.Label>
+            <h5>Contraseña</h5>
             <Form.Control
             type="password"
-            placeholder="ponga aqui su contraseña"
-            
-            
+            placeholder="contraseña"
+            onChange={this.onChange}
+            value={this.state.password}
+            name='password'
             />
-          </Form.Group>
+     
 
-          <Form>
-  <Form.Group>
+   
     <Form.File id="exampleFormControlFile1" value={this.state.profilePic} label="Foto de perfil" />
-  </Form.Group>
-
-          <Button variant="outline-warning" style={{marginRight:'10px'}}><Link to='/products' style={{color:'#ffc107',textDecoration:'none'}}>Volver a Orders</Link></Button>
-
-          <Button variant="outline-warning" onClick={(e)=>this.onSubmitear(e)}  >
+     <Button className='button-register' variant="outline-warning" onClick={(e)=>this.onSubmitear(e)}  >
             Registrarse
           </Button>
-          </Form>
-        </div>
+          </div>
+          </form>
+      
     
+
+
+
     <Modal show={this.state.openAction} onHide={this.onCloseAction}>
         <Modal.Header closeButton onClick={this.onCloseAction}>
           
@@ -214,7 +219,7 @@ openModalError(){
       </Modal>
 
 
-      </Form>
+   
       
       
         

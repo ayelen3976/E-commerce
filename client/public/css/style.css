@@ -1,9 +1,9 @@
 body{
-    background-color: #f6ffea!important;
+    background-color: #f8f8f8;
 }
 
 .bg-verde{
-    background-color: #82ae46;
+    background-color: #ffffff;
 }
 
 .fontWhite{
@@ -11,7 +11,7 @@ body{
 }
 
 .navbar{
-    position: fixed!important;
+    position: fixed;
     width: 100vw;
     top: 0;
 }
@@ -36,7 +36,7 @@ body{
 }
 
 .navbar-light .navbar-toggler{
-    border-color: #ffffff!important;
+    border-color: #ffffff;
     padding: .5em;
 }
 
@@ -66,7 +66,7 @@ body{
 
 
 .MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-9.MuiGrid-justify-xs-center{
-    margin-top: 6em!important;
+    margin-top: 6em;
 }
 
 .MuiPaper-root.MuiCard-root.ProductCard-item-2.MuiPaper-elevation1.MuiPaper-rounded{
@@ -83,7 +83,7 @@ body{
 
 @media(min-width: 768px){
     .MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-9.MuiGrid-justify-xs-center{
-        margin-top: 10em!important;
+        margin-top: 10em;
     }
 
     .MuiPaper-root.MuiCard-root.ProductCard-item-2.MuiPaper-elevation1.MuiPaper-rounded{
@@ -97,7 +97,7 @@ body{
     }
 
     #navbarNav form input{
-        width: inherit!important;
+        width: inherit;
     }
 
     #navbarNav form{

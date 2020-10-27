@@ -1,12 +1,12 @@
 .btn-verde{
     padding: 1em;
-    background-color: #82ae46;
+    background-color: #ffc107;
     color: #ffffff;
 }
 
 .btn-verde:hover{
     padding: 1em;
-    background-color: #579500;
+    background-color: #FAE363;
     text-decoration: none;
 }
 
@@ -34,7 +34,7 @@
 }
 
 .appHeader button{
-    background-color: #82ae46;
+    background-color: #ffc107;
     border: none;
     border-radius: 50px;
     padding: .5em 3em;
@@ -42,7 +42,7 @@
 }
 
 .appHeader button:hover{
-    background-color: #579500;   
+    background-color:#FAE363;   
 }
 
 .appHeader button a{
@@ -65,7 +65,7 @@
 
 .detailContent .price{
     font-weight: 700;
-    color: #82ae46;
+    color: #ffc107;
     font-size: 3em;
 }
 
@@ -91,7 +91,7 @@
 
 .buttons{
     color: #ffffff;
-    background-color: #82ae46;
+    background-color: #ffc107;
     border-radius: 50%;
     border: none;
     height: 50px;
@@ -99,7 +99,7 @@
 }
 
 .buttons:hover{
-    background-color: #579500;
+    background-color: #FAE363;
 }
 
 .infoContent{
