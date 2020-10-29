@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import {withRouter} from 'react-router-dom';
 // import shortid from "shortid";
 
 
@@ -40,24 +40,25 @@ function FormProducts() {
 
   // const AddShow = () => setLgShow(true);//Por que no se usa?
 
-  useEffect(()=> {
+  const obtenerProductos = () =>{
     
-        axios.get('/products/include/category')
-        .then(res => {
-           console.log(res.data)
-            setProducts(res.data);
-        })
-        .catch(err => console.log(err.response.data));
+    axios.get('/products/include/category')
+    .then(res => {
+       console.log(res.data)
+        setProducts(res.data);
+    })
+    .catch(err => console.log(err.response.data));
 
-        axios.get('/products/category')
-        .then(response=>{
-          setCategory(response.data)
-        })
-        
-        
-        
-        
-  },[]);
+    axios.get('/products/category')
+    .then(response=>{
+      setCategory(response.data)
+    })
+    
+  }
+
+  useEffect(()=> {
+    obtenerProductos()
+  },products);
   // },products);
 
 //  ------------------Functions---------------------------
@@ -153,7 +154,7 @@ function FormProducts() {
         setProduct({ name: "", price: "", description: "", stock:"",category:"" , img:""});
         setLgShow(false)
        agregarCat(res.data.id)
-       window.location.href = '/ProductForm'
+      //  window.location.href = '/ProductForm'
       })
       
       .catch(console.log)
@@ -294,7 +295,7 @@ function FormProducts() {
             <br/>
              <Select value={product.category} options={translate(category)} onChange={handleChangeCategory} />
             <br/>
-            <Button variant="warning" onClick={addProduct}>
+            <Button variant="warning" onClick={addProduct }>
               Añadir
             </Button>
           </Form>
@@ -467,4 +468,4 @@ function FormProducts() {
     </div>
  </div> );
 }
-export default FormProducts;
+export default withRouter(FormProducts);

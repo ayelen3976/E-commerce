@@ -33,18 +33,14 @@ function Producto({id, name, price, image, description , stock ,addNewItemToCart
           description,
           price,
           image,
-          
-           },'reduce');
+        },'reduce');
         addNewItemToCart({
-        
           id,
           name,
           description,
           price,
           image,
-          
         });
-    
         notify()
       };
  return (

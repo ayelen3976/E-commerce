@@ -12,17 +12,22 @@ import SearchBar from './SearchBar';
 import { logout } from '../Redux/Actions/auth'
 import Login from './Login/index'
 function Nav({ items, logout, usuario }) {
-
+  console.log("USUARIO:",usuario)
   const [modalShow, setModalShow] = useState(false);
   //Seteado de visibilidad del usuario
   let clientVisible = true;
   let adminVisible = true;
   let currentVisible = true;
-  if (usuario !== undefined) {
-    usuario.rol === 'Client' ? clientVisible = false : clientVisible = true;
-    usuario.rol === 'Admin' ? adminVisible = false : adminVisible = true;
-  }else {
-    currentVisible =false;
+  if(usuario && usuario[0]){
+    usuario[0].rol === 'Client' ? clientVisible = false : clientVisible = true;
+    usuario[0].rol === 'Admin' ? adminVisible = false : adminVisible = true;
+  }else{
+    if (usuario !== undefined) {
+      usuario.rol === 'Client' ? clientVisible = false : clientVisible = true;
+      usuario.rol === 'Admin' ? adminVisible = false : adminVisible = true;
+    }else {
+      currentVisible =false;
+    }
   }
 
 
@@ -162,8 +167,6 @@ function Nav({ items, logout, usuario }) {
           </div>
         </Navbar>
       </div>
-
-
 
       <div>
         <div>
