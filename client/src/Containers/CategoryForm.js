@@ -23,7 +23,7 @@ function CategoryForm() {
             setProducts(res.data);
         })
         .catch(err => console.log(err.response.data));
-  },[]);
+  },[product]);
 
 //  ------------------Functions---------------------------
   function onChange(e) {
@@ -76,7 +76,6 @@ function CategoryForm() {
         setProducts(pro);
         setProduct({ name: "", description: "" });
         setLgShow(false)
-        window.location.href = '/CategoryForm'
       })
       .catch(console.log)
   };

@@ -82,7 +82,7 @@ const handleChangeOptions = selectedOption =>{
                     {
                         icon: ForwardIcon,
                         tooltip: 'Ver Detalles de la Orden',
-                        onClick: (event,rowData) => goTo(`/admin/orders/${rowData.userId}`)
+                        onClick: (event,rowData) => goTo(`/admin/orders/${rowData.orderId}`)
                     },
                     {
                         icon: EditIcon,

@@ -23,3 +23,14 @@ export function editUserState(userId) {
             })
     }
 }
+
+export function deleteUser(userId) {
+    const url = `/user/${userId}`
+    return async (dispatch) => {
+        await axios.delete(url)
+    //         .then(res => {
+    //             console.log(res)
+    //             dispatch({ type:EDIT_USER_STATE, payload: res.data })
+    //         })
+    }
+}

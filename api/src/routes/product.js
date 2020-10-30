@@ -107,7 +107,7 @@ server.post('/', async(req, res, next) => {
             res.status(201).json(producto)
         })
         .catch(err => {
-            res.status(404).json({message: "No se pudo agregar el producto"})
+            res.status(404).json({message: "No se pudo agregar el producto", error: err})
         });
 })
 

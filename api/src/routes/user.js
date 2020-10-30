@@ -11,7 +11,7 @@ const policies = require('../middlewares/policies')
 
 ////////////////////// READ ///////////////////
 //Buscamos todos los usuarios
-server.get('/' ,auth,policies, async (req, res, next) => {
+server.get('/' , async (req, res, next) => {
     await User.findAll()
         .then(users => {
             res.json(users);
@@ -37,7 +37,7 @@ server.get('/:userId/order', async(req, res, next) => {
 //Ruta para traer todos los items de un carrito
 server.get('/:userId/cart', async (req, res, next) => {
     const { userId } = req.params;
-    await Order.findOne({ where: { userId: userId, estado: 'Carrito' } })
+    await Order.findOne({ where: { userId: userId, estado: 'Carrito' }, include: [Product] })
         .then(orden => {
             console.log(orden)
             Orderline.findAll({ where: { orderId: orden.dataValues.id} })

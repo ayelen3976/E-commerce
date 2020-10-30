@@ -1,12 +1,15 @@
 import React from 'react'
+import {connect} from 'react-redux';
 //Externas
 import MaterialTable from 'material-table';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+//Internos
 import Nav from '../Nav';
+import {editUserState ,deleteUser} from '../../Redux/Actions/userActions';
 // import Button from '@material-ui/core/Button';
 
-function User({userArray , editUserState}) {
+function User({userArray , editUserState, deleteUser , goTo}) {
 
    
     
@@ -33,7 +36,16 @@ function User({userArray , editUserState}) {
         })
     }
 
-
+    const onClickEvent= (e,id) =>{
+        e.preventDefault()
+        editUserState(id)
+        goTo(`/users`)
+    }
+    const onClickDelete = (e,id) =>{
+        e.preventDefault()
+        deleteUser(id)
+        goTo(`/users`)
+    }
 
     
     return(
@@ -46,13 +58,13 @@ function User({userArray , editUserState}) {
                 actions = {[
                     {
                         icon: EditIcon,
-                        tooltip: 'Editar Orden',
-                        onClick: (event,rowData) => {editUserState(rowData.id)}
+                        tooltip: 'Promote User',
+                        onClick: (event,rowData) => {onClickEvent(event,rowData.id)}
                     },
                     {
                         icon: DeleteForeverIcon,
-                        tooltip: 'Eliminar Orden',
-                        onClick: (event,rowData) => {}
+                        tooltip: 'Delete User',
+                        onClick: (event,rowData) => {onClickDelete(event,rowData.id)}
                     },
                 ]}
                 options= {{
@@ -67,5 +79,10 @@ function User({userArray , editUserState}) {
         </div>
     )
 }
-    
-export default User;
+
+const mapDispatchToProps = {
+    editUserState,
+    deleteUser
+}
+
+export default connect(null,mapDispatchToProps)(User);
