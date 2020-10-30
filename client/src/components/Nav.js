@@ -35,7 +35,7 @@ function Nav({ items, logout, usuario }) {
 
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return;
+      return 
     }
 
     setOpen(false);
@@ -65,6 +65,7 @@ function Nav({ items, logout, usuario }) {
   const handleLogOut = (event) => {
     event.preventDefault()
     logout()
+    
   }
 
   function handleListKeyDownn(event) {
@@ -121,7 +122,7 @@ function Nav({ items, logout, usuario }) {
     <div >
       <div>
         <Navbar className='Nav' >
-          <Navbar.Brand href="#home"><h4>Green Shop</h4></Navbar.Brand>
+          <Navbar.Brand href="#home"><h4><Link to="/products">Green Shop</Link></h4></Navbar.Brand>
           <SearchBar />
           <div className='Icons'>
             <Button
@@ -167,7 +168,7 @@ function Nav({ items, logout, usuario }) {
 
       <div>
         <div>
-          <Popper open={opened} anchorEl={anchorRefe.current} role={undefined} transition disablePortal>
+          <Popper open={opened} anchorEl={anchorRefe.current} role={undefined} transition disablePortal={false}>
             {({ TransitionProps, placement }) => (
               <Grow
                 {...TransitionProps}
@@ -209,7 +210,7 @@ function Nav({ items, logout, usuario }) {
         </div>
       </div>
 
-      <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal >
+      <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal={false} >
         {({ TransitionProps, placement }) => (
           <Grow
             {...TransitionProps}

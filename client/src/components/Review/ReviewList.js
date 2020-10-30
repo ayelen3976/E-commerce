@@ -2,8 +2,8 @@ import React from 'react';
 import Divider from '@material-ui/core/Divider';
 import Review from './Review';
 import  './style.css'
-export default function ReviewList({reviewData}){
-    console.log(reviewData)
+ function ReviewList({reviewData}){
+  
     if(reviewData){
         return(
             <div className="divOne">
@@ -27,3 +27,4 @@ export default function ReviewList({reviewData}){
         )
     }
 }
+export default ReviewList;

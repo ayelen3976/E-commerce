@@ -16,6 +16,8 @@ class Login extends Component {
         this.onSubmitear= this.onSubmitear.bind(this)
     }
 
+    
+
     onChange(e) {
         this.setState({
             [e.target.name] : e.target.value
@@ -47,12 +49,6 @@ class Login extends Component {
     <input placeholder="password" type="password" name='password' onChange={this.onChange} value={this.state.password}/>
 
     </div>
-   
-
-
-   
-
-         
  
     </Modal.Body>
     <Modal.Footer>
@@ -67,8 +63,6 @@ class Login extends Component {
 
     
 }
-
-
 
 const mapDispatchToProps = {
     login
