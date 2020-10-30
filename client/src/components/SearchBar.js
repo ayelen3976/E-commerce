@@ -19,8 +19,8 @@ function SearchBar (props) {
 
     return (
         <Form inline>
-        <input placeholder ='Search...' className='InputSearch' onChange={e => setSearchBar(e.target.value)}/> 
-         <Button variant="warning"  onClick={()=>{alHacerClick(searchBar)}}>
+        <input placeholder ='¿Que estás buscando?' className='InputSearch' onChange={e => setSearchBar(e.target.value)} onKeyUp={e=>{if(e.key=="Enter"){alHacerClick(searchBar)}}}/> 
+         <Button variant="warning"  onClick={()=>{alHacerClick(searchBar)}} >
              <SearchIcon /> 
              </Button> 
          </Form>

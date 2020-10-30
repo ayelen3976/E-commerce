@@ -1,5 +1,5 @@
 const server = require('express').Router();
-const { Product, Category ,Review } = require('../db.js');
+const { Product, Category ,Review, User } = require('../db.js');
 const { Sequelize } = require('sequelize');
 
 /////////// READ ///////////
@@ -77,7 +77,7 @@ server.get('/search', async(req, res, next) => {
 //Obtener todas las reviews de un producto
 server.get('/:id/review' ,async(req ,res, next) => {
     const {id} = req.params;
-    await Review.findAll({where: {productId : id}})
+    await Review.findAll({where: {productId : id}, include:[User]})
         .then(reviews => {
             res.status(200).json(reviews);
         })

@@ -17,6 +17,8 @@ class Login extends Component {
         this.onSubmitear = this.onSubmitear.bind(this)
     }
 
+    
+
     onChange(e) {
         this.setState({
             [e.target.name]: e.target.value
@@ -61,8 +63,6 @@ class Login extends Component {
 
 
 }
-
-
 
 const mapDispatchToProps = {
     login
