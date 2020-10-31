@@ -31,7 +31,7 @@ class Register extends React.Component{
     this.onCloseActionError=this.onCloseActionError.bind(this);
     this.openModal=this.openModal.bind(this);
     this.openModalError=this.openModalError.bind(this);
-    this.profilePic=this.profilePic.bind(this);
+    this.Handleimage=this.Handleimage.bind(this);
    
   }
 
@@ -40,7 +40,7 @@ class Register extends React.Component{
       [e.target.name]:e.target.value
     })
     
-    // console.log(`la propiedad seria ${[e.target.name]}:${e.target.value}`)
+     console.log(`la propiedad seria ${[e.target.name]}:${e.target.value}`)
   }
 
 
@@ -74,17 +74,16 @@ class Register extends React.Component{
     })
   };
 
- /*  profilePic= event=>{
-    var file = event.target.files[0]
-    const reader = new FileReader()
-    reader.addEventListener("load", function() {
-      this.setState({ 
-        profilePic : this.result
-     })
-  })
-  reader.readAsDataURL(file)
-} */
-
+  Handleimage(e) {
+    var file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        this.setState({ profilePic: event.target.result });
+      };
+      reader.readAsDataURL(file);
+    }
+  }
 
 
 onCloseAction(){
@@ -119,16 +118,10 @@ openModalError(){
     return (
       <div className='component'>
 
-
-<div className='tituloregister'>  
-<h3>Crear Cuenta</h3>
-   <p>Comprá más rápido y llevá el control de tus pedidos, ¡en un solo lugar!</p>
-</div>
-
         <div className='Form'>
            <form>
          <div className="form-group">
-          <h5 >Nombre</h5>
+          <p >Nombre</p>
           
           <Form.Control 
           value={this.state.name}
@@ -136,71 +129,79 @@ openModalError(){
           type="text"
           name="name"
           placeholder="Nombre"
+          className='form-area'
           />
-          
-       
-           
-       
-          <h5 >Apellido</h5>
+  
+          <p >Apellido</p>
           <Form.Control 
           value={this.state.lastname}
           onChange={this.onChange}
           type="text"
           name="lastname"
           placeholder="Apellido"
+          className='form-area'
           />
           
   
        
         
-          <h5>Username</h5>
+          <p>Username</p>
           <Form.Control 
           value={this.state.username}
           onChange={this.onChange}
           type="text"
           name="username"
           placeholder="nombre de usuario"
+          className='form-area'
           />
 
 
 
         
-          <h5>Edad</h5>
+          <p>Edad</p>
           <Form.Control 
           value={this.state.edad}
           onChange={this.onChange}
           type="text"
           name="edad"
           placeholder="edad"
+          className='form-area'
           />
 
         
 
-          <h5>Email</h5>
+          <p>Email</p>
           <Form.Control 
           value={this.state.email}
           onChange={this.onChange}
           type="text"
           name="email"
           placeholder="email personal"
+          className='form-area'
           />
     
 
-            <h5>Contraseña</h5>
-            <Form.Control
+            <p>Contraseña</p>
+            <Form.Control 
             type="password"
             placeholder="contraseña"
             onChange={this.onChange}
             value={this.state.password}
             name='password'
+            className='form-area'
             />
+            <br/>
      
 
    
-    <input style={{display: "-webkit-inline-box"}}  name='profilePic' type='file'  onChange={this.profilePic}/>
+     <input  type="file"  label="Foto de perfil" name='profilePic' onChange={(e)=> this.Handleimage(e)}/>
+
+     <br/>
+     <br/>
 
 
-     <Button className='button-register' variant="outline-warning" onClick={(e)=>this.onSubmitear(e)}  >
+
+     <Button className='button-register'  onClick={(e)=>this.onSubmitear(e)}  >
             Registrarse
           </Button>
           </div>
@@ -216,7 +217,7 @@ openModalError(){
         </Modal.Header>
         <Modal.Body> <h4> Usuario creado con exito</h4></Modal.Body>
         <Modal.Footer>
-          <Button variant="outline-warning"  closeButton  onClick={this.onCloseAction} > 
+          <Button variant="outline-success"  closeButton  onClick={this.onCloseAction} > 
           <Link to='/products'>Cerrar</Link>
           </Button>
         </Modal.Footer>
@@ -229,7 +230,7 @@ openModalError(){
         </Modal.Header>
         <Modal.Body> <h4> Ups! Parece que hubo un error. Por favor llene los campos correctamente y vuelva a intentarlo</h4></Modal.Body>
         <Modal.Footer>
-          <Button variant="outline-warning"  closeButton  onClick={this.onCloseActionError} > 
+          <Button variant="outline-success"  closeButton  onClick={this.onCloseActionError} > 
           Cerrar
           </Button>
         </Modal.Footer>
