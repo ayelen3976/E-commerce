@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     } else{
       postToMyOrder(products, usuario.id)
       putToMyOrder(products, usuario.id)
-     console.log(products, usuario.id ,'idUser ya estoy registrado jsjs')
+      alert('go to checkout payment')
     }
   
   }

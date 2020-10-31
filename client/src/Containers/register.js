@@ -1,13 +1,16 @@
 import React from 'react';
 import  {Form, Modal,Button, Col} from 'react-bootstrap';
 import axios from 'axios';
-import { Link } from 'react-router-dom'
+import { Link , useHistory} from 'react-router-dom'
 import '.././Components/css/Register.css'
 
 
 class Register extends React.Component{
+  
   constructor(props){
+    
     super(props)
+   
     this.state= {
       name:"",
       lastname:"",
@@ -33,12 +36,13 @@ class Register extends React.Component{
     this.setState({
       [e.target.name]:e.target.value
     })
-    console.log(`la propiedad seria ${[e.target.name]}:${e.target.value}`)
+    
+    // console.log(`la propiedad seria ${[e.target.name]}:${e.target.value}`)
   }
 
 
   onSubmitear(e){
-    console.log(this.state)
+  
     e.preventDefault();
     axios({
       method: 'post',
@@ -50,11 +54,12 @@ class Register extends React.Component{
         email: this.state.email,
         edad: this.state.edad,
         password: this.state.password,
-        profilePic: this.state.profilePic,
+        profilePic: this.state.profilePic.name,
         
       }
-    })
-    .then(res =>{
+      
+    }).then(res =>{
+      console.log(this.data, 'Laaa dataaa')
       this.openModal()
 
 
@@ -64,6 +69,13 @@ class Register extends React.Component{
       this.openModalError()
     })
   };
+
+  profilePic= event=>{
+    this.setState({
+      profilePic : event.target.files[0]
+    })
+   
+  }
 
 
 onCloseAction(){
@@ -101,17 +113,11 @@ openModalError(){
 
 <div className='tituloregister'>  
 <h3>Crear Cuenta</h3>
-        <p>Comprá más rápido y llevá el control de tus pedidos, ¡en un solo lugar!</p>
+   <p>Comprá más rápido y llevá el control de tus pedidos, ¡en un solo lugar!</p>
 </div>
 
         <div className='Form'>
-           
-
-        
-         
-       
-          
-         <form>
+           <form>
          <div className="form-group">
           <h5 >Nombre</h5>
           
@@ -182,7 +188,9 @@ openModalError(){
      
 
    
-    <Form.File id="exampleFormControlFile1" value={this.state.profilePic} label="Foto de perfil" />
+    <input style={{display: "-webkit-inline-box"}}  name='profilePic' type='file'  onChange={this.profilePic}/>
+
+
      <Button className='button-register' variant="outline-warning" onClick={(e)=>this.onSubmitear(e)}  >
             Registrarse
           </Button>

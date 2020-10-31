@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import './css/Nav.css';
 import SearchIcon from '@material-ui/icons/Search';
 import { connect } from 'react-redux';
-import { Form, Button} from 'react-bootstrap';
+import { Form} from 'react-bootstrap';
+import { Button } from '@material-ui/core';
 import buscarProducto from '../Redux/Actions/buscarProducto'
 
 
@@ -18,12 +19,13 @@ function SearchBar (props) {
 
 
     return (
-        <Form inline>
-        <input placeholder ='Search...' className='InputSearch' onChange={e => setSearchBar(e.target.value)}/> 
-         <Button variant="warning"  onClick={()=>{alHacerClick(searchBar)}}>
+     
+         <Form className='SearchBar'>
+         <input className='Input' placeholder ='Search...'  onChange={e => setSearchBar(e.target.value)} />
+         <Button  onClick={()=>{alHacerClick(searchBar)}}>
              <SearchIcon /> 
              </Button> 
-         </Form>
+       </Form>
         )
 
 }

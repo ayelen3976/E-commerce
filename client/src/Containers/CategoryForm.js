@@ -76,7 +76,7 @@ function CategoryForm() {
         setProducts(pro);
         setProduct({ name: "", description: "" });
         setLgShow(false)
-        window.location.href = '/CategoryForm'
+       
       })
       .catch(console.log)
   };

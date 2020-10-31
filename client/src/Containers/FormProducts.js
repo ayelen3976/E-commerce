@@ -176,11 +176,9 @@ function FormProducts() {
   const deleteProduct = (id) => {
     const arrayFiltrado = products.filter((item) => item.id !== id);
     const url = `/products/${id}`
-    axios.delete(url)
-      .then(() => {
+    axios.delete(url).then(() => {
         setProducts(arrayFiltrado);
-      })
-      .catch(console.log)
+      }).catch(console.log)
   };
 
   const deleteCategories= (id,categoryID) =>{

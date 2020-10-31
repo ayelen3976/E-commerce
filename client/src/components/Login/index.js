@@ -56,7 +56,7 @@ class Login extends Component {
  
     </Modal.Body>
     <Modal.Footer>
-      <Button variant="warning" className='button-modal' onClick={(e) => this.onSubmitear(e)}>Submit</Button>
+      <Button className='button-modal' onClick={(e) => this.onSubmitear(e)}>Submit</Button>
     </Modal.Footer>
   </Modal>
             </div>

@@ -7,8 +7,8 @@ import {BrowserRouter} from 'react-router-dom';
 import Home from './Components/Home'
 import ProductListContainer from './Containers/ProductListContainer';
 import ProductInfoContainer from './Containers/ProductInfoContainer';
-import FormProducts from './Containers/FormProducts';
-import CategoryForm from './Containers/CategoryForm';
+import FormProducts from './Components/FormProducts/Table';
+import CategoryForm from './Components/FormCategory/Table';
 import CategoryListContainer from './Containers/CategoryListContainer';
 import CategoryInfoContainer from './Containers/CategoryInfoContainer';
 import PageRegister from './Components/PageRegister';
