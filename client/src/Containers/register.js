@@ -1,5 +1,5 @@
 import React from 'react';
-import  {Form, Modal,Button, Col} from 'react-bootstrap';
+import  {Form, Modal,Button} from 'react-bootstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
 import '.././Components/css/Register.css'
@@ -8,6 +8,7 @@ import '.././Components/css/Register.css'
 class Register extends React.Component{
   constructor(props){
     super(props)
+
     this.state= {
       name:"",
       lastname:"",
@@ -18,8 +19,8 @@ class Register extends React.Component{
       profilePic:"",
       openAction:false,
       openActionError:false
-      
     }
+
     this.onChange= this.onChange.bind(this);
     this.onSubmitear= this.onSubmitear.bind(this);
     this.onCloseAction=this.onCloseAction.bind(this);
@@ -27,27 +28,27 @@ class Register extends React.Component{
     this.openModal=this.openModal.bind(this);
     this.openModalError=this.openModalError.bind(this);
     this.Handleimage= this.Handleimage.bind(this);
+
    
   }
 
   Handleimage(e){
      var file = e.target.files[0]
-     console.log('este es el file',e.target.files)
+
     
     if(file) {
       const reader = new FileReader()
       reader.addEventListener("load", function() {
         this.setState({
-          
           profilePic: this.result
-   
-       })
-       
+        })
       })
       reader.readAsDataURL(file)
+      // console.log(file)
     } 
-
+    // console.log(this.state)
   }
+
   onChange(e){
     this.setState({
       [e.target.name]:e.target.value
@@ -174,7 +175,7 @@ openModalError(){
             name='password'
             />
    
-    <input  type="file"  label="Foto de perfil" name='profilePic' onChange={this.Handleimage}/>
+    <input  type="file"  label="Foto de perfil" name='profilePic' onChange={(e)=> this.Handleimage(e)}/>
      <Button className='button-register' variant="outline-warning" onClick={(e)=>this.onSubmitear(e)}  >
             Registrarse
           </Button>

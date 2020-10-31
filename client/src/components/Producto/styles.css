@@ -1,0 +1,101 @@
+.card {
+    display: grid;
+    grid-template-columns: 260px;
+    grid-template-rows: 180px 180px 80px;
+    grid-template-areas: "image" "text" "stats";
+    border-radius: 18px;
+    background: white;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.9);
+    font-family: roboto;
+    text-align: center;
+    transition: 0.5s ease;
+    cursor: pointer;
+    margin: 30px;
+}
+
+.card-image {
+    margin-top: 10px;
+    grid-area: image;
+    border-radius: 5%;
+    background-size: cover;
+    width: 200px;
+    height: 200px;
+}
+
+.image-container img{
+    background:#28df99;
+    border-radius: 50%;
+    padding: 3px;
+
+}
+.card-text {
+    grid-area: text;
+    margin: 25px;
+    margin-top: 40px;
+}
+
+.card-text p {
+    color: grey;
+    font-size:15px;
+    font-weight: 300;
+}
+.card-text h2 {
+    margin-top:0px;
+    font-size:28px;
+}
+.card-stats {
+    grid-area: stats; 
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background: linear-gradient(to left, #d2f6c5, #28df99);
+    
+
+}
+.category-card-stats{
+    grid-area: stats; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background: linear-gradient(to left, #d2f6c5, #28df99);
+}
+.card-stats .stat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    padding:10px;
+}
+
+.card:hover {
+    transform: scale(1.15);
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.9);
+}
+.link{
+    color: white;
+    font-size: 19px;
+}
+.link:hover{
+    text-decoration: none;
+    color: #f6f7d4;
+}
+
+.shopIcon:hover {
+    color: #f6f7d4;
+}
+
+.value{
+    font-size: 21px;
+}
+
+.upper-container{
+    height: 120px;
+    background: linear-gradient(to left, #f6f7d4, #28df99);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}

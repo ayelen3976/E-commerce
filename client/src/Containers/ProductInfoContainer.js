@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 //Componentes
-import Nav from '../Components/Nav'
+import Nav from '../Components/Nav/Nav'
 import ReviewList from '../Components/Review/ReviewList';
 import InputReview from '../Components/Review/inputReview'
 

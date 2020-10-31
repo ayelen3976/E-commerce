@@ -4,7 +4,7 @@ import MaterialTable from 'material-table';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 //Internos
-import Nav from '../Nav';
+import Nav from '../Nav/Nav';
 import {Table, Modal, Button, Form} from "react-bootstrap";
 import { connect } from 'react-redux';
 import axios from "axios"

@@ -1,7 +1,7 @@
 import React from 'react'
 //Externas
 import MaterialTable from 'material-table';
-import Nav from '../Nav';
+import Nav from '../Nav/Nav';
 // import Button from '@material-ui/core/Button';
 
 function Order({orderArray}) {

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Table, Modal, Button, Form} from "react-bootstrap";
 import axios from 'axios';
-import Nav from '../Components/Nav';
+import Nav from '../Components/Nav/Nav'
 
 function CategoryForm() {
   const [lgShow, setLgShow] = useState(false);

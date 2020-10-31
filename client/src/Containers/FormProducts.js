@@ -8,7 +8,7 @@ import axios from 'axios';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { BsFillTrashFill } from "react-icons/bs";
-import Nav from '../Components/Nav';
+import Nav from '../Components/Nav/Nav'
 
 function FormProducts() {
   
