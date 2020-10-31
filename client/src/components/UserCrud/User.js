@@ -6,7 +6,6 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 //Internos
 import Nav from '../Nav';
 import {Table, Modal, Button, Form} from "react-bootstrap";
-import { connect } from 'react-redux';
 import axios from "axios"
 
 
@@ -28,7 +27,7 @@ function User({userArray , editUserState}) {
     let data =[]
    
     if(userArray){
-        userArray.map(user =>{
+      userArray.map(user =>{
             data.push({
                 id: user.id,
                 firstName: user.firstName,
@@ -38,6 +37,7 @@ function User({userArray , editUserState}) {
                 rol: user.rol
             })
         })
+      
     }
     function onChange(e) {
         setUser({

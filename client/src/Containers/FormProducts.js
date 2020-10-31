@@ -394,7 +394,7 @@ function FormProducts() {
           closeMenuOnSelect={false} 
           components={animatedComponents}
            options={optionSelect} 
-           isMulti 
+          
            onChange={handleChangeCategory}/>
           
         </Modal.Body>
