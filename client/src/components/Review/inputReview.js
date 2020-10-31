@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-
+import { connect } from 'react-redux';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Rating from '@material-ui/lab/Rating';
 import axios from 'axios'
 
-
-export default function InputReview(props) {
+ function InputReview(props) {
+     
 const {productId} = props
 const [text, setText] = useState()
 const [star, setStar]= useState()
+const [userId, setUserId]= useState()
+
 
 
 
@@ -27,9 +29,9 @@ const [star, setStar]= useState()
        e.preventDefault()
        
        axios.post(`http://localhost:4000/products/${id}/review`,{
-        "userId": "1",
-        "description": text,
-        "stars": star 
+        userId: props.userData.id,
+        description: text,
+        stars: star 
        })
    }
 
@@ -37,16 +39,25 @@ const [star, setStar]= useState()
     
     return (
         <div>
-            <Form>
+            <Form hidden={!props.isOnline} >
                 <Form.Group >
-                    <Form.Label>Deja tu comentario</Form.Label>
-                    <Form.Control  placeholder="tu comentario" onChange={guardarDescripcion} />
-                </Form.Group>
-                <Rating onChange={guardarEstrellas}/>
-                <Button variant="primary" type="submit" onClick={e=>{enviar(e,productId)}}>
-                        Submit
+                    <Rating onChange={guardarEstrellas} />
+                    <Form.Control as="textarea"  rows={3} placeholder="¿Que te pareció este producto?" onChange={guardarDescripcion} />
+                    <Button variant="outline-warning" type="submit" onClick={e=>{enviar(e,productId)}}>
+                        Comentar
                 </Button>
+                </Form.Group>
+                
+                
             </Form>
         </div>
     )
 }
+
+const mapStateToProps = state => {
+    return {
+        userData: state.auth.user.user,
+        isOnline: state.auth.isAuthenticated
+    }
+}
+export default  connect (mapStateToProps) (InputReview)  ;

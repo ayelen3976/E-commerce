@@ -11,9 +11,12 @@ import OrderDetails from './OrderDetails';
 
 class OrderContainer extends Component {
 
-
     componentDidMount() {
         this.props.getOrders();
+    }
+
+    componentDidUpdate(){
+    //    this.props.getOrders()
     }
 
     render() {

@@ -48,6 +48,9 @@ Review.belongsTo(User);//Una review pertenece a un usuario en particular
 Product.hasMany(Review); // Un producto puede tener muchas reviews
 Review.belongsTo(Product); //Una review pertecene a un producto en particular
 
+Order.belongsTo(User);
+User.hasMany(Order)
+
 Category.belongsToMany(Product, { through: 'productcategories' }); 
  
 module.exports = {

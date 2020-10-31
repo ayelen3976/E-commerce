@@ -6,7 +6,7 @@ import { Button, Table} from 'react-bootstrap'
 import { makeStyles } from '@material-ui/core/styles';
 import {Paper, Grid  } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import Nav from './Nav'
+import Nav from './Nav/Nav';
 import { updateStock} from '../Redux/Actions/Listproducts';
 
 
@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
       postToMyOrder(products, usuario.id)
       putToMyOrder(products, usuario.id)
       alert('go to checkout payment')
+    //  console.log(products, usuario.id ,'idUser ya estoy registrado jsjs')
     }
   
   }

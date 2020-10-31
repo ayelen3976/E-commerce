@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import './css/Nav.css';
+import './styles.css';
 import SearchIcon from '@material-ui/icons/Search';
 import { connect } from 'react-redux';
 import { Form} from 'react-bootstrap';
 import { Button } from '@material-ui/core';
-import buscarProducto from '../Redux/Actions/buscarProducto'
+import buscarProducto from '../../Redux/Actions/buscarProducto'
 
 
 
@@ -20,6 +20,7 @@ function SearchBar (props) {
 
     return (
      
+
          <Form className='SearchBar'>
          <input className='Input' placeholder ='Search...'  onChange={e => setSearchBar(e.target.value)} />
          <Button  onClick={()=>{alHacerClick(searchBar)}}>
@@ -35,7 +36,7 @@ function SearchBar (props) {
 
 const mapDispatchToProps={
     buscarProducto
-    
+
 }
 
 

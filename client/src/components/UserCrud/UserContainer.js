@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {getUsers , editUserState} from '../../Redux/Actions/userActions';
+import {getUsers } from '../../Redux/Actions/userActions';
 
 //Componentes
 import User from './User';
@@ -24,7 +24,7 @@ class UserContainer extends Component {
     
         return (
             <div >
-                <User editUserState={editUserState} userArray={userData} goTo={(path)=> this.props.history.push(path)} />
+                <User userArray={userData} goTo={(path)=> this.props.history.push(path)} />
             </div>
         )
     }
@@ -38,7 +38,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     getUsers,
-    editUserState
 }
 
 export default withRouter(connect(mapStateToProps,mapDispatchToProps)(UserContainer)) ;

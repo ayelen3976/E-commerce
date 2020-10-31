@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Table,  Button} from "react-bootstrap";
 import axios from 'axios';
-import Nav from './../Nav';
+import Nav from './../Nav/Nav';
 import ModalAdd from './AddModal'
 import ModalEdit from './EditModal'
 function CategoryForm() {

@@ -1,6 +1,6 @@
 const server = require('express').Router();
 const { response } = require('express');
-const { Order,Product } = require('../db.js');
+const { Order,Product ,OrderLine , User} = require('../db.js');
 
 
 
@@ -16,7 +16,7 @@ server.get('/', async(req, res, next) => {
         await Order.findAll({
             where: {
                 estado:  value ,
-            }
+            },include: User
         })
             .then(orderList => {
                 if(orderList) res.json(orderList);

@@ -1,42 +1,45 @@
 import React, { Component } from 'react'
-import {connect}  from 'react-redux';
-import {login} from '../../Redux/Actions/auth'
-import {Modal, Row, Col, Button, Container} from 'react-bootstrap'
+import { connect } from 'react-redux';
+import { login } from '../../Redux/Actions/auth'
+import { Modal,  Button } from 'react-bootstrap'
+import LoginWithGoogle from '../LoginGoogle/GoogleWithLogin'
 import '../css/Login.css'
 
 class Login extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
-            email : "",
-            password : ""
+            email: "",
+            password: ""
         }
 
-        this.onChange= this.onChange.bind(this)
-        this.onSubmitear= this.onSubmitear.bind(this)
+        this.onChange = this.onChange.bind(this)
+        this.onSubmitear = this.onSubmitear.bind(this)
     }
+
+    
 
     onChange(e) {
         this.setState({
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
-    onSubmitear(e){
+    onSubmitear(e) {
         e.preventDefault()
         this.props.login(this.state)
-        .then(()=>{console.log("todo bien")})
+            .then(() => { console.log("todo bien") })
         this.props.onHide()
-        
+
     }
 
     render() {
         return (
             <div>
-    <Modal {...this.props} aria-labelledby="contained-modal-title-vcenter">
-    <Modal.Header closeButton>
-      <Modal.Title id="contained-modal-title-vcenter">
-     Sign In
+                <Modal {...this.props} aria-labelledby="contained-modal-title-vcenter">
+                    <Modal.Header closeButton>
+                        <Modal.Title id="contained-modal-title-vcenter">
+                            Sign In
       </Modal.Title>
     </Modal.Header>
     <Modal.Body className="show-grid">
@@ -48,7 +51,7 @@ class Login extends Component {
 
     </div>
    
-
+<LoginWithGoogle/>
 
    
 
@@ -65,14 +68,12 @@ class Login extends Component {
 
 
 
-    
+
 }
-
-
 
 const mapDispatchToProps = {
     login
 }
 
 
-export default connect(null,mapDispatchToProps)(Login)
+export default connect(null, mapDispatchToProps)(Login)

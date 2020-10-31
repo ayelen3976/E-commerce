@@ -9,7 +9,7 @@ function userReducer(state = initialState, {type , payload}) {
             users: payload
           }
         case EDIT_USER_STATE:
-            state.orders.map(user =>{
+            state.users.map(user =>{
                 if(user.id === payload.id){
                     user.rol = payload.rol
                 }

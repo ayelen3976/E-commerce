@@ -8,7 +8,7 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import ForwardIcon from '@material-ui/icons/Forward';
 import {connect} from 'react-redux'
 import {editOrderState} from '../../Redux/Actions/orderActions';
-import Nav from '../Nav';
+import Nav from '../Nav/Nav';
 import "./style.css"
 
 function OrderDetails({orderArray ,goTo ,teMandoUnCambio}) {
@@ -82,7 +82,7 @@ const handleChangeOptions = selectedOption =>{
                     {
                         icon: ForwardIcon,
                         tooltip: 'Ver Detalles de la Orden',
-                        onClick: (event,rowData) => goTo(`/admin/orders/${rowData.userId}`)
+                        onClick: (event,rowData) => goTo(`/admin/orders/${rowData.orderId}`)
                     },
                     {
                         icon: EditIcon,

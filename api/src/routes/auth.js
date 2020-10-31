@@ -5,6 +5,42 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const authConfig = require('../../auth');
 
+//Login con google
+server.post('/login/google' , async(req,res,next)=> {
+    let {email,firstName,lastName,profilePic} = req.body;
+    //PRIMERO BUSCMAOS EL USUARIO O LO CREAMOS
+    User.findOrCreate({
+        where: {
+            email
+        },
+        defaults : {
+            firstName,
+            lastName,
+            email,
+            profilePic,
+            rol: 'Client'
+        }
+    })
+    .then(user => {
+
+            //Creamos token igual que en el signUp
+            let token = jwt.sign({user: user}, authConfig.secret ,{
+                expiresIn : authConfig.expires
+            })
+
+            res.json({
+                user:user,
+                token:token
+            })
+            
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(401).json({message: 'Problemas al iniciar sesion' , error : err})
+    })
+})
+
+
 //Ruta de logeo
 server.post('/login' , async(req,res,next)=> {
     let {email,password} = req.body;

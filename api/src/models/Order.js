@@ -35,4 +35,3 @@ module.exports = (sequelize) => {
     });
 };
 
-//default value carrito

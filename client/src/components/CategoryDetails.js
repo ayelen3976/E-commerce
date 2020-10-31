@@ -2,7 +2,7 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
 
-import ProductCard from '../Components/ProductCard';
+import ProductCard from '../Components/Producto/ProductCard';
 
 
 function CategoryDetails({ products }) {

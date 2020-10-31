@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 //Componentes
-import Nav from '../Components/Nav'
+import Nav from '../Components/Nav/Nav'
 import Catalogo from '../Components/Catalogo';
 // import Sidebar from '../components/Sidebar'
 import { connect } from 'react-redux';

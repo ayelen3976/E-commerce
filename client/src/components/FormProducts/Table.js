@@ -6,7 +6,7 @@ import { BsFillTrashFill } from "react-icons/bs";
 import ModalAdd from './AddModal'
 import ModalEdit from './EditModal'
 import makeAnimated from 'react-select/animated';
-import Nav from './../Nav'
+import Nav from './../Nav/Nav';
  
 const animatedComponents = makeAnimated();
 export default function FormProduct() {
