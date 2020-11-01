@@ -1,5 +1,5 @@
 import React from 'react';
-import  {Form, Modal,Button, Col} from 'react-bootstrap';
+import  {Form, Modal,Button} from 'react-bootstrap';
 import axios from 'axios';
 import { Link , useHistory} from 'react-router-dom'
 import '.././Components/css/Register.css'
@@ -9,9 +9,9 @@ class Register extends React.Component{
   
   constructor(props){
     
-    
     super(props)
    
+
     this.state= {
       name:"",
       lastname:"",
@@ -22,17 +22,33 @@ class Register extends React.Component{
       profilePic:"",
       openAction:false,
       openActionError:false
-      
     }
-    
     this.onChange= this.onChange.bind(this);
     this.onSubmitear= this.onSubmitear.bind(this);
     this.onCloseAction=this.onCloseAction.bind(this);
     this.onCloseActionError=this.onCloseActionError.bind(this);
     this.openModal=this.openModal.bind(this);
     this.openModalError=this.openModalError.bind(this);
-    this.Handleimage=this.Handleimage.bind(this);
+    this.Handleimage= this.Handleimage.bind(this);
+
    
+  }
+
+  Handleimage(e){
+     var file = e.target.files[0]
+
+    
+    if(file) {
+      const reader = new FileReader()
+      reader.addEventListener("load", function() {
+        this.setState({
+          profilePic: this.result
+        })
+      })
+      reader.readAsDataURL(file)
+      // console.log(file)
+    } 
+    // console.log(this.state)
   }
 
   onChange(e){
@@ -40,12 +56,11 @@ class Register extends React.Component{
       [e.target.name]:e.target.value
     })
     
-     console.log(`la propiedad seria ${[e.target.name]}:${e.target.value}`)
+    // console.log(`la propiedad seria ${[e.target.name]}:${e.target.value}`)
   }
 
 
   onSubmitear(e){
-    console.log(this.state)
   
     e.preventDefault();
     axios({
@@ -74,15 +89,11 @@ class Register extends React.Component{
     })
   };
 
-  Handleimage(e) {
-    var file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        this.setState({ profilePic: event.target.result });
-      };
-      reader.readAsDataURL(file);
-    }
+  profilePic= event=>{
+    this.setState({
+      profilePic : event.target.files[0]
+    })
+   
   }
 
 
@@ -117,6 +128,9 @@ openModalError(){
  render(){
     return (
       <div className='component'>
+<div className='tituloregister'>  
+
+</div>
 
         <div className='Form'>
            <form>
@@ -194,14 +208,12 @@ openModalError(){
      
 
    
-     <input  type="file"  label="Foto de perfil" name='profilePic' onChange={(e)=> this.Handleimage(e)}/>
-
-     <br/>
-     <br/>
-
+    <input style={{display: "-webkit-inline-box"}}  name='profilePic' type='file'  onChange={this.profilePic}/>
+    <br/>
+    <br/>
 
 
-     <Button className='button-register'  onClick={(e)=>this.onSubmitear(e)}  >
+     <Button className='button-register' variant="outline-warning" onClick={(e)=>this.onSubmitear(e)}  >
             Registrarse
           </Button>
           </div>

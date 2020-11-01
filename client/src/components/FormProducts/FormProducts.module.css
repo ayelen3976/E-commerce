@@ -1,0 +1,19 @@
+.principal{
+    background-image: url(../css/pexels-lukas-616404.jpg);
+}
+.tabla{
+    background: #dfdede;;
+    filter: drop-shadow(0 0 0.75rem black);
+}
+
+.botonAñadir{
+    margin-left: 42%;
+    margin-bottom: 1%;
+    height: 50px;
+    width: 200px;
+     background:  #28df99;
+     border:#28df99;
+}
+.botonAñadir:hover{
+    background:   linear-gradient(to left, #f6f7d4, #28df99);
+}

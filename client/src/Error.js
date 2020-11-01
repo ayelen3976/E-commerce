@@ -1,6 +1,6 @@
 import React from 'react';
-import Nav from './Components/Nav';
-import bannerError from './3733.jpg';
+import Nav from './Components/Nav/Nav';
+import bannerError from './404Nuevo.png';
 
 export default function Error(){
 

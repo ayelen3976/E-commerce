@@ -1,4 +1,4 @@
-import { GET_PRODUCTS ,GET_PRODUCTS_BY_ID, STOCK } from '../Actions/actiontypes';
+import { GET_PRODUCTS ,GET_PRODUCTS_BY_ID, STOCK, PRODUCTS_BY_CATEGORY } from '../Actions/actiontypes';
 const initialState = {};
 
 
@@ -42,11 +42,13 @@ export default function productReducer(state = initialState, action) {
       case STOCK: 
       console.log(action);
       return {...state,  products: UpdatedStore(state.products, action.payload, action.flag)}
+ 
 
     default:
       return state;
   }
 
 }
+
 
 

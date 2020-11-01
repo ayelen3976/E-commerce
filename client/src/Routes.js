@@ -7,8 +7,8 @@ import {BrowserRouter} from 'react-router-dom';
 import Home from './Components/Home'
 import ProductListContainer from './Containers/ProductListContainer';
 import ProductInfoContainer from './Containers/ProductInfoContainer';
-import FormProducts from './Containers/FormProducts';
-import CategoryForm from './Containers/CategoryForm';
+import FormProducts from './Components/FormProducts/Table';
+import CategoryForm from './Components/FormCategory/Table';
 import CategoryListContainer from './Containers/CategoryListContainer';
 import CategoryInfoContainer from './Containers/CategoryInfoContainer';
 import PageRegister from './Components/PageRegister';
@@ -18,7 +18,8 @@ import OrderInfo from './Components/Orders/OrderInfo';
 import Login from './Components/Login';
 import UserContainer from './Components/UserCrud/UserContainer'
 import Error from './Error';
-import Profile from './Components/profile/Profile'
+import Profile from './Components/profile/Profile';
+import Nosotros from './Containers/nosotres/Nosotros';
 
 const Routes = () => {
     return (
@@ -39,6 +40,7 @@ const Routes = () => {
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/users' component={UserContainer} />
                 <Route exact path='/profile' component={Profile}/>
+                <Route exact path='/nosotros' component={Nosotros} />
                 <Route component={Error}/>
             </Switch>
         </BrowserRouter>

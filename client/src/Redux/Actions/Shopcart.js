@@ -12,15 +12,11 @@ export function postCart(totalData,userId){
 
         data:{cantidad:p.count, id:p.product.id, telefono:123123, direccion:"mirave2"}})
         .then((res)=>{
-          console.log("Finished");
-          dispatch({type:POST_ORDER})})
-        .catch((err)=>{console.log(err)}) 
+          dispatch({type:POST_ORDER })})
+    .catch((err)=>{console.log(err)}) 
       })
-
-
-
-  }
-}
+      console.log(totalData, 'baaa')
+}}
 
 export function putCart(datatotal, userId){
   return (dispatch) => {

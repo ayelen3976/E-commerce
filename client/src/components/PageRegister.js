@@ -1,6 +1,6 @@
 import React from 'react';
 import Register from '../Containers/register';
-import Nav from './Nav';
+import Nav from './Nav/Nav';
 
 
 

@@ -1,42 +1,37 @@
-.InputSearch{
-    margin-left:90px;
-    width: 500px;
-    height:40px;
-    border-radius:10px;
-
-}
-.Icons{
-    float: right;
-    display:contents;
-
-}
-.Nav{
-    border-bottom: 1px solid lightgrey;
-    height: 20%;
-    background-color:#ffc107;
-    justify-content: space-evenly;
-}
-.divoptions{
-    background-color:#ffc107;
-    margin-top: 0px;
+.Navbar{
+    background: linear-gradient(to top, #2ec1ac, #28df99);
+    
+    height: 100px;
+ }
+.NavbarTwo{
+    background: linear-gradient(to bottom, #2ec1ac, #28df99);
     height: 50px;
-    margin-bottom: 150px;
+    justify-content: space-around;
 }
-.divoptions2{
+.SearchBar{
+    width: 100%;
+    text-align: center;
+    margin-left: 16%;
+}
+.Input{
+    border-radius: 10px;
+    width: 50%;
+    height: 40px;
+}
+.options{
+    margin: auto;
     display: inline-flex;
-    margin-left: 250px;
-    margin-top: 80px;
-}
-ul{
-    padding: 10px;
-    margin-left: 260px;
- 
 
 }
 ul li{
-    color:black;
-    font-size: large;
-    display: inline-block;
-    position: initial;
-    padding: 0 10px;
+list-style: none;
+margin: 20px;
+}
+.Icons{
+    display: inline-flex;
+    flex: none;
+}
+.Icon{
+margin-right: 15px;
+
 }

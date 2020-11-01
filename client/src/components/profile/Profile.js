@@ -3,6 +3,7 @@ import './Profile.css';
 import ProfileCard from './ProfileCard';
 import {connect} from 'react-redux'
 import axios from 'axios'
+import Nav from '../Nav/Nav'
 
 function Profile({idUser}){
 
@@ -32,6 +33,8 @@ function Profile({idUser}){
 
     return (
         <div className='App'>
+            <Nav/>
+            <br/>
             <ProfileCard 
             userName={usuario.userName}
              firstName= {usuario.firstName} 

@@ -1,7 +1,7 @@
 import { Grid } from '@material-ui/core';
 import React from 'react';
-import CategoryCard from './CategoryCard';
-import ProductCard from './ProductCard';
+import CategoryCard from './Category/CategoryCard';
+import ProductCard from './Producto/ProductCard';
 
 
 //Una lista de products cards

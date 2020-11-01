@@ -57,18 +57,23 @@ function Producto({id, name, price, image, description , stock ,addNewItemToCart
   },[])
 
  return (
-            <div> 
+            <div className={styles.cont}> 
             <div className={styles.detailContent}>
                 {/* <h1>Detalle Card</h1> */}
-                <figure> <img src={image} alt={name} /> </figure>
+                <figure className={styles.img}> <img src={image} alt={name} /> </figure>
                 <div className={styles.infoContent}>
-                    <h5>{name}</h5>
-                    <span className={styles.price}>$ {price} </span>
-                    <p> {description} </p>
-                    <Rating value={promedio} readOnly size="large" style={{margin:"0 auto"}} />
+                    <h5 className={styles.name}>{name}</h5>
+                   < div className={styles.reviews}>
+                      <Rating value={promedio} readOnly size="large" />
+                   </div>
+
+                    
+                    <div className={styles.price}>$ {price} </div>
+                    <p className={styles.info}> {description} </p>
+                   
                     <div className={styles.botonera}>
-                        <Link to={'/products'}><button className={styles.buttons}> <i class="fas fa-bars"></i> </button></Link>
-                        <button onClick={handleCartAddClick} className={styles.buttons}>  <AddShoppingCartIcon /></button>   
+                        
+                        <button onClick={handleCartAddClick} className={styles.buttons}> Comprar <AddShoppingCartIcon /></button>   
                     </div>
                 </div>
             </div>

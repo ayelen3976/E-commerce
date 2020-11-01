@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_PRODUCTS ,GET_PRODUCTS_BY_ID, STOCK } from './actiontypes';
+import { GET_PRODUCTS ,GET_PRODUCTS_BY_ID, STOCK, PRODUCTS_BY_CATEGORY  } from './actiontypes';
 
 export default function GetProducts() {
    //  const URL= "http://localhost:4000"
@@ -14,7 +14,6 @@ export default function GetProducts() {
          })
    }
 }
-
 export  function GetProductsById(productId) {
    //  const URL= "http://localhost:4000"
    return  async (dispatch)=> {
@@ -36,6 +35,11 @@ export function updateStock(item, flag){
    }
     
 }
+
+
+
+
+
 
 
  

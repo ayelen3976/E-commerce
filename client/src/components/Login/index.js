@@ -39,22 +39,29 @@ class Login extends Component {
                 <Modal {...this.props} aria-labelledby="contained-modal-title-vcenter">
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-vcenter">
-                            Sign In
+                            Iniciar Sesión 
       </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body className="show-grid">
-                        <div className='inputmodal-one'>
-                            <input placeholder="email" type="text" name='email' onChange={this.onChange} value={this.state.email} />
-                        </div>
-                        <div className='inputmodal-two'>
-                            <input placeholder="password" type="password" name='password' onChange={this.onChange} value={this.state.password} />
-                        </div>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="warning" className='button-modal' onClick={(e) => this.onSubmitear(e)}>Submit</Button>
-                        <LoginWithGoogle/>       
-                    </Modal.Footer>
-                </Modal>
+    </Modal.Header>
+    <Modal.Body className="show-grid">
+    <div className='inputmodal-one'>
+    <input placeholder="email" type="text" name='email' onChange={this.onChange} value={this.state.email}/>
+    </div>
+    <div className='inputmodal-two'>
+    <input placeholder="password" type="password" name='password' onChange={this.onChange} value={this.state.password}/>
+
+    </div>
+   
+<LoginWithGoogle/>
+
+   
+
+         
+ 
+    </Modal.Body>
+    <Modal.Footer>
+      <Button className='button-modal' onClick={(e) => this.onSubmitear(e)}>Ingresar</Button>
+    </Modal.Footer>
+  </Modal>
             </div>
         )
     }

@@ -6,7 +6,7 @@ import { Button, Table} from 'react-bootstrap'
 import { makeStyles } from '@material-ui/core/styles';
 import {Paper, Grid  } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import Nav from './Nav'
+import Nav from './Nav/Nav';
 import { updateStock} from '../Redux/Actions/Listproducts';
 
 
@@ -33,8 +33,9 @@ const useStyles = makeStyles((theme) => ({
       alert('registrate campeon')
     } else{
       postToMyOrder(products, usuario.id)
-      putToMyOrder(products, usuario.id)
-     console.log(products, usuario.id ,'idUser ya estoy registrado jsjs')
+      //putToMyOrder(products, usuario.id)
+      alert('go to checkout payment')
+    //  console.log(products, usuario.id ,'idUser ya estoy registrado jsjs')
     }
   
   }
@@ -75,10 +76,10 @@ const useStyles = makeStyles((theme) => ({
   <h4 className='subPrice'>${subTotal}</h4>
 </div>
 <div className='buttonNext'>
-<Button  size="lg"  variant="warning" onClick={handleCheckout} block >NEXT </Button>
+<Button  size="lg"  variant="outline-success" onClick={handleCheckout} block >NEXT </Button>
 </div>
 <div className='Cancel'>
-<Button size="lg"  variant="warning" style={{marginLeft:'10px'}} block><Link to='/products' style={{color: "black",textDecoration: 'none'}}>CANCEL</Link></Button>
+<Button size="lg"  variant="outline-danger" style={{marginLeft:'10px'}} block><Link to='/products' style={{color: "red",textDecoration: 'none'}}>CANCEL</Link></Button>
 </div>
 </div>
 
@@ -103,13 +104,13 @@ const useStyles = makeStyles((theme) => ({
      <h4>{product.name}</h4>
      <p>stock:{product.stock}</p>
      <h5>{product.description}</h5>
-     <h4>${product.price}</h4>
+     <h4 className='precio'>${product.price}</h4>
      </th>
      <th>
      <div className="contador">
     <span>{count}</span>
-    <Button  size="sm" style={{height: '10%'}}  variant="warning"  disabled={count <= 0} onClick={(e) => restarCantidad(product)}>-</Button>
-<Button size="sm" style={{height: '10%'}}  variant="warning" onClick={(e) => sumarCantidad(product)} disabled={product.stock <= 0}>+</Button> 
+    <Button  size="md"   className='menos' variant="success"  disabled={count <= 0} onClick={(e) => restarCantidad(product)}>-</Button>
+<Button size="md"   variant="success" onClick={(e) => sumarCantidad(product)} disabled={product.stock <= 0}>+</Button> 
 {
  console.log(product.stock, count)
  

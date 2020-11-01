@@ -96,10 +96,11 @@ server.delete('/:id',async (req, res, next) => {
 //nos lleguen de manera correcta.
 server.put('/:id',async (req, res, next) => {
     // Los valores modificados se sacaran del body mas adelante
-    const { name, description } = req.body;
+    const { name, description, img } = req.body;
     await Category.update({
         name: name,
-        description: description
+        description: description,
+        img:img
     }, {
         where: {
             categoryID: req.params.id
