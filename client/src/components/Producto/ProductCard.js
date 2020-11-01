@@ -16,7 +16,7 @@ function ProductCard({id,name,description,price,image,stock,addNewItemToCart, up
 
    toast.configure()
    const notify=()=>{
-    toast.warn('Product Add in the Cart Successfully!!', {position:toast.POSITION.BOTTOM_RIGHT, autoClose:2000})
+    toast('Product Add in the Cart Successfully!!', {position:toast.POSITION.BOTTOM_RIGHT, autoClose:2000})
 }
   const handleCartAddClick = () => {
     if(sub_stock !== 0) {

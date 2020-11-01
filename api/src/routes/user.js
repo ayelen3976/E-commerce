@@ -128,8 +128,7 @@ server.post('/', async (req, res, next) => {
 
 
 //Agregamos un producto al carrito de un usuario en particular
-server.post('/:idUser/cart',async (req,res,next) =>{
-    //El ID va a ser el ID del Producto 
+server.post('/:idUser/cart',async (req,res,next) =>{//
     const {id , cantidad ,direccion,telefono} = req.body;
     const {idUser} = req.params;
     // console.log(id)
@@ -170,7 +169,7 @@ server.post('/:idUser/cart',async (req,res,next) =>{
 ////////////////////// UPDATE ///////////////////
 
 //Ruta para editar las cantidades del carrito
-server.put('/:idUser/cart', async(req,res,next) => {
+server.put('/:idUser/cart', async(req,res,next) => { 
     const { idUser } = req.params;
     const {cantidad,productId} = req.body;
     let order = await Order.findOne({ where: { userId: idUser, estado: 'Carrito' } });

@@ -2,27 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {addToShoppingCart, removeFromCart,postCart, putCart} from "../Redux/Actions/Shopcart";
 import './css/Checkout.css'
-import { Button, Table} from 'react-bootstrap'
-import { makeStyles } from '@material-ui/core/styles';
-import {Paper, Grid  } from '@material-ui/core';
+import {  Table} from 'react-bootstrap'
+import { Button, Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Nav from './Nav/Nav';
 import { updateStock} from '../Redux/Actions/Listproducts';
 
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-}));
+
 
  function Checkout({ products, subTotal,  addNewItemToCart, removeItemFromCart,postToMyOrder,   putToMyOrder, updateStock, usuario}) {
-  const classes = useStyles();
+
 
 
   
@@ -33,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
       alert('registrate campeon')
     } else{
       postToMyOrder(products, usuario.id)
-      putToMyOrder(products, usuario.id)
+       putToMyOrder(products, usuario.id)
       alert('go to checkout payment')
     //  console.log(products, usuario.id ,'idUser ya estoy registrado jsjs')
     }
@@ -55,9 +45,10 @@ const useStyles = makeStyles((theme) => ({
  products.map(i => total = products[i] + total) 
 
   return (
-<div >
+<div  >
 <Nav/>
 <div className="right">
+  
 <div> <h1 className='name-right'>Your Cart</h1> </div>
 <div>
 
@@ -69,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
 </div>
 )
 )}
+
 </div>
 
 <div className='itemsprice'>  
@@ -76,22 +68,18 @@ const useStyles = makeStyles((theme) => ({
   <h4 className='subPrice'>${subTotal}</h4>
 </div>
 <div className='buttonNext'>
-<Button  size="lg"  variant="warning" onClick={handleCheckout} block >NEXT </Button>
+<Button    onClick={handleCheckout} block >NEXT </Button>
 </div>
 <div className='Cancel'>
-<Button size="lg"  variant="warning" style={{marginLeft:'10px'}} block><Link to='/products' style={{color: "black",textDecoration: 'none'}}>CANCEL</Link></Button>
+<Link to='/products' style={{color: "black",textDecoration: 'none'}}><Button  style={{marginLeft:'10px'}} block>CANCEL</Button></Link>
 </div>
 </div>
 
 <div>
-  <Grid item xs={6}>
+<Grid item xs={6}>
 { products.map(({product, count})=>(  
 
-    <div className='Card'>  
-     <Paper className={classes.paper} key={product.id}>
-
-   
-     <Paper className={classes.paper}> 
+    <div className='check' >  
     <Table >
     <tbody>
         <tr>
@@ -102,15 +90,15 @@ const useStyles = makeStyles((theme) => ({
     </th>
     <th>
      <h4>{product.name}</h4>
-     <p>stock:{product.stock}</p>
-     <h5>{product.description}</h5>
-     <h4>${product.price}</h4>
+     <p>only stock:{product.stock}</p>
      </th>
      <th>
      <div className="contador">
+  
+  
+    <Button className='count'  size="sm" style={{height: '10%', margin:'10px'}}  disabled={count <= 0} onClick={(e) => restarCantidad(product)}>-</Button>
     <span>{count}</span>
-    <Button  size="sm" style={{height: '10%'}}  variant="warning"  disabled={count <= 0} onClick={(e) => restarCantidad(product)}>-</Button>
-<Button size="sm" style={{height: '10%'}}  variant="warning" onClick={(e) => sumarCantidad(product)} disabled={product.stock <= 0}>+</Button> 
+<Button className='count' size="sm" style={{height: '10%', margin:'10px'}} onClick={(e) => sumarCantidad(product)} disabled={product.stock <= 0}>+</Button> 
 {
  console.log(product.stock, count)
  
@@ -120,12 +108,11 @@ const useStyles = makeStyles((theme) => ({
     </tr>
     </tbody>
     </Table>
-    </Paper>
-    </Paper>
+  
     </div>)
 )}
 
-  </Grid>
+</Grid>
   </div>
 
 
@@ -158,7 +145,7 @@ const mapDispatchToProps = (dispatch) => ({
     addNewItemToCart: (itemToAdd) => dispatch(addToShoppingCart( itemToAdd)),
     removeItemFromCart: ( item) => dispatch(removeFromCart(item)),
     postToMyOrder:(items,id)=> dispatch(postCart(items,id)),
-    putToMyOrder:(items, id)=> dispatch(putCart(items,id)),
+    putToMyOrder:(items, id)=> dispatch(postCart(items,id)),
     updateStock:(item, flag)=> dispatch(updateStock(item, flag))
 
   });
