@@ -23,7 +23,7 @@ export const GET_USERS ='GET_USERS';
 export const EDIT_USER_STATE ='EDIT_USER_STATE';
 export const EDIT_USER ='EDIT_USER';
 export const DELETE_USER ='DELETE_USER';
-
+export const SET_USER_GOOGLE = 'SET_USER_GOOGLE';
 
 
 

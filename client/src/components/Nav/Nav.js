@@ -16,15 +16,15 @@ import SearchBar from './SearchBar'
 
  function Nav({ items, logout, usuario }){
   const [modalShow, setModalShow] = useState(false);
-
+  console.log(usuario)
   let history = useHistory();
 
  let clientVisible = true;
   let adminVisible = true;
   let currentVisible = true;
-  if (usuario !== undefined) {
-    usuario.rol === 'Client' ? clientVisible = false : clientVisible = true;
-    usuario.rol === 'Admin' ? adminVisible = false : adminVisible = true;
+  if (usuario !== undefined && usuario.isAuthenticated) {    
+      usuario.user.rol === 'Admin' ? adminVisible = false : adminVisible = true;
+      usuario.user.rol === 'Client' ? clientVisible = false : clientVisible = true;
   }else {
     currentVisible =false;
   }
@@ -114,7 +114,7 @@ import SearchBar from './SearchBar'
 }
 const mapStateToProps = (state) => ({
   items: state.shopP.cart,
-  usuario: state.auth.user.user
+  usuario: state.auth
 });
 
 const mapDispatchToProps = {

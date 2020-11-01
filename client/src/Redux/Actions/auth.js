@@ -1,13 +1,21 @@
 import axios from 'axios';
 import setAuthorizationToken from '../../utils/setAuthorizationToken';
 import jwtDecode from 'jwt-decode';
-import { SET_CURRENT_USER } from './actiontypes';
+import { SET_CURRENT_USER ,SET_USER_GOOGLE } from './actiontypes';
 
 export function setCurrentUser(user) {
+
   return {
     type: SET_CURRENT_USER,
-    user
+    payload : user.user
   };
+}
+
+export function setCurrentUserGoogle(user){
+  return {
+    type: SET_USER_GOOGLE,
+    payload: user.user[0]
+  }
 }
 
 export function logout() {
@@ -37,7 +45,7 @@ export function loginWithGoogle(data) {
       const token = res.data.token;
       localStorage.setItem('jwtToken', token);
       setAuthorizationToken(token);
-      dispatch(setCurrentUser(jwtDecode(token)));
+      dispatch(setCurrentUserGoogle(jwtDecode(token)));
     });
   }
 }

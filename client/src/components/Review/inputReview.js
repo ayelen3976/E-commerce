@@ -56,7 +56,7 @@ const [userId, setUserId]= useState()
 
 const mapStateToProps = state => {
     return {
-        userData: state.auth.user.user,
+        userData: state.auth.user,
         isOnline: state.auth.isAuthenticated
     }
 }
