@@ -1,7 +1,9 @@
 const server = require('express').Router();
 const { Order,Product ,User} = require('../db.js');
 const Stripe = require('stripe');
-
+const {
+    PRIVATE_KEY,
+  } = process.env;
 
 //////////////// READ ////////////////
 
@@ -74,7 +76,7 @@ server.put('/:id', async(req, res, next) => {
 //Post
 server.post('/checkout', async(req, res, next) => {
     //Stripe es una clase entonces la instanciamos para poder acceder a los metodos
-    const stripe = new Stripe('sk_test_51HirpyAgyVHXmwthMaKnX271czvZzMTKbeTefKcPY0i3qUSV3hojBBTy2TGQCQ6cfKYiWZCefvYtYi9T7siegsFx00tISbBDHk')
+    const stripe = new Stripe(PRIVATE_KEY)
 
     
     try {
