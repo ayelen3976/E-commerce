@@ -1,16 +1,17 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
-import {postCart, putCart} from "../Redux/Actions/Shopcart";
+import {postCart} from "../Redux/Actions/Shopcart";
 
 import {Modal , Button, Form} from 'react-bootstrap';
 import './css/Payment.css'
 
-function Payment(props, postToMyOrder, putToMyOrder) {
+function Payment(props) {
 
-  const [detail, setDetail] = useState({ telefono: 234, direccion: 'slka' })
+  const [detail, setDetail] = useState({ telefono: 0, direccion: '' })
 
   function onChange(e) {
     var val = e.target.value;
+    console.log(val)
     setDetail({
       ...detail,
       [e.target.name]: val
@@ -20,7 +21,7 @@ function Payment(props, postToMyOrder, putToMyOrder) {
 
   const Handlebuy = () => {
     // console.log(detail)
-    props.postToMyOrder(props.products, props.usuario.id, detail.telefono, detail.direccion)
+    props.postCart(props.products, props.usuario.id, detail.telefono, detail.direccion)
     //  props.putToMyOrder(props.products, props.usuario.id)
     props.onHide()
   }
@@ -65,12 +66,10 @@ function Payment(props, postToMyOrder, putToMyOrder) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = {
 
+  postCart,
+  // putToMyOrder: (items, id, direccion, telefono) => dispatch(putCart(items, id, direccion, telefono)),
 
-  postToMyOrder: (items, id, direccion, telefono) => dispatch(postCart(items, id, direccion, telefono)),
-  putToMyOrder: (items, id, direccion, telefono) => dispatch(putCart(items, id, direccion, telefono)),
-
-
-});
+};
 export default connect(null, mapDispatchToProps)(Payment)

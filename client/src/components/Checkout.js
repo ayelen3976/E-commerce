@@ -133,7 +133,7 @@ import Payment from './Payment'
 }
 const mapStateToProps = (state) =>{
 
-  const usuario= state.auth.user.user;
+  const usuario= state.auth.user;
 
   let subTotal = 0;
   const products = Object.keys(state.shopP.cart).map((key) => {
