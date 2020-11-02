@@ -1,4 +1,3 @@
-//Only React
 import React, { Component } from 'react';
 
 //Componentes

@@ -14,7 +14,7 @@ import axios from 'axios'
 //Primero se debe pasar al loadStripe la public key otorgada por stripe en su pagina
 const stripePromise = loadStripe('pk_test_51HirpyAgyVHXmwthtYAHNseQRhcu353sW1HbQfom5o2Q2vQl0E8OPQPkkmXIKxiAebK3OxoOLGhjC1zfMXdFgyaf002ZVBQwnx')
 
-const CheckoutForm = ({usuario , products,subTotal , postCart}) => {
+const CheckoutForm = ({  usuario , products,subTotal , postCart, onHide}) => {
   const [detail, setDetail] = useState({ telefono: 0, direccion: '' })
   const stripe = useStripe() //Me da la conexion a stripe
   const elements = useElements() //nos permite acceder a los elementos de stripe / componentes
@@ -50,11 +50,13 @@ const CheckoutForm = ({usuario , products,subTotal , postCart}) => {
       console.log(data)
 
     }
+  
   }
 
   
   return (
-    <form onSubmit={handleSubmit} className='card card-body'>
+    
+    <form  onSubmit={handleSubmit} className='card card-body check' style={{    display: 'contents'}}>
       <div>
         <p>Direction:</p>
         <input name='direccion' placeholder='direction' onChange={(e) =>onChange(e)} />
@@ -66,8 +68,8 @@ const CheckoutForm = ({usuario , products,subTotal , postCart}) => {
       <div className='form-group'>
         <CardElement className='form-control' />
       </div>
-      <h3 className='text-center my-2'>Price: $100</h3>
-      <button className='btn btn-success'>
+  <h3 className='text-center my-2'> Total:{subTotal}</h3>
+      <button className='btn btn-success' onClick={onHide}>
         Buy
     </button>
     </form>
@@ -80,8 +82,10 @@ function Payment(props) {
     <Elements stripe={stripePromise}>
       <div className='container p-4'>
         <div className='row'>
-          <div className='col-md-4 offset-md-4'>
-            <CheckoutForm postCart={postCart} usuario={props.usuario.id} products={props.products} subTotal={props.subTotal}/>
+          <div  className='col-md-4 offset-md-4'>
+          <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
+            <CheckoutForm onHide={props.onHide}  postCart={postCart} usuario={props.usuario.id} products={props.products} subTotal={props.subTotal}/>
+            </Modal>
           </div>
         </div>
       </div>
