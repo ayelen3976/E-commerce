@@ -6,7 +6,7 @@ import axios from 'axios'
 import Nav from '../Nav/Nav';
 import { Button, Modal,Form} from 'react-bootstrap'
 
-function Profile({idUser}){
+function Profile({user}){
 
     const [usuario,setUsuario]=useState({
         id:"",
@@ -32,14 +32,15 @@ function Profile({idUser}){
     
 
     const traerUsuario = (id)=>{
-        axios.get(`/user`, {
-            params: {
-                id: id
-            }
-        }).then((res)=>{
-            console.log(res.data, 'aquii')
-            setUsuario(res.data)
-        }).catch((err)=>{console.log('no recibe data')})
+        // axios.get(`/user`, {
+        //     params: {
+        //         id: id
+        //     }
+        // }).then((res)=>{
+        //     console.log(res.data, 'aquii')
+        //     setUsuario(res.data)
+        // }).catch((err)=>{console.log('no recibe data')})
+        setUsuario(user)
     }
 
     function onChange(e){
@@ -87,7 +88,7 @@ function Profile({idUser}){
 //------------------ACA ARRANCAAA 
 
     useEffect(()=>{
-        traerUsuario(idUser)
+        traerUsuario()
         console.log(usuario, 'eluser')
     },[usuario])
 
@@ -175,7 +176,7 @@ function Profile({idUser}){
             <Button variant="secondary" onClick={handleClose} >
               Cerrar
             </Button>
-            <Button variant="outline-success" onClick={handlerEditUser(idUser)} onClick={handleClose}>
+            <Button variant="outline-success" onClick={handlerEditUser(user.id)} onClick={handleClose}>
              Guardar cambios
             </Button>
           </Modal.Footer>
@@ -200,7 +201,7 @@ function Profile({idUser}){
             <Button variant="secondary" onClick={handleClose} >
               Cerrar
             </Button>
-            <Button variant="outline-success" onClick={handlerEditPassword(idUser)} onClick={handleClosePassword}>
+            <Button variant="outline-success" onClick={handlerEditPassword(user.id)} onClick={handleClosePassword}>
              Guardar cambios
             </Button>
           </Modal.Footer>
@@ -216,7 +217,7 @@ function Profile({idUser}){
 
 const mapStateToProps = (state)=>{
     return{
-        idUser:state.auth.user.id
+      user :state.auth.user
     }
 }
 
