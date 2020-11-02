@@ -5,6 +5,7 @@ const policies = require('../middlewares/policies')
 const nodemailer = require('nodemailer')
 
 server.post('/',(req,res)=>{
+    const {firstName,lastName,userName,email,edad,password} = req.body;
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -15,9 +16,16 @@ server.post('/',(req,res)=>{
 
     var mailOptions = {
         from: 'Remitente',
-        to: 'fernandezjubin.data@gmail.com',
-        subject: 'Enviando correo desde nodemailer',
-        text: '!!!!HOLA COMO ESTAS!!!!'
+        to: email,
+        subject: 'Bienvenido a Moscow Dietetica',
+        text: `Bienvenido${firstName} ${lastName} \n Estamos agradecidos de 
+        tenerte con nosotros.\n Estos son tus datos de usuario:\n 
+        Nombre de Usuario:${userName}\n
+        Nombre:${firstName}\n
+        Apellido:${lastName}\n
+        Email:${email}\n
+        Edad:${edad}\n
+        Contraseña:${password}\n`
     }
 
     transporter.sendMail(mailOptions,(error,info)=>{

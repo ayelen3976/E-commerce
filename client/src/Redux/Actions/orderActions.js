@@ -1,13 +1,10 @@
 import axios from 'axios';
 import {GET_ORDERS ,GET_ORDERS_LINE,EDIT_ORDER_STATE,FIND_ORDER_BY_PK} from './actiontypes';
 
-export function getOrders() {
-    const url = `/order`
+export function getOrders(data) {
+    // const url = `/order`
     return (dispatch) => {
-        axios.get(url)
-            .then(res => {
-                dispatch({ type: GET_ORDERS, payload: res.data })
-            })
+         dispatch({ type: GET_ORDERS, payload: data })
     }
 }
 

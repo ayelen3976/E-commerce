@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getOrders ,editOrderState} from '../../Redux/Actions/orderActions';
+import axios from 'axios';
 
 //Componentes
 import OrderDetails from './OrderDetails';
@@ -11,17 +12,40 @@ import OrderDetails from './OrderDetails';
 
 class OrderContainer extends Component {
 
-    componentDidMount() {
-        this.props.getOrders();
+    constructor(props){
+        super(props)
+        this.state = {
+            orderDatax : []
+        }
+        this.seteo = this.seteo.bind(this)
     }
 
-    componentDidUpdate(){
-    //    this.props.getOrders()
+    seteo(){
+        const url = `/order`
+        axios.get(url)
+        .then(res => {
+           this.setState({
+               orderDatax : res.data
+           })
+           this.props.getOrders(res.data)
+        })
+    }
+    
+    componentDidMount() {
+        this.seteo()
+    }    
+    
+
+    componentDidUpdate(prevProps,prevState,snapshoot){
+      
+        if(prevState.orderDatax !== this.state.orderDatax){
+           console.log("Hola")
+        }
     }
 
     render() {
         const { orderData } = this.props;
-        // console.log(orderReducer)
+        console.log(orderData)
         // console.log(this.props)
     
         return (
@@ -31,6 +55,7 @@ class OrderContainer extends Component {
         )
     }
 }
+
 
 const mapStateToProps = state => {
     return {
