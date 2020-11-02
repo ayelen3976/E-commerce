@@ -216,7 +216,7 @@ function Profile({idUser}){
 
 const mapStateToProps = (state)=>{
     return{
-        idUser:state.auth.user.user.id
+        idUser:state.auth.user.id
     }
 }
 
