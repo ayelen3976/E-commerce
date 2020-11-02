@@ -1,0 +1,72 @@
+<div className="right">
+<div> <h1 className='name-right'>Your Cart</h1> </div>
+<div>
+
+{products.map(({product, count})=>(  
+<div className='items'>
+<h5 className='productName'>{product.name}({count})<h5 className='productCount'>${product.price * count}</h5> </h5>
+
+
+</div>
+)
+)}
+</div>
+
+<div className='itemsprice'>  
+  <h4 className='Subtotal'>Subtotal: </h4> 
+  <h4 className='subPrice'>${subTotal}</h4>
+</div>
+<div className='buttonNext'>
+<Button  size="lg"  variant="warning" onClick={handleCheckout} block >NEXT </Button>
+</div>
+<div className='Cancel'>
+<Button size="lg"  variant="warning" style={{marginLeft:'10px'}} block><Link to='/products' style={{color: "black",textDecoration: 'none'}}>CANCEL</Link></Button>
+</div>
+</div>
+
+<div>
+  <Grid item xs={6}>
+{ products.map(({product, count})=>(  
+
+    <div className='Card'>  
+     <Paper className={classes.paper} key={product.id}>
+
+   
+     <Paper className={classes.paper}> 
+    <Table >
+    <tbody>
+        <tr>
+        
+  
+  <th className = 'card-body-img'>
+    <img   style={{width: "100%"}} src={product.img} alt=''/>
+    </th>
+    <th>
+     <h4>{product.name}</h4>
+     <p>stock:{product.stock}</p>
+     <h5>{product.description}</h5>
+     <h4>${product.price}</h4>
+     </th>
+     <th>
+     <div className="contador">
+    <span>{count}</span>
+    <Button  size="sm" style={{height: '10%'}}  variant="warning"  disabled={count <= 0} onClick={(e) => restarCantidad(product)}>-</Button>
+<Button size="sm" style={{height: '10%'}}  variant="warning" onClick={(e) => sumarCantidad(product)} disabled={product.stock <= 0}>+</Button> 
+{
+ console.log(product.stock, count)
+ 
+}
+    </div>
+    </th>
+    </tr>
+    </tbody>
+    </Table>
+    </Paper>
+    </Paper>
+    </div>)
+)}
+
+  </Grid>
+  </div>
+
+

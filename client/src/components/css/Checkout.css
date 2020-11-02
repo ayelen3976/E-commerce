@@ -1,39 +1,62 @@
-
-.Card{
-    margin: 8px;
+.check{
+    display: flow-root;
 }
 .body{
     display: flex;
 }
 .contador{
-    border: 1px solid black;
+
     inline-size: max-content;
 
 
 }
+.count{
+
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: rgb(12, 12, 11);
+
+    background: linear-gradient(to top, #2ec1ac, #28df99);
+text-align:center
+}
+.count span{
+    font-size: 12px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: rgb(12, 12, 11);
+
+  
+text-align:center
+}
+
 .card-body-img{
     width: 50%;
 }
+.menos{
+    padding-right: 32%;
+}
+
 
 .right{
 
     width: 45%;
-    background-color:#FAF3CA;
+    background-color:rgb(255, 254, 248);
     float: right;
-    border-radius: 10px;
+
     margin: 40px;
+    filter: drop-shadow(0 0 0.75rem black);
 
 }
 .name-right{
-    border-radius: 10px;
+    font-size: 50px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: rgb(12, 12, 11);
 
-    background-color: #ffc107;
+    background: linear-gradient(to top, #2ec1ac, #28df99);
 text-align:center
 }
 
 .items{
     display: flow-root;
-    border-bottom: 1px solid lightgrey;
+
 }
 .itemsprice{
     display: flow-root;
@@ -45,28 +68,47 @@ text-align:center
 
 .productCount{
     margin-right: 15%;
-
-    float: right;
+     float: right;
 }
 .Subtotal{
+    font-size: 30px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: rgb(12, 12, 11);
     margin-left: 15%;
-
+    font-size: 40px;
      float: left;
 }
 .subPrice{
-
+    font-size: 30px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: rgb(12, 12, 11);
     margin-right: 15%;
-
     float: right;
 }
 
+.subPrice, .Subtotal, .precio{
+    color: green;
+}
+
 .buttonNext{
+    margin-top: 2%;
     margin-left: 20%;
     width: 60%;
+    background: linear-gradient(to top, #2ec1ac, #28df99);
+    
+   
 
 }
+.buttonNext span{
+    margin-left: 650%;
+}
 .Cancel{
-    margin-left: 18%;
+    background: linear-gradient(to top, #2ec1ac, #28df99);
+    margin-left: 20%;
     width: 60%;
     margin-top: 4%;
+    margin-bottom: 4%;
+}
+.Cancel span{
+    margin-left: 500%;
 }

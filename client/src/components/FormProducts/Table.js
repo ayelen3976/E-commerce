@@ -7,6 +7,7 @@ import ModalAdd from './AddModal'
 import ModalEdit from './EditModal'
 import makeAnimated from 'react-select/animated';
 import Nav from './../Nav/Nav';
+import styles from './FormProducts.module.css'
  
 const animatedComponents = makeAnimated();
 export default function FormProduct() {
@@ -144,7 +145,7 @@ function Handleimage(e){
   
  //  ----------------Render-------------------------
   return (
-      <div> 
+      <div className={styles.principal}> 
  <Nav/>
     {/* ---------------------Modal Category---------------------- */}
     <Modal show={categoryShow} onHide={handlerCloseCategory}>
@@ -158,7 +159,7 @@ function Handleimage(e){
           <Button variant="secondary" onClick={handlerCloseCategory}>
             Cerrar
           </Button>
-          <Button variant="warning" onClick={agregarCat(modalId)} onClick={()=>{setCategoryShow(false)}}>
+          <Button variant="outline-success" onClick={agregarCat(modalId)} onClick={()=>{setCategoryShow(false)}}>
             Agregar
           </Button>
         </Modal.Footer>
@@ -179,8 +180,8 @@ function Handleimage(e){
       </Modal>
 
     <div className="container">
-      <h1> Formulario de productos</h1>
-    <Button  variant="warning" onClick={() => setLgShow(true)}>Añadir producto</Button>
+      
+    <Button  className={styles.botonAñadir} onClick={() => setLgShow(true)}>Añadir producto</Button>
     {/* ----------------Table--------------------------    */}
    <ModalAdd
     show={lgShow}
@@ -211,7 +212,7 @@ function Handleimage(e){
    setProduct ={setProduct} product={product}
     /> 
 
-<Table striped bordered hover>
+<Table hover className={styles.tabla}>
   <thead style={{ textAlign: "center" }}>
       <tr>
        <th style={{width: "10%"}}>Img</th>
@@ -235,9 +236,9 @@ function Handleimage(e){
       <td>{item.price}</td>
       <td>{item.description}</td>
       <td>{item.stock}</td>
-      <td> <Button className="BsPlusSquareFill" variant="warning" onClick={() =>{setCategoryShow(true) 
+      <td> <Button className="BsPlusSquareFill" variant="outline-success" onClick={() =>{setCategoryShow(true) 
        setModalId(item.id)}}> + </Button>  <Button  variant="danger"> <BsFillTrashFill onClick={()=> megaFuncionDeAyeOne(item.categories,item.id)} />  </Button>   </td>
-       <td><Button variant="warning" onClick={() => editar(item)}>Editar</Button></td>
+       <td><Button variant="outline-success" onClick={() => editar(item)}>Editar</Button></td>
       <td><Button variant="danger" onClick={() => deleteProduct(item.id)}> Eliminar </Button> </td>
        </tr>)))}
       </tbody>

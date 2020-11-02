@@ -43,7 +43,8 @@ const [userId, setUserId]= useState()
                 <Form.Group >
                     <Rating onChange={guardarEstrellas} />
                     <Form.Control as="textarea"  rows={3} placeholder="¿Que te pareció este producto?" onChange={guardarDescripcion} />
-                    <Button variant="outline-warning" type="submit" onClick={e=>{enviar(e,productId)}}>
+                    <br/>
+                    <Button variant="outline-success" type="submit" onClick={e=>{enviar(e,productId)}}>
                         Comentar
                 </Button>
                 </Form.Group>

@@ -16,7 +16,7 @@ function ProductCard({id,name,description,price,image,stock,addNewItemToCart, up
 
    toast.configure()
    const notify=()=>{
-    toast.warn('Product Add in the Cart Successfully!!', {position:toast.POSITION.BOTTOM_RIGHT, autoClose:2000})
+    toast('Product Add in the Cart Successfully!!', {position:toast.POSITION.BOTTOM_RIGHT, autoClose:2000})
 }
   const handleCartAddClick = () => {
     if(sub_stock !== 0) {
@@ -51,24 +51,24 @@ function ProductCard({id,name,description,price,image,stock,addNewItemToCart, up
           <img className='card-image' src={image} />
         </div>
       </div>
-      <div class="card-text">
+      <div className="card-text">
         <h2>{name}</h2>
         <p>{description}</p>
       </div>
-      <div class="card-stats">
-        <div class="stat">
-          <div class="value">$ {price}</div>
-          <div class="type"></div>
+      <div className="card-stats">
+        <div className="stat">
+          <div className="value">$ {price}</div>
+          <div className="type"></div>
         </div>
-        <div class="stat">
-          <div class="value"></div>
-          <div class="type">
+        <div className="stat">
+          <div className="value"></div>
+          <div className="type">
             <Link className='link' to={"/products/" + id}>
               Ver
             </Link></div>
         </div>
-        <div class="stat">
-          <div class="value">
+        <div className="stat">
+          <div className="value">
             <AddShoppingCartIcon className='shopIcon' onClick={handleCartAddClick} disabled={sub_stock === 0} />
           </div>
         </div>

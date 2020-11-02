@@ -39,7 +39,7 @@ class Login extends Component {
                 <Modal {...this.props} aria-labelledby="contained-modal-title-vcenter">
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-vcenter">
-                            Sign In
+                            Iniciar Sesión 
       </Modal.Title>
     </Modal.Header>
     <Modal.Body className="show-grid">
@@ -59,7 +59,7 @@ class Login extends Component {
  
     </Modal.Body>
     <Modal.Footer>
-      <Button className='button-modal' onClick={(e) => this.onSubmitear(e)}>Submit</Button>
+      <Button className='button-modal' onClick={(e) => this.onSubmitear(e)}>Ingresar</Button>
     </Modal.Footer>
   </Modal>
             </div>
