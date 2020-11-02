@@ -61,7 +61,7 @@ class Register extends React.Component{
 
 
   onSubmitear(e){
-  
+    console.log(this.state)
     e.preventDefault();
     axios({
       method: 'post',
@@ -73,18 +73,26 @@ class Register extends React.Component{
         email: this.state.email,
         edad: this.state.edad,
         password: this.state.password,
-        profilePic: this.state.profilePic.name,
+        profilePic: this.state.profilePic,
         
       }
-      
-    }).then(res =>{
-      console.log(this.data, 'Laaa dataaa')
-      this.openModal()
-
-
-    }
-
-    ). catch(err=>{
+    })
+    .then(res =>{
+      axios({
+        method: 'post',
+        url: '/send-email',
+        data:{
+          firstName: this.state.name,
+          lastName: this.state.lastname,
+          userName: this.state.username,
+          email: this.state.email,
+          edad: this.state.edad,
+          password: this.state.password,
+        }
+      }).then(()=>{
+        this.openModal()
+      })
+    }). catch(err=>{
       this.openModalError()
     })
   };
