@@ -5,8 +5,9 @@ import {connect} from 'react-redux'
 import axios from 'axios'
 import Nav from '../Nav/Nav';
 import { Button, Modal,Form} from 'react-bootstrap'
+import { logout, login} from '../../Redux/Actions/auth'
 
-function Profile({user}){
+function Profile({user, login, logout}){
 
     const [usuario,setUsuario]=useState({
         id:"",
@@ -32,15 +33,16 @@ function Profile({user}){
     
 
     const traerUsuario = (id)=>{
-        // axios.get(`/user`, {
-        //     params: {
-        //         id: id
-        //     }
-        // }).then((res)=>{
-        //     console.log(res.data, 'aquii')
-        //     setUsuario(res.data)
-        // }).catch((err)=>{console.log('no recibe data')})
-        setUsuario(user)
+        axios.get(`/user/${id}`, {
+            params: {
+                id: id
+            }
+        }).then((res)=>{
+            console.log(res.data, 'aquii')
+            setUsuario(res.data)
+        }).catch((err)=>{console.log('no recibe data')})
+        
+        
         
     }
 
@@ -49,9 +51,11 @@ function Profile({user}){
             ...usuario,
             [e.target.name]: e.target.value
         })
+        console.log('onchange',usuario)
     }
 
     const handlerEditUser= async(id)=>{
+      console.log('entrando')
       
        const {error, data}=await axios.put(`user/${id}`,{
             userName: usuario.userName,
@@ -63,6 +67,7 @@ function Profile({user}){
             
         })
          if(!error){
+          
         console.log(data)
          } 
        
@@ -97,7 +102,8 @@ function Profile({user}){
 //------------------ACA ARRANCAAA 
 
     useEffect(()=>{
-        traerUsuario()
+      
+        traerUsuario(user.id)
         
     },[])
 
@@ -185,7 +191,7 @@ function Profile({user}){
             <Button variant="secondary" onClick={handleClose} >
               Cerrar
             </Button>
-            <Button variant="outline-success" onClick={()=>handlerEditUser(user.id)} onClick={handleClose}>
+            <Button variant="outline-success" onClick={handlerEditUser(user.id)} onClick={handleClose}>
              Guardar cambios
             </Button>
           </Modal.Footer>
@@ -230,4 +236,9 @@ const mapStateToProps = (state)=>{
     }
 }
 
-export default connect(mapStateToProps,null)(Profile);
+const mapDispatchToProps = {
+  login,
+  logout
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Profile);
