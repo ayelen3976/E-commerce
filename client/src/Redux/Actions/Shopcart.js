@@ -5,17 +5,19 @@ const URL = "http://localhost:4000/"
 
 
 
-export function postCart(totalData,userId){
+export function postCart(totalData, userId,  telefono, direccion){
   return (dispatch)=> {
        totalData.forEach((p)=>{
-        return axios({method:"post",url:`/user/${userId}/cart`,
+        return axios({method:"post", url:`/user/${userId}/cart`,
 
-        data:{cantidad:p.count, id:p.product.id, telefono:123123, direccion:"mirave2"}})
+        data:{cantidad:p.count, id:p.product.id, telefono:telefono, direccion:direccion}})
         .then((res)=>{
-          dispatch({type:POST_ORDER })})
+          dispatch({type:POST_ORDER })
+          console.log(totalData, userId, telefono, direccion, 'baaa')})
+          
     .catch((err)=>{console.log(err)}) 
       })
-      console.log(totalData, 'baaa')
+    
 }}
 
 export function putCart(datatotal, userId){

@@ -1,15 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Modal , Button, Form} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import {postCart, putCart} from "../Redux/Actions/Shopcart";
 import './css/Payment.css'
 function Payment(props, postToMyOrder,   putToMyOrder) {
+const [detail, setDetail]= useState({telefono:234, direccion:'slka'})
 
+function onChange (e){
+  var val = e.target.value;
+   setDetail({
+    ...detail,
+    [e.target.name]: val}) 
+  
+  }
 
 
     const Handlebuy=()=>{
-       props.postToMyOrder(props.products, props.usuario.id)
-       props.putToMyOrder(props.products, props.usuario.id)
+      console.log(props)
+       props.postToMyOrder(props.products, props.usuario.id, detail.telefono, detail.direccion)
+        
+      //  props.putToMyOrder(props.products, props.usuario.id)
        props.onHide()
     }
     return (
@@ -25,17 +35,20 @@ function Payment(props, postToMyOrder,   putToMyOrder) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h4>Data </h4>
+          <h4>Payment Details </h4>
          <Form className='formmodal'>
-    <div> 
+{/*     <div> 
+      <p>Email:</p>
     <input placeholder='email'  className='input1'/>
 
+    </div> */}
+    <div>
+    <p>Direction:</p>
+    <input name='direccion' placeholder='direction' className='input2' onChange={onChange}/>
     </div>
     <div>
-    <input placeholder='direction' className='input2'/>
-    </div>
-    <div>
-    <input placeholder='phone' className='input3'/> 
+    <p>Phone:</p>
+    <input name ='telefono' placeholder='phone' className='input3' onChange={onChange}/> 
     </div>
           
   
@@ -52,8 +65,8 @@ function Payment(props, postToMyOrder,   putToMyOrder) {
 const mapDispatchToProps = (dispatch) => ({
     
 
-    postToMyOrder:(items,id)=> dispatch(postCart(items,id)),
-    putToMyOrder:(items, id)=> dispatch(putCart(items,id)),
+    postToMyOrder:(items,id, direccion, telefono)=> dispatch(postCart(items,id, direccion, telefono)),
+    putToMyOrder:(items, id, direccion , telefono)=> dispatch(putCart(items,id, direccion, telefono)),
  
 
   });

@@ -1,9 +1,7 @@
 import React from 'react';
 import {Modal, Button, Container, Form} from 'react-bootstrap'
 import Select from 'react-select';
-import axios from 'axios'
 import makeAnimated from 'react-select/animated';
-import { BsFillTrashFill } from "react-icons/bs";
 export default function ModalEdit(props){
 
 
@@ -76,7 +74,7 @@ return (
           <Button variant="secondary" onClick={props.handleClose}>
             Cerrar
           </Button>
-          <Button variant="warning"  onClick={props.editProduct}>
+          <Button variant="outline-success"  onClick={props.editProduct}>
            Guardar cambios
           </Button>
         </Modal.Footer>

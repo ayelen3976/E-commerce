@@ -54,26 +54,26 @@ import SearchBar from './SearchBar'
             {/* ---------------------------------- */}
             <div className='Icon'>
               <Menu menuButton={<Button hidden={adminVisible} ><PersonIcon /> </Button>} >
-                <MenuItem style={{ color: "black", textDecoration: "none" }} onClick={() => history.push("/ProductForm")}>Products</MenuItem>
-
+                <MenuItem style={{ color: "black", textDecoration: "none" }} onClick={() => history.push("/profile")}>Mi perfil</MenuItem>
+                <MenuItem style={{ color: "black", textDecoration: "none" }} onClick={() => history.push("/ProductForm")}>Productos</MenuItem>
                 <MenuItem style={{ color: "black", textDecoration: "none" }} onClick={() => history.push('/CategoryForm')} >Categorias</MenuItem>
-                <MenuItem style={{ color: "black", textDecoration: "none" }} onClick={() => history.push("/admin/orders")}> Orders </MenuItem>
-                <MenuItem style={{ color: "black", textDecoration: "none" }} onClick={() => history.push("/users")}>Users  </MenuItem>
-                <MenuItem onClick={logout}>logOut</MenuItem>
+                <MenuItem style={{ color: "black", textDecoration: "none" }} onClick={() => history.push("/admin/orders")}> Ordenes </MenuItem>
+                <MenuItem style={{ color: "black", textDecoration: "none" }} onClick={() => history.push("/users")}> Usuarios </MenuItem>
+                <MenuItem onClick={logout}>Cerrar Sesión</MenuItem>
               </Menu>
 
             </div>
             <div className='Icon'>
               <Menu menuButton={<Button hidden={currentVisible}><PersonIcon /> </Button>} >
-                <MenuItem onClick={() => setModalShow(true)}>Sign In </MenuItem>
-                <MenuItem style={{ color: "black", textDecoration: "none" }} onClick={() => history.push("/register")}> Register</MenuItem>
+                <MenuItem onClick={() => setModalShow(true)}>Iniciar Sesión </MenuItem>
+                <MenuItem style={{ color: "black", textDecoration: "none" }} onClick={() => history.push("/register")}> Registrarse</MenuItem>
               </Menu>
 
             </div>
             <div className='Icon'>
               <Menu menuButton={<Button hidden={clientVisible}><PersonIcon /> </Button>} >
-                <MenuItem>Profile</MenuItem>
-                <MenuItem onClick={logout}>logOut</MenuItem>
+                <MenuItem>Mi Perfil</MenuItem>
+                <MenuItem onClick={logout}>Cerrar Sesión</MenuItem>
               </Menu>
             </div>
             {/* 
@@ -99,7 +99,7 @@ import SearchBar from './SearchBar'
             <li><Link className='links' to="/products" > Productos </Link> </li>
             <li><Link className='links' to="/category">Categorias </Link> </li>
             <li><Link  className='links'>Como Comprar</Link></li>
-            <li><Link  className='links'>Quines Somos</Link></li>
+            <li><Link  className='links' to="/nosotros">Quines Somos</Link></li>
             <li><Link  className='links'>Sucursales</Link></li>
           </ul>
         </div>

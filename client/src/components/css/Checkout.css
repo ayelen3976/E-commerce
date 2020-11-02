@@ -30,6 +30,10 @@ text-align:center
 .card-body-img{
     width: 50%;
 }
+.menos{
+    padding-right: 32%;
+}
+
 
 .right{
 
@@ -38,6 +42,7 @@ text-align:center
     float: right;
 
     margin: 40px;
+    filter: drop-shadow(0 0 0.75rem black);
 
 }
 .name-right{
@@ -63,15 +68,14 @@ text-align:center
 
 .productCount{
     margin-right: 15%;
-
-    float: right;
+     float: right;
 }
 .Subtotal{
     font-size: 30px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: rgb(12, 12, 11);
     margin-left: 15%;
-
+    font-size: 40px;
      float: left;
 }
 .subPrice{
@@ -79,14 +83,20 @@ text-align:center
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: rgb(12, 12, 11);
     margin-right: 15%;
-
     float: right;
 }
 
+.subPrice, .Subtotal, .precio{
+    color: green;
+}
+
 .buttonNext{
+    margin-top: 2%;
     margin-left: 20%;
     width: 60%;
     background: linear-gradient(to top, #2ec1ac, #28df99);
+    
+   
 
 }
 .buttonNext span{
@@ -97,6 +107,7 @@ text-align:center
     margin-left: 20%;
     width: 60%;
     margin-top: 4%;
+    margin-bottom: 4%;
 }
 .Cancel span{
     margin-left: 500%;

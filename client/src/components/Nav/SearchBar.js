@@ -17,12 +17,14 @@ function SearchBar (props) {
         buscarProducto(texto)
     }
 
+  
+
 
     return (
      
 
-         <Form className='SearchBar'>
-         <input className='Input' placeholder ='Search...'  onChange={e => setSearchBar(e.target.value)} />
+         <Form className='SearchBar' >
+         <input className='Input' placeholder ='¿Qué estás buscando?'   onChange={e => setSearchBar(e.target.value)} onKeyUp={e=>{if(e.key=="Enter"){alHacerClick(searchBar)}}} />
          <Button  onClick={()=>{alHacerClick(searchBar)}}>
              <SearchIcon /> 
              </Button> 

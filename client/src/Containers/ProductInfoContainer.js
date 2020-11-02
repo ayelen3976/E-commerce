@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import Nav from '../Components/Nav/Nav'
 import ReviewList from '../Components/Review/ReviewList';
 import InputReview from '../Components/Review/inputReview'
+import styles from '../Components/css/Producto.module.css';
 
 //Externos
 import axios from 'axios';
@@ -67,7 +68,7 @@ class ProductInfoContainer extends Component {
 
         const product = this.state;
         return (
-            <div>
+            <div className={styles.padre}>
                 <Nav />
                 <Producto
                     key={product.id}
@@ -80,8 +81,15 @@ class ProductInfoContainer extends Component {
                     reviews={product.reviews}
                 />
                 {/* Componente Promedio */}
-                <ReviewList reviewData={product.reviews}/>
+                <div className={styles.listaReviews}>
+                     <ReviewList reviewData={product.reviews}/>
+                </div>
+              
+                <div className={styles.contenedor}>
+               
                 <InputReview productId={product.id}/>
+                 
+                </div>
                 
             </div>
         )

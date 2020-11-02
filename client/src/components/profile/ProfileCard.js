@@ -3,14 +3,12 @@ import './ProfileCard.css'
 
 
 function Card({firstName, lastName,userName, rol, profilePic, edad, email}){
-    // wait let me see oki
-    // sent the screen shot in discord
-    console.log(profilePic)
+   
     return (
         <div className='Card'>
             <div className='upper-container'>
                 <div className='image-container'>
-                <img src={profilePic} alt="" />
+                    <img  src={profilePic} />
                 </div>
             </div>
             <div className='lower-container'>

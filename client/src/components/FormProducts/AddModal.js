@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal, Button, Container, Form} from 'react-bootstrap'
+import {Modal, Button,  Form} from 'react-bootstrap'
 import Select from 'react-select';
 export default function ModalAdd(props){
  
@@ -66,7 +66,7 @@ centered
             {/* fala el translate en el select */}
            <Select options={props.translate(props.category)} onChange={props.handleChangeCategory} /> 
             <br/>
-            <Button variant="warning" onClick={props.addProduct}>
+            <Button variant="outline-success" onClick={props.addProduct}>
               Añadir
             </Button>
           </Form>
