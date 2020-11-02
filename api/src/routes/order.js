@@ -1,7 +1,6 @@
 const server = require('express').Router();
-const { response } = require('express');
-const { Order,Product ,OrderLine , User} = require('../db.js');
-
+const { Order,Product ,User} = require('../db.js');
+const Stripe = require('stripe');
 
 
 //////////////// READ ////////////////
@@ -71,6 +70,29 @@ server.put('/:id', async(req, res, next) => {
         res.send("El estado no cumple los requisitos para ser modificado");
     };
 });
+
+//Post
+server.post('/checkout', async(req, res, next) => {
+    //Stripe es una clase entonces la instanciamos para poder acceder a los metodos
+    const stripe = new Stripe('sk_test_51HirpyAgyVHXmwthMaKnX271czvZzMTKbeTefKcPY0i3qUSV3hojBBTy2TGQCQ6cfKYiWZCefvYtYi9T7siegsFx00tISbBDHk')
+
+    
+    try {
+        const { id, amount } = req.body;
+
+        const payment = await stripe.paymentIntents.create({
+            amount,
+            currency: 'USD',
+            description: 'Compras',
+            payment_method: id,
+            confirm: true
+        })
+        console.log(payment)
+        res.send({ message: 'Successfull payment' })
+    } catch (error) {
+        res.send({message: error.raw.message})
+    }
+})
 
 
 module.exports = server;

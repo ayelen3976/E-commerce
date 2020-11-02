@@ -25,7 +25,7 @@ server.get('/' , async (req, res, next) => {
 server.get('/:userId/order', async(req, res, next) => {
     const { userId } = req.params;
     // console.log(id)
-    await Order.findAll({ where: { userId: userId } })
+    await Order.findAll({ where: { userId: userId }})
         .then(orderList=> {
             res.send(orderList)
         })
