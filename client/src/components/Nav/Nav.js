@@ -13,6 +13,8 @@ import { logout } from '../../Redux/Actions/auth'
 import Login from '../Login/index'
 import { useHistory } from "react-router-dom";
 import SearchBar from './SearchBar'
+import Historial from '../Historial/Historial'
+import Profile from '../profile/Profile'
 
  function Nav({ items, logout, usuario }){
   const [modalShow, setModalShow] = useState(false);
@@ -36,7 +38,7 @@ import SearchBar from './SearchBar'
 
     <div>
       <div className='head'>
-        <div className='head-title'><Link to="/products">Moscow</Link> </div>
+        <div className='head-title'><Link to="/products" style={{color:"wheat", textDecoration:"none"}} >Moscow</Link> </div>
         <div className='head-sub-title'>Dietetica</div>
       </div>
 
@@ -72,7 +74,8 @@ import SearchBar from './SearchBar'
             </div>
             <div className='Icon'>
               <Menu menuButton={<Button hidden={clientVisible}><PersonIcon /> </Button>} >
-                <MenuItem>Mi Perfil</MenuItem>
+                <MenuItem onClick={() => history.push("/profile")} >Mi Perfil </MenuItem>
+                <MenuItem onClick={() => history.push("/historial")} >Mis Ordenes  </MenuItem>
                 <MenuItem onClick={logout}>Cerrar Sesión</MenuItem>
               </Menu>
             </div>

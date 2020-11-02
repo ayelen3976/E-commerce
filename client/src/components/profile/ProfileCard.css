@@ -22,11 +22,11 @@
 
 .image-container img {
     background: white;
-    /* width: 100px; */
-    /* height: 100px; */
+     width: 150px; 
+     height: 150px; 
     border-radius: 50%;
-    /* padding: 5px; */
-    /* transform: translate(95px, 45px); */
+     padding: 5px; 
+     transform: translate(77px, 30px); 
 }
 
 

@@ -5,6 +5,7 @@ import axios from 'axios';
 import Nav from './../Nav/Nav';
 import ModalAdd from './AddModal'
 import ModalEdit from './EditModal'
+import Styles from './FormCategory.module.css';
 function CategoryForm() {
     const [lgShow, setLgShow] = useState(false);
     const [show, setShow] = useState(false);
@@ -96,15 +97,15 @@ axios({ method: 'post', url: '/products/category',
   
   //  ----------------Render-------------------------
     return (
-      <div>
+      <div className={Styles.principalCategory}>
            <Nav/>
-      <div className="container">
+      <div className="container" >
         
      {/* ------------------Button ADD-------------------------  */}
-        <h1>Formulario de categoria</h1>
-        <Button variant="warning"onClick={() => setLgShow(true)}>Añadir Categoria</Button>
         
-  <ModalAdd
+        <Button className={Styles.botonAñadirCategoria} onClick={() => setLgShow(true)}>Añadir Categoria</Button>
+        
+  <ModalAdd className={Styles.tablaCategory}
   show={lgShow}
   onHide={setLgShow}
   onChange={onChange} 

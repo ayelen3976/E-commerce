@@ -12,3 +12,26 @@
     align-items: center;
 
 }
+
+.botonEditar{
+    background-color: transparent;
+    display: flex;
+    margin-left: 55%;
+    margin-top: -1.5%;
+    border-color: transparent;
+    color: black;
+    
+}
+.botonContraseña{
+    background-color: transparent;
+    display: flex;
+    margin-left: 37%;
+    margin-top: -3%;
+    border-color: transparent;
+    color: black;
+
+}
+.botonEditar:hover, .botonContraseña:hover{
+     background:   linear-gradient(to left, #f6f7d4, #28df99);
+     border: black;
+}
