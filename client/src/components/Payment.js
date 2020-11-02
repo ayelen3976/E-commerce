@@ -8,16 +8,18 @@ const [detail, setDetail]= useState({telefono:234, direccion:'slka'})
 
 function onChange (e){
   var val = e.target.value;
+
    setDetail({
     ...detail,
     [e.target.name]: val}) 
+    console.log(val)
   
   }
 
 
     const Handlebuy=()=>{
-      console.log(props)
-       props.postToMyOrder(props.products, props.usuario.id, detail.telefono, detail.direccion)
+    
+       postToMyOrder(props.products, props.usuario.id, detail.telefono, detail.direccion)
         
       //  props.putToMyOrder(props.products, props.usuario.id)
        props.onHide()
