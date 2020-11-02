@@ -1,30 +1,32 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import {addToShoppingCart, removeFromCart,postCart, putCart} from "../Redux/Actions/Shopcart";
 import './css/Checkout.css'
-import {  Table} from 'react-bootstrap'
-import { Button, Grid } from '@material-ui/core';
+import {  Table, Button} from 'react-bootstrap'
+import {  Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Nav from './Nav/Nav';
 import { updateStock} from '../Redux/Actions/Listproducts';
-
+import Payment from './Payment'
 
 
 
  function Checkout({ products, subTotal,  addNewItemToCart, removeItemFromCart,postToMyOrder,   putToMyOrder, updateStock, usuario}) {
 
 
+  const [modalShow, setModalShow] = useState(false);
 
   
 
 
   const handleCheckout = ()=>{
     if (!usuario){
-      alert('registrate campeon')
+      alert('Debes estar registrado')
     } else{
-      postToMyOrder(products, usuario.id)
-       putToMyOrder(products, usuario.id)
-      alert('go to checkout payment')
+     
+
+      setModalShow(true)
+      
     //  console.log(products, usuario.id ,'idUser ya estoy registrado jsjs')
     }
   
@@ -47,6 +49,12 @@ import { updateStock} from '../Redux/Actions/Listproducts';
   return (
 <div  >
 <Nav/>
+
+
+
+
+      <Payment show={modalShow} onHide={() => setModalShow(false)} 
+      subTotal={subTotal}     usuario={usuario} products={products}              />
 <div className="right">
   
 <div> <h1 className='name-right'>Your Cart</h1> </div>
@@ -67,11 +75,12 @@ import { updateStock} from '../Redux/Actions/Listproducts';
   <h4 className='Subtotal'>Subtotal: </h4> 
   <h4 className='subPrice'>${subTotal}</h4>
 </div>
-<div className='buttonNext'>
-<Button    onClick={handleCheckout} block >NEXT </Button>
+<div >
+
+<Button className='buttonNext' onClick={handleCheckout} block >NEXT </Button>
 </div>
-<div className='Cancel'>
-<Link to='/products' style={{color: "black",textDecoration: 'none'}}><Button  style={{marginLeft:'10px'}} block>CANCEL</Button></Link>
+<div >
+<Link to='/products' style={{color: "black",textDecoration: 'none'}}><Button   className='Cancel' block>CANCEL</Button></Link>
 </div>
 </div>
 
