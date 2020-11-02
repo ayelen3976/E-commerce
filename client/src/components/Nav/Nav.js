@@ -36,7 +36,7 @@ import SearchBar from './SearchBar'
 
     <div>
       <div className='head'>
-        <div className='head-title'>Moscow</div>
+        <div className='head-title'><Link to="/products">Moscow</Link> </div>
         <div className='head-sub-title'>Dietetica</div>
       </div>
 
@@ -95,7 +95,7 @@ import SearchBar from './SearchBar'
 
         <div>
           <ul className='options'>
-            <li><Link className='links' to="/">Inicio</Link></li>
+            <li><Link className='links' to="/products">Inicio</Link></li>
             <li><Link className='links' to="/products" > Productos </Link> </li>
             <li><Link className='links' to="/category">Categorias </Link> </li>
             <li><Link  className='links'>Como Comprar</Link></li>
