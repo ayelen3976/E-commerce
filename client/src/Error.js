@@ -7,7 +7,7 @@ export default function Error(){
     return (
         <div>
             <Nav/>
-            <img  src={bannerError} width="100%"/>
+            <img style={{border: "none"}} src={bannerError} width="100%"/>
 
         </div>
         

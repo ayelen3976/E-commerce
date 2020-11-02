@@ -41,6 +41,7 @@ function Profile({user}){
         //     setUsuario(res.data)
         // }).catch((err)=>{console.log('no recibe data')})
         setUsuario(user)
+        
     }
 
     function onChange(e){
@@ -50,8 +51,9 @@ function Profile({user}){
         })
     }
 
-    const handlerEditUser=(id)=>{
-        axios.put(`user/${id}`,{
+    const handlerEditUser= async(id)=>{
+      
+       const {error, data}=await axios.put(`user/${id}`,{
             userName: usuario.userName,
             firstName: usuario.firstName,
             lastName: usuario.lastName,
@@ -60,12 +62,19 @@ function Profile({user}){
             profilePic: usuario.profilePic
             
         })
+         if(!error){
+        console.log(data)
+         } 
+       
+         else {
+           console.log(error)
+        }
     }
         
     function Handleimage(e){
         var file = e.target.profilePic
         if(file) {const reader = new FileReader()
-        reader.addEventListener("load", function() {
+        reader.addEventListener("load", ()=> {
             setUsuario({ 
         ...usuario,
         img: this.result
@@ -89,8 +98,8 @@ function Profile({user}){
 
     useEffect(()=>{
         traerUsuario()
-        console.log(usuario, 'eluser')
-    },[usuario])
+        
+    },[])
 
     return (
         <div className='App'>
@@ -104,11 +113,11 @@ function Profile({user}){
              email={usuario.email}
              profilePic={usuario.profilePic}
             />
-            <Button  onClick={()=> setShow(true)} >
-                EDITAR
+            <Button  onClick={()=> setShow(true)} className="botonEditar">
+            Editar 
             </Button>
-            <Button onClick={()=> setShowPassword(true)}>
-                cambiar contraseña
+            <Button onClick={()=> setShowPassword(true)} className="botonContraseña">
+                Cambiar Contraseña
             </Button>
 
 {/* //----------Modal editar datos del usuario-------------- */}
@@ -176,7 +185,7 @@ function Profile({user}){
             <Button variant="secondary" onClick={handleClose} >
               Cerrar
             </Button>
-            <Button variant="outline-success" onClick={handlerEditUser(user.id)} onClick={handleClose}>
+            <Button variant="outline-success" onClick={()=>handlerEditUser(user.id)} onClick={handleClose}>
              Guardar cambios
             </Button>
           </Modal.Footer>
@@ -201,7 +210,7 @@ function Profile({user}){
             <Button variant="secondary" onClick={handleClose} >
               Cerrar
             </Button>
-            <Button variant="outline-success" onClick={handlerEditPassword(user.id)} onClick={handleClosePassword}>
+            <Button variant="outline-success" onClick={()=>handlerEditPassword(user.id)} onClick={handleClosePassword}>
              Guardar cambios
             </Button>
           </Modal.Footer>

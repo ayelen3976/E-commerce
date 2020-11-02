@@ -21,6 +21,7 @@ import Error from './Error';
 import Profile from './Components/profile/Profile';
 import Nosotros from './Containers/nosotres/Nosotros';
 import Historial from './Components/Historial/Historial'
+import Hdetails from './Components/Historial/HistorialDetails'
 
 const Routes = () => {
     return (
@@ -43,6 +44,8 @@ const Routes = () => {
                 <Route exact path='/profile' component={Profile}/>
                 <Route exact path='/nosotros' component={Nosotros} />
                 <Route exact path='/historial' component={Historial} />
+                <Route exact path='/hdetails/:id' component={Hdetails} />
+
                 <Route component={Error}/>
             </Switch>
         </BrowserRouter>
