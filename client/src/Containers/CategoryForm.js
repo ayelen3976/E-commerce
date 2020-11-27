@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Table, Modal, Button, Form} from "react-bootstrap";
 import axios from 'axios';
-import Nav from '../Components/Nav';
+import Nav from '../Components/Nav/Nav'
 
 function CategoryForm() {
   const [lgShow, setLgShow] = useState(false);
@@ -23,7 +23,7 @@ function CategoryForm() {
             setProducts(res.data);
         })
         .catch(err => console.log(err.response.data));
-  },[]);
+  },[product]);
 
 //  ------------------Functions---------------------------
   function onChange(e) {
@@ -76,7 +76,6 @@ function CategoryForm() {
         setProducts(pro);
         setProduct({ name: "", description: "" });
         setLgShow(false)
-        window.location.href = '/CategoryForm'
       })
       .catch(console.log)
   };

@@ -1,12 +1,11 @@
 import React from 'react';
-
 import { makeStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 
 const labels = {
   1: 'Malo',
-  2: 'Pobre',
+  2: 'Aceptable',
   3: 'Bueno',
   4: 'Muy Bueno',
   5: 'Excelente',
@@ -31,6 +30,7 @@ export default function Stars({ stars }) {
                     name="hover-feedback"
                     value={stars}
                     precision={1}
+                    readOnly
                 />
                 {value !== null && <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>}
             </div>

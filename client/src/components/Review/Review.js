@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React,{useState, useEffect}from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -7,17 +6,17 @@ import Avatar from '@material-ui/core/Avatar';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import Stars from './stars';
+import axios from 'axios';
+import { connect} from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     inline: {
         display: 'inline',
     },
 }));
-
-export default function Review({review}) {
-    console.log(review)
+function Review({review}) {
+ 
     const classes = useStyles();
-
     return (
         <ListItem alignItems="flex-start">
             <ListItemAvatar>
@@ -33,7 +32,9 @@ export default function Review({review}) {
                             className={classes.inline}
                             color="textPrimary"
                         >
-                            {review.userId}
+                            {review.user.firstName}
+                            
+                            
                         </Typography>
                         <Typography>
                         {review.description}
@@ -44,3 +45,6 @@ export default function Review({review}) {
         </ListItem>
     )
 }
+
+
+export default Review;
